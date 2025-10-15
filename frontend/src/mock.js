@@ -93,7 +93,7 @@ export const howItWorksSteps = [
     id: 3,
     step: 'Step 3',
     title: 'Build Order',
-    description: 'Quick-reply buttons guide customers through menu selection'
+    description: 'AI assistant understands natural language and guides customers through ordering'
   },
   {
     id: 4,
