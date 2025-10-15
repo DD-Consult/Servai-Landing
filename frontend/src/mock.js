@@ -41,8 +41,8 @@ export const features = [
   {
     id: 1,
     icon: 'MessageSquare',
-    title: 'Messaging-First Ordering',
-    description: 'Customers order directly through WhatsApp or Messenger - no app downloads, no friction. Just tap, chat, and order in under 90 seconds.'
+    title: 'Conversational AI Ordering',
+    description: 'Customers have natural conversations with our AI agent through WhatsApp or Messenger. No rigid menus or confusing buttons - just chat naturally like ordering from a real person. Complete orders in under 90 seconds.'
   },
   {
     id: 2,
