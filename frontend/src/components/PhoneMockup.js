@@ -47,15 +47,19 @@ const PhoneMockup = ({ activeStep }) => {
               </div>
               <div>
                 <div className="chat-title">ServAI Restaurant</div>
-                <div className="chat-status">Taking your order</div>
+                <div className="chat-status">AI Assistant</div>
               </div>
             </div>
             <div className="chat-bubbles">
-              <div className="chat-bubble bot-bubble">What would you like today?</div>
-              <div className="quick-replies">
-                <button className="quick-reply-btn">🍕 Pizza</button>
-                <button className="quick-reply-btn">🍔 Burger</button>
-                <button className="quick-reply-btn">🍜 Pasta</button>
+              <div className="chat-bubble bot-bubble">What would you like to order today?</div>
+              <div className="chat-bubble user-bubble">I'd like a Margherita pizza please</div>
+              <div className="chat-bubble bot-bubble">Great choice! What size would you like?</div>
+              <div className="chat-bubble user-bubble">Large, please</div>
+              <div className="chat-bubble bot-bubble">Perfect! One large Margherita pizza. Any drinks or sides?</div>
+              <div className="typing-indicator">
+                <span></span>
+                <span></span>
+                <span></span>
               </div>
             </div>
           </div>
