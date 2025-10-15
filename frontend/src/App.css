@@ -51,6 +51,17 @@ body {
   min-height: 100vh;
 }
 
+/* Hide Emergent watermark */
+[alt*="Made with Emergent"],
+[class*="emergent"],
+[id*="emergent"],
+a[href*="emergent"] img,
+div[style*="position: fixed"][style*="bottom"][style*="right"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
 /* Typography */
 .font-mono {
   font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
