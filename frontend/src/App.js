@@ -219,20 +219,6 @@ function App() {
         </div>
       </section>
 
-      {/* How It Works Section */}
-      <section id="how-it-works" className="section">
-        <h2 className="heading-1 section-title">How It Works</h2>
-        <div className="steps-grid">
-          {howItWorksSteps.map((step) => (
-            <div key={step.id} className="step-card">
-              <div className="step-badge">{step.step}</div>
-              <h3 className="step-title">{step.title}</h3>
-              <p className="step-description">{step.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* Demo Request Form Section */}
       <section id="demo" className="demo-section">
         <div className="demo-container">
