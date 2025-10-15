@@ -29,7 +29,7 @@
    - Base directory: `frontend`
    - Build command: `yarn install && yarn build`
    - Publish directory: `frontend/build`
-   - Node version: 18 (set in netlify.toml)
+   - Node version: 20 (set in netlify.toml)
 
 4. **Deploy**
    - Click "Deploy site"
