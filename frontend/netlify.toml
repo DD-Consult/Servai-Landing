@@ -1,13 +1,17 @@
 [build]
   # Build command for React app
-  command = "yarn build"
+  command = "yarn install && yarn build"
   
-  # Directory where build output is generated
+  # Directory where build output is generated (relative to base)
   publish = "build"
+  
+  # Base directory for the build (if repo root contains frontend folder)
+  base = "frontend"
   
   # Node version to use for build
   [build.environment]
     NODE_VERSION = "18"
+    CI = "false"
 
 # Redirect all routes to index.html for client-side routing
 [[redirects]]
