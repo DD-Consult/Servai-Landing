@@ -207,7 +207,7 @@ Move everything from `/frontend/*` to root `/`:
 - [ ] netlify.toml exists in repo
 - [ ] Base directory is correct
 - [ ] Publish directory points to build output
-- [ ] Node version is 18+
+- [ ] Node version is 20+
 - [ ] No build errors in Netlify logs
 - [ ] Redirect rule exists for SPA routing
 - [ ] Site URL loads (not 404)
