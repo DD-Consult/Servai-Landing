@@ -32,6 +32,8 @@ function App() {
     location: ''
   });
   const [showSuccess, setShowSuccess] = useState(false);
+  const [activeStep, setActiveStep] = useState(1);
+  const [autoPlay, setAutoPlay] = useState(true);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
