@@ -385,55 +385,152 @@ div[style*="position: fixed"][style*="bottom"][style*="right"] {
   color: var(--text-secondary);
 }
 
-/* How It Works */
-.steps-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  margin-top: 3rem;
+/* Interactive How It Works Section */
+.interactive-how-it-works-section {
+  background: var(--bg-page);
+  padding: 5rem 2rem;
 }
 
-.step-card {
+.section-subtitle {
+  text-align: center;
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  margin-bottom: 4rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.interactive-container {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 4rem;
+  align-items: start;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.phone-column {
+  display: flex;
+  justify-content: center;
+}
+
+.steps-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.auto-play-toggle {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+.toggle-btn {
+  background: transparent;
+  border: 1px solid var(--border-primary);
+  border-radius: 2rem;
+  padding: 0.5rem 1.25rem;
+  font-family: 'SF Mono', monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-primary);
+}
+
+.toggle-btn:hover {
+  background: var(--text-primary);
+  color: white;
+  border-color: var(--text-primary);
+}
+
+.toggle-btn.active {
+  background: var(--text-primary);
+  color: white;
+  border-color: var(--text-primary);
+}
+
+.interactive-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.interactive-step-card {
   background: var(--bg-card);
   border-radius: 0.75rem;
-  padding: 2rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  padding: 1.5rem;
+  border: 2px solid transparent;
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  cursor: pointer;
   transition: all 0.3s ease;
-  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
 }
 
-.step-card:hover {
-  transform: translateY(-4px);
+.interactive-step-card:hover {
+  transform: translateX(8px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border-color: rgba(35, 35, 35, 0.1);
 }
 
-.step-badge {
-  width: 60px;
-  height: 60px;
+.interactive-step-card.active {
+  border-color: var(--text-primary);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transform: translateX(12px);
+  background: linear-gradient(135deg, rgba(252, 202, 199, 0.1) 0%, rgba(253, 215, 197, 0.1) 100%);
+}
+
+.step-number {
+  width: 48px;
+  height: 48px;
   background: var(--text-primary);
   color: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 1.5rem;
   font-family: 'SF Mono', monospace;
-  font-size: 0.875rem;
-  font-weight: 500;
-  text-transform: uppercase;
+  font-size: 1.125rem;
+  font-weight: 600;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
 }
 
-.step-title {
-  font-size: 1.25rem;
+.interactive-step-card:hover .step-number {
+  transform: scale(1.1);
+}
+
+.interactive-step-card.active .step-number {
+  transform: scale(1.15) rotate(360deg);
+  box-shadow: 0 4px 12px rgba(35, 35, 35, 0.3);
+}
+
+.step-content {
+  flex: 1;
+}
+
+.interactive-step-card .step-title {
+  font-size: 1.125rem;
   font-weight: 500;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
   color: var(--text-primary);
+  transition: color 0.3s ease;
 }
 
-.step-description {
+.interactive-step-card.active .step-title {
+  font-weight: 600;
+}
+
+.interactive-step-card .step-description {
   font-size: 0.9375rem;
   line-height: 1.6;
   color: var(--text-secondary);
+  margin: 0;
 }
 
 /* Demo Form Section */
