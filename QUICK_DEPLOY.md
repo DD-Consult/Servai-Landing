@@ -5,7 +5,7 @@
 - [x] Code is working locally
 - [x] Build succeeds: `cd frontend && yarn build`
 - [x] netlify.toml exists at root
-- [x] .nvmrc specifies Node 18
+- [x] .nvmrc specifies Node 20
 - [x] All files committed to Git
 
 ## 🚀 Deploy to Netlify (5 Minutes)
