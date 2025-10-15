@@ -10,7 +10,7 @@
   
   # Node version to use for build
   [build.environment]
-    NODE_VERSION = "18"
+    NODE_VERSION = "20"
     CI = "false"
 
 # Redirect all routes to index.html for client-side routing
