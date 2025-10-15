@@ -65,7 +65,7 @@
 ### Issue 1: Build Failed
 - Check Netlify build logs for errors
 - Ensure all dependencies are in package.json
-- Make sure Node version is 18 or higher
+- Make sure Node version is 20 or higher
 
 ### Issue 2: 404 on Page Refresh
 - This is fixed by the redirect rule in netlify.toml
