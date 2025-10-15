@@ -59,7 +59,7 @@ The redirect rule should be:
 **Error: "Node version too old"**
 ```toml
 [build.environment]
-  NODE_VERSION = "18"
+  NODE_VERSION = "20"
 ```
 
 **Error: "Module not found"**
