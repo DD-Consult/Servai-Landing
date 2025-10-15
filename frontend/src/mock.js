@@ -65,8 +65,8 @@ export const features = [
   {
     id: 5,
     icon: 'Languages',
-    title: 'Multilingual AI (Coming Soon)',
-    description: 'Real-time conversational AI in multiple languages. Perfect for tourist areas - customers order in their native language, translated instantly for staff.'
+    title: 'Multilingual Conversations (Coming Soon)',
+    description: 'AI understands and responds in multiple languages naturally. Perfect for tourist areas - customers have full conversations in their native language, with instant translation for your staff. No language barriers.'
   },
   {
     id: 6,
