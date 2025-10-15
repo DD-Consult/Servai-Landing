@@ -92,8 +92,8 @@ export const howItWorksSteps = [
   {
     id: 3,
     step: 'Step 3',
-    title: 'Build Order',
-    description: 'AI assistant understands natural language and guides customers through ordering'
+    title: 'Conversational Ordering',
+    description: 'Customers chat naturally with our AI agent - ask questions, request recommendations, modify orders - just like talking to a waiter'
   },
   {
     id: 4,
