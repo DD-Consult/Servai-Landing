@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { 
   MessageSquare, 
@@ -11,6 +11,7 @@ import {
   X
 } from 'lucide-react';
 import { benefits, features, howItWorksSteps, mockFormSubmit } from './mock';
+import PhoneMockup from './components/PhoneMockup';
 
 const iconMap = {
   MessageSquare,
