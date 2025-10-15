@@ -1,8 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { QrCode, MessageCircle, ShoppingBag, Fingerprint, CheckCircle, Award } from 'lucide-react';
 import './PhoneMockup.css';
 
 const PhoneMockup = ({ activeStep }) => {
+  const [visibleMessages, setVisibleMessages] = useState(0);
+
+  // Reset and animate messages when step 3 is active
+  useEffect(() => {
+    if (activeStep === 3) {
+      setVisibleMessages(0);
+      const timeouts = [];
+      
+      // Show messages one by one with delays
+      timeouts.push(setTimeout(() => setVisibleMessages(1), 500));
+      timeouts.push(setTimeout(() => setVisibleMessages(2), 1500));
+      timeouts.push(setTimeout(() => setVisibleMessages(3), 3000));
+      timeouts.push(setTimeout(() => setVisibleMessages(4), 4000));
+      timeouts.push(setTimeout(() => setVisibleMessages(5), 5500));
+      timeouts.push(setTimeout(() => setVisibleMessages(6), 7000));
+      
+      return () => timeouts.forEach(timeout => clearTimeout(timeout));
+    } else {
+      setVisibleMessages(0);
+    }
+  }, [activeStep]);
   const renderScreenContent = () => {
     switch (activeStep) {
       case 1:
