@@ -60,6 +60,15 @@ const PhoneMockup = ({ activeStep }) => {
           </div>
         );
       case 3:
+        const messages = [
+          { type: 'bot', text: 'Hi! Welcome to our restaurant. How can I help you today?' },
+          { type: 'user', text: 'What are your specials today?' },
+          { type: 'bot', text: 'Great question! Today we have:\n• Wood-fired Margherita Pizza\n• Grilled Salmon with seasonal vegetables\n• Truffle Mushroom Risotto\n\nAll specials are 20% off!' },
+          { type: 'user', text: 'The pizza sounds amazing! I\'ll take that' },
+          { type: 'bot', text: 'Excellent choice! What size would you like - small, medium, or large?' },
+          { type: 'user', text: 'Large please' }
+        ];
+
         return (
           <div className="phone-screen-content step-3">
             <div className="chat-header">
@@ -72,16 +81,22 @@ const PhoneMockup = ({ activeStep }) => {
               </div>
             </div>
             <div className="chat-bubbles">
-              <div className="chat-bubble bot-bubble">What would you like to order today?</div>
-              <div className="chat-bubble user-bubble">I'd like a Margherita pizza please</div>
-              <div className="chat-bubble bot-bubble">Great choice! What size would you like?</div>
-              <div className="chat-bubble user-bubble">Large, please</div>
-              <div className="chat-bubble bot-bubble">Perfect! One large Margherita pizza. Any drinks or sides?</div>
-              <div className="typing-indicator">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
+              {messages.slice(0, visibleMessages).map((msg, index) => (
+                <div 
+                  key={index} 
+                  className={`chat-bubble ${msg.type}-bubble message-appear`}
+                  style={{ whiteSpace: 'pre-line' }}
+                >
+                  {msg.text}
+                </div>
+              ))}
+              {visibleMessages > 0 && visibleMessages < messages.length && (
+                <div className="typing-indicator">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              )}
             </div>
           </div>
         );
