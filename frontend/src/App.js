@@ -73,6 +73,22 @@ function App() {
     setMobileMenuOpen(false);
   };
 
+  // Auto-play functionality for How It Works section
+  useEffect(() => {
+    if (!autoPlay) return;
+    
+    const interval = setInterval(() => {
+      setActiveStep(prev => (prev >= 6 ? 1 : prev + 1));
+    }, 4000);
+    
+    return () => clearInterval(interval);
+  }, [autoPlay]);
+
+  const handleStepClick = (stepId) => {
+    setAutoPlay(false);
+    setActiveStep(stepId);
+  };
+
   return (
     <div className="App">
       {/* Header */}
