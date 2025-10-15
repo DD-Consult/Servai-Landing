@@ -143,7 +143,7 @@ Publish directory: frontend/build
 Add to netlify.toml:
 ```toml
 [build.environment]
-  NODE_VERSION = "18"
+  NODE_VERSION = "20"
 ```
 
 ### Fix 3: Ignore Build Warnings
