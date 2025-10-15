@@ -304,6 +304,47 @@ function App() {
         </div>
       </section>
 
+      {/* Interactive How It Works Section */}
+      <section id="how-it-works" className="interactive-how-it-works-section">
+        <div className="container">
+          <h2 className="heading-1 section-title">How It Works</h2>
+          <p className="section-subtitle">Experience the seamless ordering journey from start to finish</p>
+          
+          <div className="interactive-container">
+            <div className="phone-column">
+              <PhoneMockup activeStep={activeStep} />
+            </div>
+            
+            <div className="steps-column">
+              <div className="auto-play-toggle">
+                <button 
+                  className={`toggle-btn ${autoPlay ? 'active' : ''}`}
+                  onClick={() => setAutoPlay(!autoPlay)}
+                >
+                  {autoPlay ? 'Pause Auto-Play' : 'Resume Auto-Play'}
+                </button>
+              </div>
+              
+              <div className="interactive-steps">
+                {howItWorksSteps.map((step) => (
+                  <div 
+                    key={step.id} 
+                    className={`interactive-step-card ${activeStep === step.id ? 'active' : ''}`}
+                    onClick={() => handleStepClick(step.id)}
+                  >
+                    <div className="step-number">{step.id}</div>
+                    <div className="step-content">
+                      <h3 className="step-title">{step.title}</h3>
+                      <p className="step-description">{step.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="footer">
         <img 
