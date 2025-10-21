@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Demo Request Form - Netlify Form Detection</title>
+</head>
+<body>
+  <!-- This file helps Netlify detect the form at build time -->
+  <!-- Users will never see this page -->
+  
+  <form name="demo-request" netlify netlify-honeypot="bot-field" hidden>
+    <input type="hidden" name="form-name" value="demo-request" />
+    <input type="text" name="bot-field" />
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <input type="tel" name="phone" />
+    <input type="text" name="restaurant-name" />
+    <input type="text" name="location" />
+  </form>
+</body>
+</html>
