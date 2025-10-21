@@ -250,7 +250,24 @@ function App() {
           </p>
           
           {!showSuccess ? (
-            <form className="demo-form" onSubmit={handleSubmit}>
+            <form 
+              className="demo-form" 
+              onSubmit={handleSubmit}
+              name="demo-request"
+              method="POST"
+              data-netlify="true"
+              data-netlify-honeypot="bot-field"
+            >
+              {/* Hidden input for Netlify Forms */}
+              <input type="hidden" name="form-name" value="demo-request" />
+              
+              {/* Honeypot field for spam protection */}
+              <div style={{ display: 'none' }}>
+                <label>
+                  Don't fill this out if you're human: <input name="bot-field" />
+                </label>
+              </div>
+              
               <div className="form-group">
                 <label htmlFor="name">Your Name *</label>
                 <input
@@ -292,7 +309,7 @@ function App() {
                 <input
                   type="text"
                   id="restaurantName"
-                  name="restaurantName"
+                  name="restaurant-name"
                   value={formData.restaurantName}
                   onChange={handleInputChange}
                   required
