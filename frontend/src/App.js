@@ -46,23 +46,45 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Mock form submission
-    await mockFormSubmit(formData);
+    // Netlify Forms submission
+    const form = e.target;
     
-    // Show success message
-    setShowSuccess(true);
-    
-    // Reset form and success message after 5 seconds
-    setTimeout(() => {
-      setShowSuccess(false);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        restaurantName: '',
-        location: ''
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          'form-name': 'demo-request',
+          'name': formData.name,
+          'email': formData.email,
+          'phone': formData.phone,
+          'restaurant-name': formData.restaurantName,
+          'location': formData.location
+        }).toString()
       });
-    }, 5000);
+      
+      if (response.ok) {
+        // Show success message
+        setShowSuccess(true);
+        
+        // Reset form after 5 seconds
+        setTimeout(() => {
+          setShowSuccess(false);
+          setFormData({
+            name: '',
+            email: '',
+            phone: '',
+            restaurantName: '',
+            location: ''
+          });
+        }, 5000);
+      } else {
+        alert('Failed to submit. Please try again.');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      alert('Failed to submit. Please try again.');
+    }
   };
 
   const scrollToSection = (id) => {
