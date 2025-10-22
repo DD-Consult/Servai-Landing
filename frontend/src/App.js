@@ -309,7 +309,7 @@ function App() {
                 <input
                   type="text"
                   id="restaurantName"
-                  name="restaurant-name"
+                  name="restaurantName"
                   value={formData.restaurantName}
                   onChange={handleInputChange}
                   required
