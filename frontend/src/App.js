@@ -58,7 +58,7 @@ function App() {
           'name': formData.name,
           'email': formData.email,
           'phone': formData.phone,
-          'restaurant-name': formData.restaurantName,
+          'restaurantName': formData.restaurantName,
           'location': formData.location
         }).toString()
       });
