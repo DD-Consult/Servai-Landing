@@ -194,7 +194,7 @@ function App() {
       <section className="hero-section">
         <div className="hero-content">
           <h1 className="heading-hero font-mono">SERVAI</h1>
-          <p className="hero-subtitle font-mono">Conversational AI-Powered Food Ordering</p>
+          <p className="hero-subtitle font-mono" style={{ fontWeight: 'bold', color: '#000000' }}>Conversational AI-Powered Food Ordering</p>
           <p className="body-large hero-description">
             Say goodbye to clunky QR code apps. ServAI uses conversational AI to let customers order naturally through WhatsApp and Messenger - just like chatting with a friend. Complete orders in under 90 seconds while merchants retain 100% ownership of customer data.
           </p>
