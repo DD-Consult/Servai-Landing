@@ -386,18 +386,24 @@ function App() {
 
       {/* Footer */}
       <footer className="footer">
-        <img 
-          src="https://customer-assets.emergentagent.com/job_servai-demo/artifacts/4xi5nw05_Options%205-transparent%20background%20landscape%20copy%20%282%29.png" 
-          alt="DD Consulting" 
-          className="footer-logo" 
-        />
-        <p className="footer-text">ServAI - AI-Powered Food Ordering Platform</p>
-        <p className="footer-contact">
-          <a href="mailto:info@serv-ai.com">info@serv-ai.com</a>
-        </p>
-        <p className="footer-copyright">
-          © 2025 DD Consulting. All rights reserved.
-        </p>
+        <div className="footer-content">
+          <div className="footer-left">
+            <img 
+              src="https://customer-assets.emergentagent.com/job_servai-demo/artifacts/4xi5nw05_Options%205-transparent%20background%20landscape%20copy%20%282%29.png" 
+              alt="DD Consulting" 
+              className="footer-logo" 
+            />
+          </div>
+          <div className="footer-right">
+            <p className="footer-text">ServAI: AI-Powered Food Ordering Platform</p>
+            <p className="footer-contact">
+              <a href="mailto:info@serv-ai.com">info@serv-ai.com</a>
+            </p>
+            <p className="footer-copyright">
+              © 2025 DD Consulting. All rights reserved.
+            </p>
+          </div>
+        </div>
       </footer>
     </div>
   );
