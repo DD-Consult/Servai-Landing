@@ -688,6 +688,11 @@ div[style*="position: fixed"][style*="bottom"][style*="right"] {
   color: var(--text-primary);
 }
 
+/* Nav Trial Button */
+.nav-trial-btn {
+  white-space: nowrap;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
   .interactive-container {
@@ -702,6 +707,10 @@ div[style*="position: fixed"][style*="bottom"][style*="right"] {
   }
 
   .nav-links {
+    display: none;
+  }
+
+  .nav-trial-btn {
     display: none;
   }
 

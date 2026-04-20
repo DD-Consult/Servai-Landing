@@ -65,7 +65,7 @@ export const features = [
   {
     id: 5,
     icon: 'Languages',
-    title: 'Multilingual Conversations (Coming Soon)',
+    title: 'Multilingual Conversations',
     description: 'AI understands and responds in multiple languages naturally. Perfect for tourist areas - customers have full conversations in their native language, with instant translation for your staff. No language barriers.'
   },
   {

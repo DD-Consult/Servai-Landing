@@ -127,6 +127,14 @@ function App() {
         </nav>
         
         <div className="nav-actions">
+          <a 
+            href="https://app.serv-ai.com/login" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="btn-secondary nav-trial-btn"
+          >
+            Start Free Trial
+          </a>
           <button 
             className="btn-primary" 
             onClick={() => scrollToSection('demo')}
@@ -202,9 +210,14 @@ function App() {
             <button className="btn-primary" onClick={() => scrollToSection('demo')}>
               Schedule Demo
             </button>
-            <button className="btn-secondary" onClick={() => scrollToSection('features')}>
-              Learn More
-            </button>
+            <a 
+              href="https://app.serv-ai.com/login" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="btn-secondary"
+            >
+              Start Free Trial
+            </a>
           </div>
         </div>
       </section>
