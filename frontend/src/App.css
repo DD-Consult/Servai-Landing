@@ -715,21 +715,23 @@ body {
   gap: 1.25rem;
   align-items: flex-start;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  position: relative;
 }
 
 .step-card:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  transform: translateX(4px);
-  background: rgba(255, 255, 255, 0.9);
+  transform: scale(1.05);
+  z-index: 10;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
+  border-left-color: rgba(212, 168, 67, 0.4);
 }
 
 .step-card.active-step {
   box-shadow: 0 8px 24px rgba(45, 212, 191, 0.15);
   background: rgba(255, 255, 255, 0.95);
   border-left-color: var(--brand-teal);
-  transform: translateX(6px);
+  transform: scale(1.02);
 }
 
 .step-num-circle {
@@ -1224,7 +1226,7 @@ body {
   .how-section { padding: 4rem 1.25rem; }
   .how-layout { flex-direction: column; gap: 2.5rem; }
   .how-phone-col { width: 100%; }
-  .step-card:hover, .step-card.active-step { transform: translateX(0); }
+  .step-card:hover, .step-card.active-step { transform: scale(1); }
 
   .roi-section { padding: 4rem 1.25rem; }
   .roi-grid { grid-template-columns: 1fr; }
