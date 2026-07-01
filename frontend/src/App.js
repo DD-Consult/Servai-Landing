@@ -505,17 +505,29 @@ function App() {
 
       {/* ════════════════════════════════════════ FOOTER ════════════════════ */}
       <footer className="footer">
-        <div className="footer-content">
-          <div className="footer-left">
-            <img src="https://customer-assets.emergentagent.com/job_servai-demo/artifacts/4xi5nw05_Options%205-transparent%20background%20landscape%20copy%20%282%29.png"
-              alt="ServAI" className="footer-logo" />
-          </div>
-          <div className="footer-right">
-            <p className="footer-text">ServAI: AI-Powered Food Ordering Platform</p>
-            <p className="footer-contact"><a href="mailto:info@serv-ai.com">info@serv-ai.com</a></p>
-            <p className="footer-copyright">© 2025 DD Consulting. All rights reserved.</p>
-          </div>
+        {/* Row 1 — Logo + brand name */}
+        <div className="footer-brand">
+          <img
+            src="https://customer-assets.emergentagent.com/job_servai-demo/artifacts/4xi5nw05_Options%205-transparent%20background%20landscape%20copy%20%282%29.png"
+            alt="ServAI"
+            className="footer-logo-icon"
+          />
+          <span className="footer-brand-name">ServAI</span>
         </div>
+
+        {/* Row 2 — Nav links */}
+        <div className="footer-links">
+          <a href="#" className="footer-link">Platform</a>
+          <a href="#" className="footer-link">Solutions</a>
+          <a href="#" className="footer-link">Security</a>
+          <a href="#" className="footer-link">Privacy</a>
+          <a href="mailto:info@serv-ai.com" className="footer-link">info@serv-ai.com</a>
+        </div>
+
+        {/* Row 3 — Tagline / copyright */}
+        <p className="footer-tagline">
+          ServAI: AI-Powered Food Ordering Platform | Made with excellence by DD Consulting
+        </p>
       </footer>
 
     </div>
