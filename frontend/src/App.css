@@ -224,12 +224,11 @@ body {
   padding: 8rem 2rem 5rem;
   position: relative;
   background-image:
-    linear-gradient(rgba(10, 10, 10, 0.42), rgba(10, 10, 10, 0.42)),
-    url('https://images.pexels.com/photos/19535906/pexels-photo-19535906.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+    linear-gradient(rgba(10, 10, 10, 0.4), rgba(10, 10, 10, 0.4)),
+    url('https://lh3.googleusercontent.com/aida-public/AB6AXuCmQTlU_UCcbEdeEpWX3wa29TWJn0tT8OWSOM361Qz9ksib7EG-iaclJT23_MCMVlK8PlhsT24ruh8VBNmg1bO2DQnXBqXm8YBJcu6FUxIS62d0Uyz1m_Nv-ltMSgPMu9rySqKJdtFMzBrbqGttIxQgKbEYakscybz73u8yPzE6eQPfnlo8mRKb-2c1wViv3FNG9GrVtqkvaeNPn_Ptwg99ImZ-uiK0maVT6RSya_C8MRtdfh_WvyZDxMV-kDsmkr6sp2hF4G5eUms');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-color: #1a0a05;
 }
 
 .hero-content {
