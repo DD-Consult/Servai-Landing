@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import './App.css';
 import { Menu, X } from 'lucide-react';
 import PhoneMockup from './components/PhoneMockup';
@@ -123,11 +123,17 @@ function App() {
 
   // ── Scroll reveal IntersectionObserver ────────────────────────────────────
   // Adds `.active` to .reveal-on-scroll elements as they enter viewport.
-  // threshold:0.12 + rootMargin bottom offset mirrors reference behavior.
+  // Also stores each revealed node so we can re-apply `.active` after React
+  // re-renders wipe imperative class changes (e.g. when activeStep changes).
+  const revealedNodesRef = useRef(new Set());
+
   useEffect(() => {
     const io = new IntersectionObserver(
       (entries) => entries.forEach(e => {
-        if (e.isIntersecting) e.target.classList.add('active');
+        if (e.isIntersecting) {
+          e.target.classList.add('active');
+          revealedNodesRef.current.add(e.target);
+        }
       }),
       { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
     );
@@ -135,6 +141,12 @@ function App() {
     nodes.forEach(n => io.observe(n));
     return () => io.disconnect();
   }, []);
+
+  // Re-apply `.active` synchronously after each React DOM update so that
+  // the step cards never flash invisible when activeStep causes a re-render.
+  useLayoutEffect(() => {
+    revealedNodesRef.current.forEach(node => node.classList.add('active'));
+  }, [activeStep]);
 
   // ── Auto-play step carousel ────────────────────────────────────────────────
   useEffect(() => {
