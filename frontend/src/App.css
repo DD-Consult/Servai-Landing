@@ -66,22 +66,51 @@ body {
 }
 
 /* ===== HEADER ===== */
+/* ===== HEADER ===== */
 .header-nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 999;
   height: 72px;
-  background: rgba(255, 255, 255, 0.97);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  /* Transparent by default — hero image shows through */
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 2.5rem;
-  border-bottom: 1px solid var(--outline-variant);
+  border-bottom: 1px solid transparent;
+  /* Smooth transition for all scroll-triggered properties */
+  transition:
+    background 0.35s ease,
+    backdrop-filter 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
-.logo { height: 40px; width: auto; }
+/* Scrolled state — blur & subtle tint */
+.header-scrolled {
+  background: rgba(10, 10, 10, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 1px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* Logo: invert to white over dark hero, restore when scrolled */
+.logo {
+  height: 40px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.92;
+  transition: filter 0.35s ease, opacity 0.35s ease;
+}
+
+.header-scrolled .logo {
+  filter: brightness(0) invert(1);
+  opacity: 0.88;
+}
 
 .nav-links {
   display: flex;
@@ -90,13 +119,15 @@ body {
   list-style: none;
 }
 
+/* White text — always visible on dark header (transparent or blur) */
 .nav-links a {
   text-decoration: none;
-  color: var(--on-surface);
+  color: rgba(255, 255, 255, 0.88);
   font-family: 'Inter', sans-serif;
   font-size: 0.9375rem;
   font-weight: 500;
-  transition: color 0.2s ease;
+  letter-spacing: 0.01em;
+  transition: color 0.25s ease;
 }
 
 .nav-links a:hover { color: var(--brand-teal); }
@@ -108,39 +139,21 @@ body {
 }
 
 /* ===== BUTTONS ===== */
+
+/* Request Demo — solid dark pill (always visible on any bg) */
 .btn-primary {
   background: var(--charcoal-bg);
   color: white;
-  border: none;
-  border-radius: 2rem;
-  padding: 0.6875rem 1.5rem;
+  border: 1.5px solid transparent;
+  border-radius: 9999px;
+  padding: 0.625rem 1.375rem;
   font-family: 'Inter', sans-serif;
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.2s ease;
-  min-height: 2.5rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  line-height: 1.2;
-}
-
-.btn-primary:hover { background: #333; transform: scale(1.02); }
-.btn-primary:active { transform: scale(0.98); }
-
-.btn-outline {
-  background: transparent;
-  color: var(--on-surface);
-  border: 1.5px solid var(--on-surface);
-  border-radius: 2rem;
-  padding: 0.625rem 1.5rem;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.875rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
   min-height: 2.5rem;
   display: inline-flex;
   align-items: center;
@@ -148,58 +161,112 @@ body {
   text-decoration: none;
   line-height: 1.2;
   white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-.btn-outline:hover { background: var(--on-surface); color: white; transform: scale(1.02); }
-.btn-outline:active { transform: scale(0.98); }
+.btn-primary:hover {
+  background: #333;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  transform: scale(1.03);
+}
+.btn-primary:active { transform: scale(0.97); }
 
-/* Hero CTA Buttons */
+/* Start Free Trial — ghost pill (white outline over dark header) */
+.btn-outline {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.9);
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  border-radius: 9999px;
+  padding: 0.625rem 1.375rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  min-height: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  line-height: 1.2;
+  white-space: nowrap;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.75);
+  color: #ffffff;
+  transform: scale(1.03);
+}
+.btn-outline:active { transform: scale(0.97); }
+
+/* Hero CTA Buttons — exact Stitch spec */
+
+/* SCHEDULE DEMO — bg-digital-teal, text-charcoal-bg, shadow-lg, tracking-widest */
 .btn-teal {
-  background: var(--brand-teal);
-  color: var(--charcoal-bg);
+  background: #2DD4BF;              /* digital-teal */
+  color: #1a1a1a;                   /* text-charcoal-bg */
   border: none;
-  border-radius: 2rem;
-  padding: 1rem 2rem;
+  border-radius: 9999px;            /* rounded-full */
+  padding: 1rem 2rem;               /* py-4 px-8 */
   font-family: 'Inter', sans-serif;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;           /* tracking-widest */
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  box-shadow: 0 4px 16px rgba(45, 212, 191, 0.35);
+  /* shadow-lg — prominent teal glow */
+  box-shadow:
+    0 10px 24px -4px rgba(45, 212, 191, 0.45),
+    0 4px 8px -2px rgba(45, 212, 191, 0.25);
 }
 
-.btn-teal:hover { background: #14B8A6; transform: scale(1.02); }
-.btn-teal:active { transform: scale(0.98); }
+.btn-teal:hover {
+  background: #14B8A6;
+  transform: translateY(-1px) scale(1.02);
+  box-shadow:
+    0 14px 32px -4px rgba(45, 212, 191, 0.55),
+    0 6px 12px -2px rgba(45, 212, 191, 0.3);
+}
+.btn-teal:active { transform: scale(0.97); }
 
+/* START FREE TRIAL — bg-white/10 backdrop-blur-md border-white/20, tracking-widest */
 .btn-hero-dark {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 2rem;
-  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.10);   /* bg-white/10 */
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.20);  /* border-white/20 */
+  border-radius: 9999px;                    /* rounded-full */
+  padding: 1rem 2rem;                       /* py-4 px-8 */
   font-family: 'Inter', sans-serif;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;                   /* tracking-widest */
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(12px);              /* backdrop-blur-md */
+  -webkit-backdrop-filter: blur(12px);
 }
 
-.btn-hero-dark:hover { background: rgba(255, 255, 255, 0.2); transform: scale(1.02); }
-.btn-hero-dark:active { transform: scale(0.98); }
+.btn-hero-dark:hover {
+  background: rgba(255, 255, 255, 0.20);   /* hover:bg-white/20 */
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-1px) scale(1.02);
+}
+.btn-hero-dark:active { transform: scale(0.97); }
 
 /* Nav compat */
 .nav-trial-btn { white-space: nowrap; }
@@ -211,7 +278,12 @@ body {
   border: none;
   cursor: pointer;
   padding: 0.5rem;
-  color: var(--on-surface);
+  color: rgba(255, 255, 255, 0.9);   /* white over dark transparent header */
+  transition: color 0.25s ease;
+}
+
+.header-scrolled .mobile-menu-btn {
+  color: rgba(255, 255, 255, 0.9);   /* stays white since header stays dark */
 }
 
 /* ===== HERO SECTION ===== */
@@ -232,41 +304,50 @@ body {
 }
 
 .hero-content {
-  max-width: 900px;
+  max-width: 56rem;   /* wider than max-w-3xl to let hero breathe */
   margin: 0 auto;
   position: relative;
   z-index: 2;
 }
 
+/* H1 "SERVAI" — font-display-lg, text-3xl→4xl→5xl, tracking-tighter, drop-shadow-md */
 .hero-title {
   font-family: 'JetBrains Mono', monospace;
-  font-size: clamp(3rem, 7vw, 5rem);
+  font-size: clamp(1.875rem, 6vw, 3rem);   /* text-3xl → text-4xl → text-5xl */
   font-weight: 700;
-  color: #ffffff;
+  color: #ffffff;                           /* text-on-primary */
   text-transform: uppercase;
-  letter-spacing: -0.02em;
-  margin-bottom: 1rem;
+  letter-spacing: -0.04em;                 /* tracking-tighter */
+  margin-bottom: 0.5rem;                   /* mb-2 */
   line-height: 1.1;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+  /* drop-shadow-md */
+  text-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.5),
+    0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
+/* H2 Subtitle — font-headline-lg, text-xl→3xl→4xl, text-primary-fixed (gold), drop-shadow-sm */
 .hero-subtitle {
   font-family: 'Manrope', sans-serif;
-  font-size: clamp(1.25rem, 3vw, 2rem);
+  font-size: clamp(1.25rem, 3.5vw, 2.25rem);  /* text-xl → text-3xl → text-4xl */
   font-weight: 700;
-  color: var(--champagne-gold);
-  margin-bottom: 1.5rem;
+  color: #D4A843;                              /* text-primary-fixed = champagne gold */
+  margin-bottom: 1.5rem;                       /* mb-stack-lg */
   line-height: 1.3;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  /* drop-shadow-sm */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
 }
 
+/* Body — font-body-lg, text-xl→2xl, text-on-primary/95, leading-relaxed, drop-shadow-sm */
 .hero-description {
   font-family: 'Inter', sans-serif;
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  color: rgba(255, 255, 255, 0.93);
-  line-height: 1.75;
-  max-width: 720px;
-  margin: 0 auto 2.5rem;
+  font-size: clamp(1.125rem, 2.2vw, 1.5rem);  /* text-xl → text-2xl */
+  color: rgba(255, 255, 255, 0.95);            /* text-on-primary/95 */
+  line-height: 1.625;                          /* leading-relaxed */
+  max-width: 48rem;                            /* max-w-3xl = 768px */
+  margin: 0 auto 2.5rem;                       /* mb-stack-lg */
+  /* drop-shadow-sm */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
 }
 
 .hero-buttons {
@@ -274,6 +355,7 @@ body {
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 /* ===== STATS / BUSINESS IMPACT ===== */

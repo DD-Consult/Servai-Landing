@@ -71,6 +71,7 @@ const howItWorksSteps = [
 
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [formData, setFormData] = useState({
     name: '', email: '', phone: '', restaurantName: '', location: ''
   });
@@ -87,6 +88,12 @@ function App() {
     const pct = ((value - min) / (max - min)) * 100;
     return { background: `linear-gradient(to right, #2DD4BF ${pct}%, #e0e0e0 ${pct}%)` };
   };
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     if (!autoPlay) return;
@@ -155,7 +162,7 @@ function App() {
     <div className="App">
 
       {/* ===== HEADER ===== */}
-      <header className="header-nav">
+      <header className={`header-nav${scrolled ? ' header-scrolled' : ''}`}>
         <img
           src="https://customer-assets.emergentagent.com/job_servai-demo/artifacts/4xi5nw05_Options%205-transparent%20background%20landscape%20copy%20%282%29.png"
           alt="ServAI"
@@ -174,7 +181,7 @@ function App() {
             href="https://app.serv-ai.com/login"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-secondary nav-trial-btn"
+            className="btn-outline nav-trial-btn"
           >
             Start Free Trial
           </a>
@@ -191,16 +198,17 @@ function App() {
       {mobileMenuOpen && (
         <div style={{
           position: 'fixed', top: '72px', left: 0, right: 0,
-          background: 'rgba(255,255,255,0.97)', backdropFilter: 'blur(12px)',
+          background: 'rgba(10,10,10,0.88)', backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
           padding: '1rem 1.5rem', zIndex: 998,
-          borderBottom: '1px solid rgba(0,0,0,0.1)'
+          borderBottom: '1px solid rgba(255,255,255,0.08)'
         }}>
           <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
             {navLinks.map(({ id, label }) => (
               <a key={id} href={`#${id}`}
                 onClick={(e) => { e.preventDefault(); scrollToSection(id); }}
                 style={{
-                  textDecoration: 'none', color: '#1a1a1a',
+                  textDecoration: 'none', color: 'rgba(255,255,255,0.88)',
                   fontFamily: 'Inter, sans-serif', fontWeight: 500,
                   fontSize: '0.9375rem', padding: '0.875rem 0.75rem', borderRadius: '0.5rem'
                 }}>
