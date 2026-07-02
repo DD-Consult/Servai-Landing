@@ -198,13 +198,13 @@ function App() {
 
       {/* ═══════════════════════════════════════ HEADER ══════════════════════ */}
       <header className={`fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-glass-border h-16 flex justify-between items-center px-margin-mobile header-nav${scrolled ? ' header-scrolled' : ''}`}>
-        <div class="flex items-center gap-2">
+        <div className="flex items-center gap-2">
         <img
           src="https://customer-assets.emergentagent.com/job_servai-demo/artifacts/4xi5nw05_Options%205-transparent%20background%20landscape%20copy%20%282%29.png"
           alt="ServAI" className="logo"
         />
         </div>
-        <div class="flex items-center gap-stack-lg ml-auto mr-stack-lg">
+        <div className="flex items-center gap-stack-lg ml-auto mr-stack-lg">
         <nav className="nav-links">
           {navLinks.map(({ id, label }) => (
             <a key={id} href={`#${id}`}
