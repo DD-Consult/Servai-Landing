@@ -91,16 +91,25 @@ const formFields = [
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled,       setScrolled]       = useState(false);
-  const [heroVisible,    setHeroVisible]    = useState(false);   // spring entrance
+  const [heroVisible,    setHeroVisible]    = useState(false);
   const [formData,       setFormData]       = useState({ name:'', email:'', phone:'', restaurantName:'', location:'' });
   const [showSuccess,    setShowSuccess]    = useState(false);
   const [activeStep,     setActiveStep]     = useState(1);
   const [autoPlay,       setAutoPlay]       = useState(true);
   const [ordersPerDay,   setOrdersPerDay]   = useState(50);
   const [avgOrderValue,  setAvgOrderValue]  = useState(15);
+  const [isPlaying,      setIsPlaying]      = useState(false);
+  const videoRef = useRef(null);
 
   const monthlyRevenue = Math.round(ordersPerDay * avgOrderValue * 30 * 0.4).toLocaleString();
   const hoursSaved     = Math.round(ordersPerDay * 30 * 0.042);
+
+  const handlePlayClick = () => {
+    videoRef.current?.play();
+    setIsPlaying(true);
+  };
+  const handleVideoPause  = () => setIsPlaying(false);
+  const handleVideoEnded  = () => setIsPlaying(false);
 
   const getSliderStyle = (value, min, max) => {
     const pct = ((value - min) / (max - min)) * 100;
@@ -451,14 +460,24 @@ function App() {
             <div className="video-glow"></div>
             <div className="video-glass">
               <video
+                ref={videoRef}
                 className="video-iframe"
                 src="/video/servai-demo.mp4"
-                controls
+                poster="/video/servai-demo-thumb.jpg"
                 playsInline
                 preload="metadata"
-              >
-                Your browser does not support the video tag.
-              </video>
+                controls={isPlaying}
+                onPause={handleVideoPause}
+                onEnded={handleVideoEnded}
+              />
+              {!isPlaying && (
+                <div className="video-play-overlay" onClick={handlePlayClick}>
+                  <div className="video-play-btn">
+                    <span className="material-symbols-outlined video-play-icon"
+                      style={{ fontVariationSettings: '"FILL" 1' }}>play_arrow</span>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -940,6 +940,46 @@ body {
   object-fit: contain;
 }
 
+/* Play overlay — covers thumbnail, fades out once playing */
+.video-play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.28);
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.video-play-overlay:hover {
+  background: rgba(0, 0, 0, 0.42);
+}
+
+.video-play-btn {
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+
+.video-play-overlay:hover .video-play-btn {
+  transform: scale(1.12);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+}
+
+.video-play-icon {
+  font-size: 42px !important;
+  color: #1a1a1a;
+  margin-left: 4px; /* optical centering for play triangle */
+}
+
 /* ===== CTA / DEMO FORM ===== */
 .cta-section {
   padding: 6rem 2rem;
