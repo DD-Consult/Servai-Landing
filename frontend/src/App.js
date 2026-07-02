@@ -209,7 +209,7 @@ function App() {
       <header className={`fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-glass-border h-16 flex justify-between items-center px-margin-mobile header-nav${scrolled ? ' header-scrolled' : ''}`}>
         <div className="flex items-center gap-2">
         <img
-          src="https://customer-assets.emergentagent.com/job_servai-demo/artifacts/4xi5nw05_Options%205-transparent%20background%20landscape%20copy%20%282%29.png"
+          src="https://customer-assets.emergentagent.com/job_preview-view-80/artifacts/6jlb0rap_ServAI-logo.png"
           alt="ServAI" className="logo"
         />
         </div>

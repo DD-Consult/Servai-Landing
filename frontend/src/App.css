@@ -88,11 +88,12 @@ body {
   box-shadow: 0 1px 24px rgba(0, 0, 0, 0.08);
 }
 
-/* Logo — show original colors on light glass background */
+/* Logo — new square ServAI icon */
 .logo {
   height: 40px;
-  width: auto;
+  width: 40px;
   object-fit: contain;
+  border-radius: 8px;
 }
 
 .nav-links {
