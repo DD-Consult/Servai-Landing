@@ -450,24 +450,13 @@ function App() {
           <div className="video-container-wrapper reveal-on-scroll stagger-2">
             <div className="video-glow"></div>
             <div className="video-glass">
-              <video className="video-el" autoPlay muted loop playsInline
-                poster="https://lh3.googleusercontent.com/aida/AP1WRLuPFLGaYerYpmoMJ8P-AY_LKA9_yjp-E8LOmQrHJch5ndWyB376_OuNs9AVy1AjmdsboRhsRrStmV7HKgCwKl0sMrAKSddCJ-WEFOdsUiWwXIYZnli8r5eLi1Xg3gwRVqPLW8Ba04NhtJbq_giSLajq3ZJfkZy_UFlPOn-L52HlbNNlEY553uyi2up1t-HVysdRQPmk6BdB3Aw95Mr2Pj6DVTBoG6LW8_r5W-nwvzU7Wx3zy_Vd9-dV_J0">
-                <source src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
-              </video>
-              {/* Play button overlay — scales 1.1 on hover via CSS */}
-              <div className="video-overlay">
-                <div className="play-button">
-                  <span className="material-symbols-outlined play-icon"
-                    style={{ fontVariationSettings:'"FILL" 1' }}>play_arrow</span>
-                </div>
-              </div>
-              {/* Controls bar — fades in on hover via CSS */}
-              <div className="video-controls">
-                <div className="video-progress-track">
-                  <div className="video-progress-fill"></div>
-                </div>
-                <span className="video-time">01:24 / 03:45</span>
-              </div>
+              <iframe
+                className="video-iframe"
+                src="https://drive.google.com/file/d/1vAp7J852MPgUFEiyjqVg3C5RItf-8v6B/preview"
+                title="ServAI — Experience the Future"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowFullScreen
+              ></iframe>
             </div>
           </div>
         </div>
