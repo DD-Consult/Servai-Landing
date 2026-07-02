@@ -450,13 +450,15 @@ function App() {
           <div className="video-container-wrapper reveal-on-scroll stagger-2">
             <div className="video-glow"></div>
             <div className="video-glass">
-              <iframe
+              <video
                 className="video-iframe"
-                src="https://drive.google.com/file/d/1vAp7J852MPgUFEiyjqVg3C5RItf-8v6B/preview"
-                title="ServAI — Experience the Future"
-                allow="autoplay; encrypted-media; picture-in-picture"
-                allowFullScreen
-              ></iframe>
+                src="/video/servai-demo.mp4"
+                controls
+                playsInline
+                preload="metadata"
+              >
+                Your browser does not support the video tag.
+              </video>
             </div>
           </div>
         </div>
