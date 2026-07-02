@@ -544,11 +544,18 @@ function App() {
         <p className="footer-tagline">
           ServAI: AI-Powered Food Ordering Platform | <a href="mailto:info@serv-ai.com" className="footer-link">info@serv-ai.com</a>
         </p>
-        <p className="footer-tagline">
-          <a href="https://aws.amazon.com/what-is-cloud-computing">
-            <img src="https://d0.awsstatic.com/logos/powered-by-aws.png" alt="Powered by AWS Cloud Computing"/>
-          </a>
-        </p>
+        <a
+          href="https://aws.amazon.com/what-is-cloud-computing"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="footer-aws-link"
+        >
+          <img
+            src="https://d0.awsstatic.com/logos/powered-by-aws-white.png"
+            alt="Powered by AWS Cloud Computing"
+            className="footer-aws-badge"
+          />
+        </a>
       </footer>
 
     </div>
