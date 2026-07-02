@@ -524,26 +524,24 @@ function App() {
         {/* Row 1 — Logo + brand name */}
         <div className="footer-brand">
           <img
-            src="https://customer-assets.emergentagent.com/job_servai-demo/artifacts/4xi5nw05_Options%205-transparent%20background%20landscape%20copy%20%282%29.png"
+            src="https://customer-assets.emergentagent.com/job_preview-view-80/artifacts/6jlb0rap_ServAI-logo.png"
             alt="ServAI"
             className="footer-logo-icon"
           />
-          <span className="footer-brand-name">ServAI</span>
+          <span className="footer-brand-name">
+            <span className="footer-brand-serv">Serv</span><span className="footer-brand-ai">AI</span>
+          </span>
         </div>
 
-        {/* Row 2 — Nav links */}
-        {/* <div className="footer-links">
-          <a href="#" className="footer-link">Platform</a>
-          <a href="#" className="footer-link">Solutions</a>
-          <a href="#" className="footer-link">Security</a>
-          <a href="#" className="footer-link">Privacy</a>
-          <a href="mailto:info@serv-ai.com" className="footer-link">info@serv-ai.com</a>
-        </div> */}
-
-        {/* Row 3 — Tagline / copyright */}
+        {/* Row 2 — Tagline */}
         <p className="footer-tagline">
           ServAI: AI-Powered Food Ordering Platform | <a href="mailto:info@serv-ai.com" className="footer-link">info@serv-ai.com</a>
         </p>
+
+        {/* Row 3 — Credit */}
+        <p className="footer-credit">Made with excellence by <strong>DD Consulting</strong></p>
+
+        {/* Row 4 — AWS badge */}
         <a
           href="https://aws.amazon.com/what-is-cloud-computing"
           target="_blank"

@@ -1145,20 +1145,22 @@ body {
 }
 
 .footer-logo-icon {
-  height: 28px;
-  width: auto;
+  height: 36px;
+  width: 36px;
   object-fit: contain;
-  opacity: 0.85;
+  border-radius: 6px;
 }
 
 .footer-brand-name {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.8125rem;
+  font-size: 1.125rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: #ffffff;
+  letter-spacing: 0.06em;
 }
+
+/* Exact colors sampled from the ServAI logo */
+.footer-brand-serv { color: #0E595F; }
+.footer-brand-ai   { color: #F4A261; }
 
 /* Row 2 — nav links */
 .footer-links {
@@ -1184,10 +1186,23 @@ body {
 .footer-tagline {
   font-family: 'Inter', sans-serif;
   font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.45);
   text-align: center;
   max-width: 28rem;
   line-height: 1.65;
+}
+
+/* DD Consulting credit — clearly readable */
+.footer-credit {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.65);
+  text-align: center;
+}
+
+.footer-credit strong {
+  color: #F4A261;
+  font-weight: 600;
 }
 
 /* AWS badge */
