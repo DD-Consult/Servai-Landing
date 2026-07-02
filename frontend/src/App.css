@@ -66,143 +66,113 @@ body {
 }
 
 /* ===== HEADER ===== */
-/* ===== HEADER ===== */
 .header-nav {
   position: fixed;
   top: 0; left: 0; right: 0;
-  z-index: 999;
-  height: 72px;
-  /* Transparent by default — hero image shows through */
-  background: transparent;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  z-index: 50;
+  height: 64px;
+  /* Glass white — always present, matching reference bg-surface/80 backdrop-blur-md */
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(121, 119, 119, 0.1);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 2.5rem;
-  border-bottom: 1px solid transparent;
-  /* Smooth transition for all scroll-triggered properties */
-  transition:
-    background 0.35s ease,
-    backdrop-filter 0.35s ease,
-    border-color 0.35s ease,
-    box-shadow 0.35s ease;
+  padding: 0 1.5rem;
+  transition: box-shadow 0.35s ease;
 }
 
-/* Scrolled state — blur & subtle tint */
+/* Scrolled state — adds depth shadow only */
 .header-scrolled {
-  background: rgba(10, 10, 10, 0.55);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom-color: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 1px 24px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 1px 24px rgba(0, 0, 0, 0.08);
 }
 
-/* Logo: invert to white over dark hero, restore when scrolled */
+/* Logo — show original colors on light glass background */
 .logo {
   height: 40px;
   width: auto;
-  filter: brightness(0) invert(1);
-  opacity: 0.92;
-  transition: filter 0.35s ease, opacity 0.35s ease;
-}
-
-.header-scrolled .logo {
-  filter: brightness(0) invert(1);
-  opacity: 0.88;
+  object-fit: contain;
 }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 2.5rem;
+  gap: 1.5rem;
   list-style: none;
 }
 
-/* White text — always visible on dark header (transparent or blur) */
+/* Dark text on light glass header — ref: text-on-surface, hover:text-primary */
 .nav-links a {
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.88);
+  color: #1a1a1a;
   font-family: 'Inter', sans-serif;
-  font-size: 0.9375rem;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  transition: color 0.25s ease;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: color 0.2s ease;
 }
 
-.nav-links a:hover { color: var(--brand-teal); }
+.nav-links a:hover { color: var(--champagne-gold); }
 
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
 /* ===== BUTTONS ===== */
 
-/* Request Demo — solid dark pill (always visible on any bg) */
+/* Request Demo — dark pill, hover: brightness(1.25) — ref: bg-charcoal-bg hover:brightness-125 */
 .btn-primary {
-  background: var(--charcoal-bg);
+  background: #1c1b1b;
   color: white;
-  border: 1.5px solid transparent;
+  border: none;
   border-radius: 9999px;
-  padding: 0.625rem 1.375rem;
+  padding: 0.5rem 1.5rem;
   font-family: 'Inter', sans-serif;
-  font-size: 0.8125rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.25s ease;
-  min-height: 2.5rem;
+  transition: filter 0.2s ease;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  line-height: 1.2;
   white-space: nowrap;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-.btn-primary:hover {
-  background: #333;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-  transform: scale(1.03);
-}
-.btn-primary:active { transform: scale(0.97); }
+.btn-primary:hover { filter: brightness(1.25); }
+.btn-primary:active { filter: brightness(0.9); }
 
-/* Start Free Trial — ghost pill (white outline over dark header) */
+/* Start Free Trial — gold border + gold text — ref: border-primary text-primary hover:bg-primary/5 */
 .btn-outline {
-  background: rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.9);
-  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  background: transparent;
+  color: var(--champagne-gold);
+  border: 1px solid var(--champagne-gold);
   border-radius: 9999px;
-  padding: 0.625rem 1.375rem;
+  padding: 0.5rem 1rem;
   font-family: 'Inter', sans-serif;
-  font-size: 0.8125rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.25s ease;
-  min-height: 2.5rem;
+  transition: background 0.2s ease;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  line-height: 1.2;
   white-space: nowrap;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
 }
 
 .btn-outline:hover {
-  background: rgba(255, 255, 255, 0.18);
-  border-color: rgba(255, 255, 255, 0.75);
-  color: #ffffff;
-  transform: scale(1.03);
+  background: rgba(212, 168, 67, 0.05);
 }
-.btn-outline:active { transform: scale(0.97); }
+.btn-outline:active { opacity: 0.85; }
 
 /* Hero CTA Buttons — exact Stitch spec */
 
@@ -271,20 +241,18 @@ body {
 /* Nav compat */
 .nav-trial-btn { white-space: nowrap; }
 
-/* Mobile Menu Button */
+/* Mobile Menu Button — gold icon, ref: text-primary lg:hidden */
 .mobile-menu-btn {
   display: none;
   background: none;
   border: none;
   cursor: pointer;
   padding: 0.5rem;
-  color: rgba(255, 255, 255, 0.9);   /* white over dark transparent header */
-  transition: color 0.25s ease;
+  color: var(--champagne-gold);
+  transition: opacity 0.2s ease;
 }
 
-.header-scrolled .mobile-menu-btn {
-  color: rgba(255, 255, 255, 0.9);   /* stays white since header stays dark */
-}
+.mobile-menu-btn:hover { opacity: 0.75; }
 
 /* ===== HERO SECTION ===== */
 .hero-section {

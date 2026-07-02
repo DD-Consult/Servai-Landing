@@ -220,21 +220,23 @@ function App() {
         </div>
       </header>
 
-      {/* Mobile menu */}
+      {/* Mobile menu — light glass consistent with header */}
       {mobileMenuOpen && (
         <div style={{
-          position:'fixed', top:'72px', left:0, right:0, zIndex:998,
-          background:'rgba(10,10,10,0.90)', backdropFilter:'blur(16px)',
-          WebkitBackdropFilter:'blur(16px)',
-          padding:'1rem 1.5rem', borderBottom:'1px solid rgba(255,255,255,0.08)'
+          position:'fixed', top:'64px', left:0, right:0, zIndex:49,
+          background:'rgba(255, 255, 255, 0.95)', backdropFilter:'blur(20px)',
+          WebkitBackdropFilter:'blur(20px)',
+          padding:'0.75rem 1.5rem', borderBottom:'1px solid rgba(121,119,119,0.1)',
+          boxShadow:'0 4px 24px rgba(0,0,0,0.06)'
         }}>
           <nav style={{ display:'flex', flexDirection:'column', gap:'0.25rem' }}>
             {navLinks.map(({ id, label }) => (
               <a key={id} href={`#${id}`}
                 onClick={(e) => { e.preventDefault(); scrollToSection(id); }}
-                style={{ textDecoration:'none', color:'rgba(255,255,255,0.88)',
-                  fontFamily:'Inter,sans-serif', fontWeight:500,
-                  fontSize:'0.9375rem', padding:'0.875rem 0.75rem', borderRadius:'0.5rem' }}>
+                style={{ textDecoration:'none', color:'#1a1a1a',
+                  fontFamily:'Inter,sans-serif', fontWeight:600,
+                  fontSize:'0.75rem', textTransform:'uppercase', letterSpacing:'0.1em',
+                  padding:'0.875rem 0.75rem', borderRadius:'0.5rem' }}>
                 {label}
               </a>
             ))}
