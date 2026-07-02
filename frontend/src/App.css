@@ -172,7 +172,7 @@ body {
 }
 
 .btn-outline:hover {
-  background: rgba(212, 168, 67, 0.05);
+  background: rgba(212, 168, 67, 0.2);
 }
 .btn-outline:active { opacity: 0.85; }
 
@@ -1201,7 +1201,7 @@ body {
 }
 
 .footer-credit strong {
-  color: #F4A261;
+  color: #ca8a04;
   font-weight: 600;
 }
 
