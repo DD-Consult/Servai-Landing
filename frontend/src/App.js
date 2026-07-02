@@ -46,12 +46,12 @@ function StatCounter({ targetValue, duration = 1500 }) {
 // Static data
 // ─────────────────────────────────────────────────────────────────────────────
 const features = [
-  { id: 1, icon: 'chat_bubble',     iconColor: '#D4A843', iconBg: 'rgba(212,168,67,0.12)',  borderColor: '#D4A843', title: 'Conversational AI Ordering',    description: 'Sophisticated LLM-driven chat interface that handles complex dietary requests and natural language ordering.' },
-  { id: 2, icon: 'fingerprint',     iconColor: '#8b5cf6', iconBg: 'rgba(139,92,246,0.12)',  borderColor: '#8b5cf6', title: 'Instant Biometric Payments',     description: 'Frictionless checkout with Apple Pay, Google Pay, and Face ID integrated directly into the chat flow.' },
-  { id: 3, icon: 'card_membership', iconColor: '#25D366', iconBg: 'rgba(37,211,102,0.12)',  borderColor: '#25D366', title: 'Built-In Loyalty System',         description: 'Automatically track visits and reward regulars without physical cards or app downloads.' },
-  { id: 4, icon: 'dashboard',       iconColor: '#2DD4BF', iconBg: 'rgba(45,212,191,0.12)',  borderColor: '#2DD4BF', title: 'Smart Dashboard',                 description: 'Real-time order management, inventory tracking, and deep customer analytics at your fingertips.' },
-  { id: 5, icon: 'translate',       iconColor: '#6366f1', iconBg: 'rgba(99,102,241,0.12)',  borderColor: '#6366f1', title: 'Multilingual Conversations',      description: 'Serve international guests in their native language with real-time AI translation capabilities.' },
-  { id: 6, icon: 'database',        iconColor: '#C9A227', iconBg: 'rgba(201,162,39,0.12)',  borderColor: '#C9A227', title: 'Own Your Customer Data',          description: 'Reclaim your relationship with customers. No third-party aggregator data lock-in or hidden fees.' }
+  { id: 1, icon: 'chat_bubble',     iconColor: '#D4A843', iconBg: 'rgba(212,168,67,0.12)',  borderColor: '#D4A843', title: 'Conversational AI Ordering',    description: 'Customers have natural conversations with our AI agent through WhatsApp or Messenger. No rigid menus or confusing buttons - just chat naturally like ordering from a real person. Complete orders in under 90 seconds.' },
+  { id: 2, icon: 'fingerprint',     iconColor: '#8b5cf6', iconBg: 'rgba(139,92,246,0.12)',  borderColor: '#8b5cf6', title: 'Instant Biometric Payments',     description: 'Complete transactions with Face ID or Google Pay. No manual card entry, no checkout forms - just fast, secure, trusted payments.' },
+  { id: 3, icon: 'card_membership', iconColor: '#25D366', iconBg: 'rgba(37,211,102,0.12)',  borderColor: '#25D366', title: 'Built-In Loyalty System',         description: 'Track customer orders, reward repeat visits, and build relationships - all inside the chat. Your data, your customers, your loyalty program.' },
+  { id: 4, icon: 'dashboard',       iconColor: '#2DD4BF', iconBg: 'rgba(45,212,191,0.12)',  borderColor: '#2DD4BF', title: 'Smart Dashboard',                 description: 'Real-time order management with actionable insights. Know your top customers, track preferences, and optimize your menu based on actual data.' },
+  { id: 5, icon: 'translate',       iconColor: '#6366f1', iconBg: 'rgba(99,102,241,0.12)',  borderColor: '#6366f1', title: 'Multilingual Conversations',      description: 'AI understands and responds in multiple languages naturally. Perfect for tourist areas - customers have full conversations in their native language, with instant translation for your staff. No language barriers.' },
+  { id: 6, icon: 'database',        iconColor: '#C9A227', iconBg: 'rgba(201,162,39,0.12)',  borderColor: '#C9A227', title: 'Own Your Customer Data',          description: 'No third-party aggregators taking your customer relationships. Full ownership of profiles, preferences, and contact information.' }
 ];
 
 const howItWorksSteps = [
@@ -197,11 +197,14 @@ function App() {
     <div className="App">
 
       {/* ═══════════════════════════════════════ HEADER ══════════════════════ */}
-      <header className={`header-nav${scrolled ? ' header-scrolled' : ''}`}>
+      <header className={`fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-glass-border h-16 flex justify-between items-center px-margin-mobile header-nav${scrolled ? ' header-scrolled' : ''}`}>
+        <div class="flex items-center gap-2">
         <img
           src="https://customer-assets.emergentagent.com/job_servai-demo/artifacts/4xi5nw05_Options%205-transparent%20background%20landscape%20copy%20%282%29.png"
           alt="ServAI" className="logo"
         />
+        </div>
+        <div class="flex items-center gap-stack-lg ml-auto mr-stack-lg">
         <nav className="nav-links">
           {navLinks.map(({ id, label }) => (
             <a key={id} href={`#${id}`}
@@ -210,6 +213,7 @@ function App() {
             </a>
           ))}
         </nav>
+        </div>
         <div className="nav-actions">
           <a href="https://app.serv-ai.com/login" target="_blank" rel="noopener noreferrer"
             className="btn-outline nav-trial-btn">Start Free Trial</a>
@@ -518,17 +522,22 @@ function App() {
         </div>
 
         {/* Row 2 — Nav links */}
-        <div className="footer-links">
+        {/* <div className="footer-links">
           <a href="#" className="footer-link">Platform</a>
           <a href="#" className="footer-link">Solutions</a>
           <a href="#" className="footer-link">Security</a>
           <a href="#" className="footer-link">Privacy</a>
           <a href="mailto:info@serv-ai.com" className="footer-link">info@serv-ai.com</a>
-        </div>
+        </div> */}
 
         {/* Row 3 — Tagline / copyright */}
         <p className="footer-tagline">
-          ServAI: AI-Powered Food Ordering Platform | Made with excellence by DD Consulting
+          ServAI: AI-Powered Food Ordering Platform | <a href="mailto:info@serv-ai.com" className="footer-link">info@serv-ai.com</a>
+        </p>
+        <p className="footer-tagline">
+          <a href="https://aws.amazon.com/what-is-cloud-computing">
+            <img src="https://d0.awsstatic.com/logos/powered-by-aws.png" alt="Powered by AWS Cloud Computing"/>
+          </a>
         </p>
       </footer>
 
