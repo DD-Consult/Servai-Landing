@@ -516,40 +516,59 @@ function App() {
       </section>
 
       {/* ════════════════════════════════════════ FOOTER ════════════════════ */}
-      <footer className="footer">
-        {/* Row 1 — Logo + brand name */}
-        <div className="footer-brand">
-          <img
-            src="https://customer-assets.emergentagent.com/job_preview-view-80/artifacts/6jlb0rap_ServAI-logo.png"
-            alt="ServAI"
-            className="footer-logo-icon"
-          />
-          <span className="footer-brand-name">
-            <span className="footer-brand-serv">Serv</span><span className="footer-brand-ai">AI</span>
-          </span>
+      <footer className="w-full bg-[#1c1b1b] text-[#f2f0f0] py-12 px-6 border-t border-white/10">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
+
+          {/* DD Consulting — left */}
+          <div className="flex flex-col items-center md:items-start order-2 md:order-1 space-y-2">
+            <div className="flex items-center gap-2">
+              <span className="material-symbols-outlined text-[#ffab00] text-3xl">corporate_fare</span>
+              <span className="font-bold tracking-wider text-sm uppercase text-white">DD Consulting</span>
+            </div>
+            <p className="text-xs text-gray-400">
+              Made with excellence by <strong className="text-[#ffab00]">DD Consulting</strong>
+            </p>
+          </div>
+
+          {/* ServAI brand — center */}
+          <div className="flex flex-col items-center order-1 md:order-2 space-y-3">
+            <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-xl border border-white/10 shadow-inner">
+              <img
+                src="https://customer-assets.emergentagent.com/job_preview-view-80/artifacts/6jlb0rap_ServAI-logo.png"
+                alt="ServAI Logo"
+                className="h-8 w-auto object-contain"
+              />
+              <span className="text-xl font-semibold tracking-wide text-white">
+                <span className="text-[#00ffc8]">Serv</span><span className="text-[#ffab00]">AI</span>
+              </span>
+            </div>
+            <p className="text-xs text-gray-400 max-w-sm text-center">
+              ServAI: AI-Powered Food Ordering Platform <br className="hidden sm:inline" />
+              <span className="text-gray-500">|</span>
+              <a href="mailto:info@serv-ai.com" className="text-[#00ffc8] hover:underline ml-1">info@serv-ai.com</a>
+            </p>
+          </div>
+
+          {/* AWS — right */}
+          <div className="flex flex-col items-center md:items-end order-3 space-y-2">
+            <a
+              href="https://aws.amazon.com/what-is-cloud-computing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-transform duration-200 hover:scale-105 inline-block"
+            >
+              <img
+                src="https://d0.awsstatic.com/logos/powered-by-aws-white.png"
+                alt="Powered by AWS Cloud Computing"
+                className="h-8 w-auto object-contain"
+              />
+            </a>
+            <p className="text-[10px] text-gray-500 tracking-wider uppercase">
+              Cloud Infrastructure
+            </p>
+          </div>
+
         </div>
-
-        {/* Row 2 — Tagline */}
-        <p className="footer-tagline">
-          ServAI: AI-Powered Food Ordering Platform | <a href="mailto:info@serv-ai.com" className="footer-link">info@serv-ai.com</a>
-        </p>
-
-        {/* Row 3 — Credit */}
-        <p className="footer-credit">Made with excellence by <strong>DD Consulting</strong></p>
-
-        {/* Row 4 — AWS badge */}
-        <a
-          href="https://aws.amazon.com/what-is-cloud-computing"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="footer-aws-link"
-        >
-          <img
-            src="https://d0.awsstatic.com/logos/powered-by-aws-white.png"
-            alt="Powered by AWS Cloud Computing"
-            className="footer-aws-badge"
-          />
-        </a>
       </footer>
 
     </div>
