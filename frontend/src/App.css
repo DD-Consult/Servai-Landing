@@ -200,7 +200,7 @@ body {
 .hero-section {
   position: relative;
   min-height: 100vh;
-  background: #1a1c22;
+  background: linear-gradient(135deg, #141620 0%, #1a1f2e 30%, #1e2738 60%, #1c2433 100%);
   overflow: hidden;
   display: flex;
   align-items: center;

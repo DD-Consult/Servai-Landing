@@ -522,8 +522,11 @@ function App() {
           {/* DD Consulting — left */}
           <div className="flex flex-col items-center md:items-start order-2 md:order-1 space-y-2">
             <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-[#ffab00] text-3xl">corporate_fare</span>
-              <span className="font-bold tracking-wider text-sm uppercase text-white">DD Consulting</span>
+              <img 
+                src="/assets/dd_consulting.png" 
+                alt="DD Consulting Logo" 
+                class="h-10 w-auto object-contain rounded-lg shadow-md"
+              />
             </div>
             <p className="text-xs text-gray-400">
               Made with excellence by <strong className="text-[#ffab00]">DD Consulting</strong>
@@ -563,9 +566,6 @@ function App() {
                 className="h-8 w-auto object-contain"
               />
             </a>
-            <p className="text-[10px] text-gray-500 tracking-wider uppercase">
-              Cloud Infrastructure
-            </p>
           </div>
 
         </div>
