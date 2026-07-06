@@ -339,14 +339,19 @@ body {
   aspect-ratio: 16 / 9;
   min-height: 280px;
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 1.25rem;
   overflow: hidden;
   box-shadow:
-    0 25px 50px -12px rgba(0, 0, 0, 0.25),
-    0 40px 80px -20px rgba(0, 0, 0, 0.45),
-    0 8px 20px -4px rgba(0, 0, 0, 0.35),
-    0 0 0 1px rgba(255, 255, 255, 0.06);
+    /* outer rim glow — lifts card edge against dark bg */
+    0 0 0 1px rgba(255, 255, 255, 0.10),
+    0 0 24px 4px rgba(255, 255, 255, 0.05),
+    /* reference shadow layer */
+    0 25px 50px -12px rgba(0, 0, 0, 0.95),
+    /* deep atmospheric spread */
+    0 60px 120px -30px rgba(0, 0, 0, 0.80),
+    /* wide bleed darkening area around card */
+    0 0 80px 20px rgba(0, 0, 0, 0.60);
 }
 
 .hero-video-el {
