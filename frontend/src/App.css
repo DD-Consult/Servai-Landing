@@ -245,9 +245,9 @@ body {
 
 .hero-brand-label {
   font-family: 'Manrope', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.3em;
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--champagne-gold);
 }
@@ -277,9 +277,9 @@ body {
   align-items: center;
 }
 
-/* Schedule Demo — teal pill */
+/* Schedule Demo — warm tan pill (matches prior btn-teal color) */
 .btn-hero-primary {
-  background: var(--brand-teal);
+  background: #bbb095;
   color: #1a1a1a;
   border: none;
   border-radius: 9999px;
@@ -290,14 +290,14 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   cursor: pointer;
-  box-shadow: 0 8px 24px rgba(45, 212, 191, 0.35);
-  transition: filter 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 8px 24px rgba(187, 176, 149, 0.35);
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   white-space: nowrap;
 }
 .btn-hero-primary:hover {
-  filter: brightness(1.1);
+  background: #ab986d;
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(45, 212, 191, 0.45);
+  box-shadow: 0 12px 32px rgba(171, 152, 109, 0.45);
 }
 
 /* Start Free Trial — ghost pill */
