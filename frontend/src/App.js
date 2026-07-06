@@ -99,7 +99,9 @@ function App() {
   const [ordersPerDay,   setOrdersPerDay]   = useState(50);
   const [avgOrderValue,  setAvgOrderValue]  = useState(15);
   const [isPlaying,      setIsPlaying]      = useState(false);
-  const videoRef = useRef(null);
+  const [heroPlaying,    setHeroPlaying]    = useState(false);
+  const videoRef     = useRef(null);
+  const heroVideoRef = useRef(null);
 
   const monthlyRevenue = Math.round(ordersPerDay * avgOrderValue * 30 * 0.4).toLocaleString();
   const hoursSaved     = Math.round(ordersPerDay * 30 * 0.042);
@@ -259,32 +261,60 @@ function App() {
 
       {/* ═══════════════════════════════════════ HERO ════════════════════════ */}
       <section className="hero-section">
-        {/*
-          Spring entrance:
-          Initial: opacity:0 translateY(40px)
-          After 120ms → heroVisible=true → CSS transition fires:
-          transition: 1s cubic-bezier(0.16, 1, 0.3, 1)  — exact reference spec
-        */}
-        <div
-          id="hero-content"
-          className={`hero-content hero-spring${heroVisible ? ' visible' : ''}`}
-        >
-          <h1 className="hero-title">SERVAI</h1>
-          <h2 className="hero-subtitle">Conversational AI-Powered Food Ordering</h2>
-          <p className="hero-description">
-            Say goodbye to clunky QR code apps. ServAI uses conversational AI to let customers order naturally
-            through WhatsApp and Messenger - just like chatting with a friend. Complete orders in under 90 seconds
-            while merchants retain 100% ownership of customer data.
-          </p>
-          <div className="hero-buttons">
-            {/* btn-hover-lift: translateY(-2px) scale(1.03) + teal shadow-lg */}
-            <button className="btn-teal btn-hover-lift" onClick={() => scrollToSection('demo')}>
-              Schedule Demo
-            </button>
-            <a href="https://app.serv-ai.com/login" target="_blank" rel="noopener noreferrer"
-              className="btn-hero-dark">
-              Start Free Trial
-            </a>
+        {/* Ambient glow blobs */}
+        <div className="hero-glow hero-glow-teal" />
+        <div className="hero-glow hero-glow-mustard" />
+
+        <div className="hero-inner">
+          {/* ── LEFT — text content ─────────────────────────────────────── */}
+          <div className={`hero-left hero-spring${heroVisible ? ' visible' : ''}`}>
+            <span className="hero-brand-label">SERVAi</span>
+
+            <h1 className="hero-heading">
+              Conversational AI-Powered Food Ordering
+            </h1>
+
+            <p className="hero-sub">
+              Say goodbye to clunky QR code apps. ServAI uses conversational AI to let customers
+              order naturally through WhatsApp and Messenger — just like chatting with a friend.
+              Complete orders in under 90 seconds.
+            </p>
+
+            <div className="hero-buttons">
+              <button className="btn-hero-primary btn-hover-lift" onClick={() => scrollToSection('demo')}>
+                Schedule Demo
+              </button>
+              <a href="https://app.serv-ai.com/login" target="_blank" rel="noopener noreferrer"
+                className="btn-hero-ghost">
+                Start Free Trial
+              </a>
+            </div>
+          </div>
+
+          {/* ── RIGHT — video player ─────────────────────────────────────── */}
+          <div className="hero-right">
+            <div className="hero-video-glass">
+              <video
+                ref={heroVideoRef}
+                className="hero-video-el"
+                src="/video/servai-demo.mp4"
+                poster="/video/servai-demo-thumb.jpg"
+                playsInline
+                preload="metadata"
+                controls={heroPlaying}
+                onPause={() => setHeroPlaying(false)}
+                onEnded={() => setHeroPlaying(false)}
+              />
+              {!heroPlaying && (
+                <div className="hero-video-overlay"
+                  onClick={() => { heroVideoRef.current?.play(); setHeroPlaying(true); }}>
+                  <div className="hero-play-btn">
+                    <span className="material-symbols-outlined hero-play-icon"
+                      style={{ fontVariationSettings: '"FILL" 1' }}>play_arrow</span>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </section>

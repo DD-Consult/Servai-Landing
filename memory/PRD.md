@@ -34,14 +34,14 @@ Marketing / Landing Page — React frontend + FastAPI backend (backend untouched
 ### 2025 (Session 3)
 - Full App.js motion engine: IntersectionObserver scroll reveal, hero spring entrance (120ms delay, cubic-bezier(0.16, 1, 0.3, 1)), stat counter (easeOutCubic RAF), auto-play step carousel
 
-### 2026 (Current Session)
-- **Fixed**: `.comparison-card.old-way:hover` — was missing entirely; added `shadow-lg` + warmer border brighten on hover matching reference `hover:shadow-lg`
-- **Fixed**: border-color on `.old-way` changed from `rgba(0,0,0,0.12)` to `rgba(212,168,67,0.4)` (champagne gold tint, matching reference `border-primary/40`)
-- **Added**: Full Motion Engine CSS block in `App.css`:
-  - `.hero-spring` / `.hero-spring.visible` — spring entrance
-  - `.reveal-on-scroll` / `.reveal-on-scroll.active` — scroll reveal
-  - `.stagger-1` through `.stagger-6` — cascade delays (0.08s steps)
-  - `.btn-hover-lift` / `.btn-hover-lift:hover` — hero CTA lift
+### 2026 (Current Session — Hero Redesign)
+- **Rebuilt** hero section from full-width bg-image to two-column dark layout matching `servai.html` reference:
+  - Left: SERVAI brand label → heading → body → SCHEDULE DEMO (teal) + START FREE TRIAL (ghost)
+  - Right: Video player glass container (thumbnail + custom play button, click-to-play)
+  - Background: `#1a1c22` dark slate with teal + mustard ambient glows
+- **Fixed** hero video file permissions (`chmod 644`) — was root-only, causing `ERR_ABORTED`
+- **Fixed** right column visibility: removed `hero-spring` from `hero-right` (was permanently `opacity:0`)
+- **Separate video states**: `heroPlaying/heroVideoRef` (hero) vs `isPlaying/videoRef` (preview section)
 
 ## Architecture
 - `/app/frontend/src/App.js` — main React component, all sections, motion JS
