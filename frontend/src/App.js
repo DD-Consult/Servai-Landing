@@ -98,20 +98,18 @@ function App() {
   const [autoPlay,       setAutoPlay]       = useState(true);
   const [ordersPerDay,   setOrdersPerDay]   = useState(50);
   const [avgOrderValue,  setAvgOrderValue]  = useState(15);
-  const [isPlaying,      setIsPlaying]      = useState(false);
   const [heroPlaying,    setHeroPlaying]    = useState(false);
-  const videoRef     = useRef(null);
   const heroVideoRef = useRef(null);
 
   const monthlyRevenue = Math.round(ordersPerDay * avgOrderValue * 30 * 0.4).toLocaleString();
   const hoursSaved     = Math.round(ordersPerDay * 30 * 0.042);
 
   const handlePlayClick = () => {
-    videoRef.current?.play();
-    setIsPlaying(true);
+    heroVideoRef.current?.play();
+    setHeroPlaying(true);
   };
-  const handleVideoPause  = () => setIsPlaying(false);
-  const handleVideoEnded  = () => setIsPlaying(false);
+  const handleVideoPause  = () => setHeroPlaying(false);
+  const handleVideoEnded  = () => setHeroPlaying(false);
 
   const getSliderStyle = (value, min, max) => {
     const pct = ((value - min) / (max - min)) * 100;
@@ -476,38 +474,6 @@ function App() {
                 <div className="roi-result-value white-val">{hoursSaved}h</div>
                 <div className="roi-result-label">Staff hours freed / month</div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ════════════════════════════════ PRODUCT PREVIEW ═══════════════════ */}
-      <section className="preview-section">
-        <div className="preview-section-inner">
-          <span className="preview-label reveal-on-scroll">The Interface</span>
-          <h2 className="preview-heading reveal-on-scroll stagger-1">Experience the Future</h2>
-          <div className="video-container-wrapper reveal-on-scroll stagger-2">
-            <div className="video-glow"></div>
-            <div className="video-glass">
-              <video
-                ref={videoRef}
-                className="video-iframe"
-                src="/video/servai-demo.mp4"
-                poster="/video/servai-demo-thumb.jpg"
-                playsInline
-                preload="metadata"
-                controls={isPlaying}
-                onPause={handleVideoPause}
-                onEnded={handleVideoEnded}
-              />
-              {!isPlaying && (
-                <div className="video-play-overlay" onClick={handlePlayClick}>
-                  <div className="video-play-btn">
-                    <span className="material-symbols-outlined video-play-icon"
-                      style={{ fontVariationSettings: '"FILL" 1' }}>play_arrow</span>
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         </div>
