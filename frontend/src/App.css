@@ -343,15 +343,13 @@ body {
   border-radius: 1.25rem;
   overflow: hidden;
   box-shadow:
-    /* outer rim glow — lifts card edge against dark bg */
-    0 0 0 1px rgba(255, 255, 255, 0.10),
-    0 0 24px 4px rgba(255, 255, 255, 0.05),
-    /* reference shadow layer */
+    /* visible outer glow — light halo against dark bg */
+    0 0 0 1px rgba(255, 255, 255, 0.14),
+    0 0 40px 12px rgba(255, 255, 255, 0.10),
+    0 0 80px 20px rgba(255, 255, 255, 0.06),
+    /* deep shadow beneath for depth */
     0 25px 50px -12px rgba(0, 0, 0, 0.95),
-    /* deep atmospheric spread */
-    0 60px 120px -30px rgba(0, 0, 0, 0.80),
-    /* wide bleed darkening area around card */
-    0 0 80px 20px rgba(0, 0, 0, 0.60);
+    0 60px 120px -30px rgba(0, 0, 0, 0.80);
 }
 
 .hero-video-el {
