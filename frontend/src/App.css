@@ -277,38 +277,6 @@ body {
   align-items: center;
 }
 
-/* Schedule Demo — wrap holds the pointer-tracked halo + button together */
-.btn-hero-primary-wrap {
-  position: relative;
-  display: inline-flex;
-  --mx: 50%;
-  --my: 50%;
-}
-
-/* Outer bleeding halo — soft warm glow that trails the cursor, matches
-   the reference screenshot (blurred orange/white light behind the pill) */
-.btn-hero-primary-halo {
-  position: absolute;
-  inset: -26px;
-  border-radius: 9999px;
-  background: radial-gradient(
-    circle 130px at var(--mx) var(--my),
-    rgba(255, 214, 153, 0.95),
-    rgba(255, 145, 60, 0.55) 45%,
-    rgba(255, 145, 60, 0) 75%
-  );
-  filter: blur(22px);
-  opacity: 0;
-  transform: scale(0.92);
-  transition: opacity 0.45s ease, transform 0.45s ease;
-  pointer-events: none;
-  z-index: 0;
-}
-.btn-hero-primary-wrap:hover .btn-hero-primary-halo {
-  opacity: 1;
-  transform: scale(1);
-}
-
 .btn-hero-primary {
   position: relative;
   overflow: hidden;
@@ -328,6 +296,8 @@ body {
   box-shadow: 0 8px 24px rgba(187, 176, 149, 0.35);
   transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   white-space: nowrap;
+  --mx: 14%;
+  --my: 50%;
 }
 .btn-hero-primary:hover {
   background: #ab986d;
@@ -335,18 +305,19 @@ body {
   box-shadow: 0 12px 32px rgba(171, 152, 109, 0.45);
 }
 
-/* Inner spotlight — bright warm highlight that moves with the cursor
-   across the pill surface itself, clipped to the pill shape */
+/* Spotlight — always on, contained strictly within the pill (clipped by
+   overflow: hidden above). Idle: JS sweeps --mx/--my back and forth to
+   highlight "Schedule Demo". Hover: --mx/--my track the real cursor. */
 .btn-hero-primary-shine {
   position: absolute;
   inset: 0;
   background: radial-gradient(
-    circle 90px at var(--mx) var(--my),
-    rgba(255, 255, 255, 0.85),
-    rgba(255, 205, 140, 0.35) 45%,
+    circle 85px at var(--mx) var(--my),
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 205, 140, 0.45) 45%,
     transparent 72%
   );
-  opacity: 0;
+  opacity: 0.55;
   transition: opacity 0.3s ease;
   pointer-events: none;
   z-index: 0;

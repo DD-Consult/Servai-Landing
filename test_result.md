@@ -101,3 +101,71 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: "Verify the Schedule Demo button's glow/spotlight effect on the ServAI landing page hero section"
+
+frontend:
+  - task: "Schedule Demo Button - Idle Animation"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "Tested idle animation over 5 seconds. CSS variable --mx changes continuously with 10 unique values ranging from 14.26% to 85.97%, confirming the spotlight sweeps across the button automatically without mouse interaction. Animation loop verified using requestAnimationFrame."
+  
+  - task: "Schedule Demo Button - Mouse Tracking"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "Tested cursor tracking at left edge, center, and right edge of button. CSS variables --mx and --my update in real-time to follow cursor position. Shine opacity increases from 0.55 to 1.0 on hover. Button background changes from rgb(187,176,149) to rgb(171,152,109) on hover. All hover effects working correctly."
+  
+  - task: "Schedule Demo Button - Glow Containment"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/App.css"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "Verified glow effect containment. Button has overflow:hidden and border-radius:9999px (pill shape). Shine element positioned absolutely with inset:0, dimensions match button (192.953px x 46px). Radial gradient with white center (rgba(255,255,255,0.9)) fading to golden (rgba(255,205,140,0.45)) and transparent. No visual bleed outside button boundaries observed in close-up screenshots."
+  
+  - task: "Schedule Demo Button - Click Functionality"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "Button click functionality verified. Clicking the button successfully scrolls from position 0px to 5277px, bringing the demo section (#demo) into view. Smooth scroll behavior working correctly. Hover lift effect (translateY(-2px) scale(1.03)) and enhanced box-shadow also working as expected."
+
+metadata:
+  created_by: "testing_agent"
+  version: "1.0"
+  test_sequence: 1
+  run_ui: true
+
+test_plan:
+  current_focus:
+    - "All Schedule Demo button tests completed"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+    - agent: "testing"
+      message: "Completed comprehensive testing of Schedule Demo button glow/spotlight effect. All four requirements verified: (1) Idle animation sweeps spotlight automatically across button, (2) Mouse tracking follows cursor position in real-time, (3) Glow effect properly contained within pill-shaped button boundaries, (4) Button click scrolls to demo section. All tests passed successfully. Screenshots captured at multiple stages for documentation."

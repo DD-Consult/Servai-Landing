@@ -174,14 +174,40 @@ function App() {
     setMobileMenuOpen(false);
   };
 
-  // Cursor-follow glow — tracks pointer position over the CTA and exposes it
-  // as CSS vars so the glow (::before + halo span) can trail the cursor.
+  // ── Schedule Demo CTA — cursor-follow glow ──────────────────────────────
+  // Idle: an automatic sweep animates the spotlight across the button so it
+  // draws the eye to "Schedule Demo" even with no pointer interaction.
+  // Hover: the sweep pauses and the spotlight tracks the real cursor instead.
+  const scheduleBtnRef = useRef(null);
+  const ctaHoveringRef = useRef(false);
+
+  useEffect(() => {
+    let rafId;
+    const animate = (t) => {
+      if (!ctaHoveringRef.current && scheduleBtnRef.current) {
+        const phase = (t % 3200) / 3200; // 0..1 loop every 3.2s
+        const eased = (Math.sin(phase * Math.PI * 2 - Math.PI / 2) + 1) / 2; // smooth 0..1
+        const x = 14 + eased * 72; // sweep 14% -> 86%
+        scheduleBtnRef.current.style.setProperty('--mx', `${x}%`);
+        scheduleBtnRef.current.style.setProperty('--my', '50%');
+      }
+      rafId = requestAnimationFrame(animate);
+    };
+    rafId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(rafId);
+  }, []);
+
   const handleCtaGlowMove = (e) => {
+    ctaHoveringRef.current = true;
     const rect = e.currentTarget.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 100;
     const y = ((e.clientY - rect.top) / rect.height) * 100;
     e.currentTarget.style.setProperty('--mx', `${x}%`);
     e.currentTarget.style.setProperty('--my', `${y}%`);
+  };
+
+  const handleCtaGlowLeave = () => {
+    ctaHoveringRef.current = false;
   };
 
   const handleInputChange = (e) => {
@@ -289,13 +315,17 @@ function App() {
             </p>
 
             <div className="hero-buttons">
-              <div className="btn-hero-primary-wrap" onMouseMove={handleCtaGlowMove}>
-                <span className="btn-hero-primary-halo" />
-                <button className="btn-hero-primary btn-hover-lift" onClick={() => scrollToSection('demo')}>
-                  <span className="btn-hero-primary-shine" />
-                  <span className="btn-hero-primary-label">Schedule Demo</span>
-                </button>
-              </div>
+              <button
+                ref={scheduleBtnRef}
+                className="btn-hero-primary btn-hover-lift"
+                onClick={() => scrollToSection('demo')}
+                onMouseMove={handleCtaGlowMove}
+                onMouseEnter={handleCtaGlowMove}
+                onMouseLeave={handleCtaGlowLeave}
+              >
+                <span className="btn-hero-primary-shine" />
+                <span className="btn-hero-primary-label">Schedule Demo</span>
+              </button>
               <a href="https://app.serv-ai.com/login" target="_blank" rel="noopener noreferrer"
                 className="btn-hero-ghost">
                 Start Free Trial
