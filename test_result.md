@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Verify the ambient glow effect around the hero video player on the ServAI landing page"
+user_problem_statement: "Verify the border-beam light effect (thin rotating colored line) around the hero video player on the ServAI landing page"
 
 frontend:
   - task: "Schedule Demo Button - Idle Animation"
@@ -164,16 +164,28 @@ frontend:
         - working: true
           agent: "testing"
           comment: "Verified ambient glow effect around hero video player. Two aura elements found: warm (orange/red) and cool (blue). Both animate with 7s ease-in-out infinite alternate. Captured 4 unique positions over 9 seconds confirming continuous orbiting motion: warm aura moves top to bottom (39px→171px→136px→-18px), cool aura moves opposite direction (91px→-41px→-6px→149px). Auras correctly positioned behind video glass (z-index 0 vs 1). Size: 320x180px with blur(55px), opacity 0.9. Auras extend around video edges with negative positioning (-88px left/right) creating bleeding effect. Video content not obscured, play button functional. Animation creates smooth back-and-forth orbiting motion as specified."
+  
+  - task: "Hero Video Card - Border-Beam Light Effect"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/App.css (lines 380-418), /app/frontend/src/App.js (line 365)"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "Verified border-beam light effect on hero video card. THIN bright line (3px border with blur(1.5px) + drop-shadow) continuously rotates around card edge, NOT a large blurred cloud. Two colored arcs confirmed: warm orange/red arc (rgba(255,140,60,0.95) → rgb(255,218,185) at 90-110deg) and cool blue arc (rgba(80,155,255,0.95) → rgb(198,227,255) at 270-290deg) positioned 180° apart in conic-gradient. Rotation verified over 10 seconds: --beam-angle changed from 127.326° → 229.99° → 330.654° → 71.31° → 173.978° → 277.31° (span 259.34°). Animation: heroBeamSpin 9s linear infinite. Arcs trade positions as they rotate (diametrically opposite). Video content completely unobstructed: border-beam has z-index:2 (above glass z-index:1), pointer-events:none, and uses mask-composite:exclude to create hollow border-only effect. Video element and play button fully visible and accessible. No CSS @property or conic-gradient errors detected. Screenshots captured at 0s, 2s, 4s, 6s, 8s, 10s intervals plus close-up. All requirements met."
 
 metadata:
   created_by: "testing_agent"
   version: "1.0"
-  test_sequence: 2
+  test_sequence: 3
   run_ui: true
 
 test_plan:
   current_focus:
-    - "Hero video ambient glow effect verified"
+    - "All hero section effects verified and working"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
@@ -183,3 +195,5 @@ agent_communication:
       message: "Completed comprehensive testing of Schedule Demo button glow/spotlight effect. All four requirements verified: (1) Idle animation sweeps spotlight automatically across button, (2) Mouse tracking follows cursor position in real-time, (3) Glow effect properly contained within pill-shaped button boundaries, (4) Button click scrolls to demo section. All tests passed successfully. Screenshots captured at multiple stages for documentation."
     - agent: "testing"
       message: "Completed testing of hero video card ambient glow effect. Verified all requirements: (1) Two colored blurred light blobs present (warm orange/red and cool blue), (2) Lights move in continuous loop with warm drifting to bottom while cool drifts to top, then reversing in 7-second cycles, (3) Video content not broken or obscured, glow sits behind video card with proper z-index layering. Animation working correctly with 4 unique positions captured over 9 seconds. Screenshots saved at 0s, 3s, 6s, 9s intervals plus close-up. All tests passed."
+    - agent: "testing"
+      message: "Completed testing of hero video card border-beam light effect. This is a SEPARATE effect from the ambient glow - it's a thin rotating border line around the video card edge. All requirements verified: (1) Effect is a THIN bright line (3px border, not a large blurred cloud), (2) Two colored arcs present: warm orange/red and cool blue positioned 180° apart, (3) Arcs continuously rotate around card border in 9-second loop, confirmed by --beam-angle changing from 127° to 277° over 10 seconds, (4) Arcs trade positions as they rotate (diametrically opposite), (5) Video content completely unobstructed - border-beam uses mask-composite to create hollow border-only effect with pointer-events:none, (6) No CSS @property or conic-gradient browser compatibility errors. Screenshots captured at 0s, 2s, 4s, 6s, 8s, 10s intervals showing rotation progression. All tests passed successfully."

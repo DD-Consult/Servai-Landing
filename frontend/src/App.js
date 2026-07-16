@@ -336,10 +336,6 @@ function App() {
           {/* ── RIGHT — video player ─────────────────────────────────────── */}
           <div className="hero-right">
             <div className="hero-video-wrap">
-              {/* Ambient orbiting aura — warm light drifts top<->bottom while
-                  cool light drifts the opposite way, in an endless loop */}
-              <span className="hero-video-aura hero-video-aura-warm" />
-              <span className="hero-video-aura hero-video-aura-cool" />
               <div className="hero-video-glass">
                 <video
                   ref={heroVideoRef}
@@ -362,6 +358,11 @@ function App() {
                   </div>
                 )}
               </div>
+              {/* Border-beam — a slim bright line that continuously travels
+                  around the card's edge. Two arcs (warm + cool) sit 180°
+                  apart on the same rotating ring, so as warm reaches the
+                  bottom, cool reaches the top, and they swap every half turn */}
+              <span className="hero-video-beam" />
             </div>
           </div>
         </div>

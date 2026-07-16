@@ -363,58 +363,61 @@ body {
   min-height: 300px;
 }
 
-/* Wrap holds the video glass + the ambient orbiting aura blobs. Sized to
-   match the glass exactly so the blobs anchor correctly around its edges. */
+/* Wrap holds the video glass + the rotating border-beam ring. Sized to
+   match the glass exactly so the beam ring aligns with its edges. */
 .hero-video-wrap {
   position: relative;
   width: 100%;
   max-width: 600px;
 }
 
-/* Ambient aura blobs — sit BEHIND the glass (z-index below it) and bleed
-   out around its rounded edges. Warm drifts top<->bottom on a loop while
-   cool drifts the opposite way, swapping places every cycle. */
-.hero-video-aura {
+/* Border-beam — a slim BRIGHT LINE that continuously travels around the
+   card's outer edge (never a big blurred cloud, and never hidden behind
+   the opaque card since it renders on top, hollow in the middle). A single
+   rotating conic-gradient carries two short arcs — warm + cool — sitting
+   180deg apart, so every half turn they trade places: warm reaches the
+   bottom exactly as cool reaches the top, and vice versa. */
+@property --beam-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+.hero-video-beam {
   position: absolute;
-  width: 58%;
-  height: 58%;
-  border-radius: 50%;
-  filter: blur(55px);
-  opacity: 0.9;
+  inset: 0;
+  border-radius: 1.25rem; /* matches .hero-video-glass */
+  border: 3px solid transparent;
+  background: conic-gradient(
+      from var(--beam-angle, 0deg),
+      transparent 0deg,
+      transparent 72deg,
+      rgba(255, 140, 60, 0.95) 90deg,
+      rgba(255, 218, 185, 1) 100deg,
+      rgba(255, 140, 60, 0.95) 110deg,
+      transparent 128deg,
+      transparent 252deg,
+      rgba(80, 155, 255, 0.95) 270deg,
+      rgba(198, 227, 255, 1) 280deg,
+      rgba(80, 155, 255, 0.95) 290deg,
+      transparent 308deg,
+      transparent 360deg
+    )
+    border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  filter: blur(1.5px) drop-shadow(0 0 6px rgba(255, 255, 255, 0.2));
   pointer-events: none;
-  z-index: 0;
-  will-change: top;
+  z-index: 2;
+  animation: heroBeamSpin 9s linear infinite;
 }
-.hero-video-aura-warm {
-  left: -16%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 145, 64, 0.95) 0%,
-    rgba(255, 88, 24, 0.55) 45%,
-    rgba(255, 88, 24, 0) 72%
-  );
-  animation: heroAuraDrop 7s ease-in-out infinite alternate;
-}
-.hero-video-aura-cool {
-  right: -16%;
-  background: radial-gradient(
-    circle,
-    rgba(90, 165, 255, 0.95) 0%,
-    rgba(35, 110, 255, 0.55) 45%,
-    rgba(35, 110, 255, 0) 72%
-  );
-  animation: heroAuraRise 7s ease-in-out infinite alternate;
-}
-@keyframes heroAuraDrop {
-  0%   { top: -16%; }
-  100% { top: 58%; }
-}
-@keyframes heroAuraRise {
-  0%   { top: 58%; }
-  100% { top: -16%; }
+@keyframes heroBeamSpin {
+  from { --beam-angle: 0deg; }
+  to   { --beam-angle: 360deg; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero-video-aura-warm, .hero-video-aura-cool { animation: none; top: 21%; }
+  .hero-video-beam { animation: none; }
 }
 
 .hero-video-glass {
