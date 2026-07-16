@@ -363,8 +363,63 @@ body {
   min-height: 300px;
 }
 
+/* Wrap holds the video glass + the ambient orbiting aura blobs. Sized to
+   match the glass exactly so the blobs anchor correctly around its edges. */
+.hero-video-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Ambient aura blobs — sit BEHIND the glass (z-index below it) and bleed
+   out around its rounded edges. Warm drifts top<->bottom on a loop while
+   cool drifts the opposite way, swapping places every cycle. */
+.hero-video-aura {
+  position: absolute;
+  width: 58%;
+  height: 58%;
+  border-radius: 50%;
+  filter: blur(55px);
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 0;
+  will-change: top;
+}
+.hero-video-aura-warm {
+  left: -16%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 145, 64, 0.95) 0%,
+    rgba(255, 88, 24, 0.55) 45%,
+    rgba(255, 88, 24, 0) 72%
+  );
+  animation: heroAuraDrop 7s ease-in-out infinite alternate;
+}
+.hero-video-aura-cool {
+  right: -16%;
+  background: radial-gradient(
+    circle,
+    rgba(90, 165, 255, 0.95) 0%,
+    rgba(35, 110, 255, 0.55) 45%,
+    rgba(35, 110, 255, 0) 72%
+  );
+  animation: heroAuraRise 7s ease-in-out infinite alternate;
+}
+@keyframes heroAuraDrop {
+  0%   { top: -16%; }
+  100% { top: 58%; }
+}
+@keyframes heroAuraRise {
+  0%   { top: 58%; }
+  100% { top: -16%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-video-aura-warm, .hero-video-aura-cool { animation: none; top: 21%; }
+}
+
 .hero-video-glass {
   position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 600px;
   aspect-ratio: 16 / 9;

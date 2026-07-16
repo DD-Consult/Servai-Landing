@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Verify the Schedule Demo button's glow/spotlight effect on the ServAI landing page hero section"
+user_problem_statement: "Verify the ambient glow effect around the hero video player on the ServAI landing page"
 
 frontend:
   - task: "Schedule Demo Button - Idle Animation"
@@ -152,16 +152,28 @@ frontend:
         - working: true
           agent: "testing"
           comment: "Button click functionality verified. Clicking the button successfully scrolls from position 0px to 5277px, bringing the demo section (#demo) into view. Smooth scroll behavior working correctly. Hover lift effect (translateY(-2px) scale(1.03)) and enhanced box-shadow also working as expected."
+  
+  - task: "Hero Video Card - Ambient Glow Animation"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/App.js, /app/frontend/src/App.css"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "Verified ambient glow effect around hero video player. Two aura elements found: warm (orange/red) and cool (blue). Both animate with 7s ease-in-out infinite alternate. Captured 4 unique positions over 9 seconds confirming continuous orbiting motion: warm aura moves top to bottom (39px→171px→136px→-18px), cool aura moves opposite direction (91px→-41px→-6px→149px). Auras correctly positioned behind video glass (z-index 0 vs 1). Size: 320x180px with blur(55px), opacity 0.9. Auras extend around video edges with negative positioning (-88px left/right) creating bleeding effect. Video content not obscured, play button functional. Animation creates smooth back-and-forth orbiting motion as specified."
 
 metadata:
   created_by: "testing_agent"
   version: "1.0"
-  test_sequence: 1
+  test_sequence: 2
   run_ui: true
 
 test_plan:
   current_focus:
-    - "All Schedule Demo button tests completed"
+    - "Hero video ambient glow effect verified"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
@@ -169,3 +181,5 @@ test_plan:
 agent_communication:
     - agent: "testing"
       message: "Completed comprehensive testing of Schedule Demo button glow/spotlight effect. All four requirements verified: (1) Idle animation sweeps spotlight automatically across button, (2) Mouse tracking follows cursor position in real-time, (3) Glow effect properly contained within pill-shaped button boundaries, (4) Button click scrolls to demo section. All tests passed successfully. Screenshots captured at multiple stages for documentation."
+    - agent: "testing"
+      message: "Completed testing of hero video card ambient glow effect. Verified all requirements: (1) Two colored blurred light blobs present (warm orange/red and cool blue), (2) Lights move in continuous loop with warm drifting to bottom while cool drifts to top, then reversing in 7-second cycles, (3) Video content not broken or obscured, glow sits behind video card with proper z-index layering. Animation working correctly with 4 unique positions captured over 9 seconds. Screenshots saved at 0s, 3s, 6s, 9s intervals plus close-up. All tests passed."

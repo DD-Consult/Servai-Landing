@@ -335,27 +335,33 @@ function App() {
 
           {/* ── RIGHT — video player ─────────────────────────────────────── */}
           <div className="hero-right">
-            <div className="hero-video-glass">
-              <video
-                ref={heroVideoRef}
-                className="hero-video-el"
-                src="/video/servai-demo.mp4"
-                poster="/video/servai-demo-thumb.jpg"
-                playsInline
-                preload="metadata"
-                controls={heroPlaying}
-                onPause={() => setHeroPlaying(false)}
-                onEnded={() => setHeroPlaying(false)}
-              />
-              {!heroPlaying && (
-                <div className="hero-video-overlay"
-                  onClick={() => { heroVideoRef.current?.play(); setHeroPlaying(true); }}>
-                  <div className="hero-play-btn">
-                    <span className="material-symbols-outlined hero-play-icon"
-                      style={{ fontVariationSettings: '"FILL" 1' }}>play_arrow</span>
+            <div className="hero-video-wrap">
+              {/* Ambient orbiting aura — warm light drifts top<->bottom while
+                  cool light drifts the opposite way, in an endless loop */}
+              <span className="hero-video-aura hero-video-aura-warm" />
+              <span className="hero-video-aura hero-video-aura-cool" />
+              <div className="hero-video-glass">
+                <video
+                  ref={heroVideoRef}
+                  className="hero-video-el"
+                  src="/video/servai-demo.mp4"
+                  poster="/video/servai-demo-thumb.jpg"
+                  playsInline
+                  preload="metadata"
+                  controls={heroPlaying}
+                  onPause={() => setHeroPlaying(false)}
+                  onEnded={() => setHeroPlaying(false)}
+                />
+                {!heroPlaying && (
+                  <div className="hero-video-overlay"
+                    onClick={() => { heroVideoRef.current?.play(); setHeroPlaying(true); }}>
+                    <div className="hero-play-btn">
+                      <span className="material-symbols-outlined hero-play-icon"
+                        style={{ fontVariationSettings: '"FILL" 1' }}>play_arrow</span>
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </div>
         </div>
