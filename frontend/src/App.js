@@ -174,6 +174,16 @@ function App() {
     setMobileMenuOpen(false);
   };
 
+  // Cursor-follow glow — tracks pointer position over the CTA and exposes it
+  // as CSS vars so the glow (::before + halo span) can trail the cursor.
+  const handleCtaGlowMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    e.currentTarget.style.setProperty('--mx', `${x}%`);
+    e.currentTarget.style.setProperty('--my', `${y}%`);
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -279,9 +289,13 @@ function App() {
             </p>
 
             <div className="hero-buttons">
-              <button className="btn-hero-primary btn-hover-lift" onClick={() => scrollToSection('demo')}>
-                Schedule Demo
-              </button>
+              <div className="btn-hero-primary-wrap" onMouseMove={handleCtaGlowMove}>
+                <span className="btn-hero-primary-halo" />
+                <button className="btn-hero-primary btn-hover-lift" onClick={() => scrollToSection('demo')}>
+                  <span className="btn-hero-primary-shine" />
+                  <span className="btn-hero-primary-label">Schedule Demo</span>
+                </button>
+              </div>
               <a href="https://app.serv-ai.com/login" target="_blank" rel="noopener noreferrer"
                 className="btn-hero-ghost">
                 Start Free Trial
