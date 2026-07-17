@@ -1,16 +1,25 @@
 /* ServAI - Modern Design System */
 
 :root {
-  /* Brand Colors */
-  --charcoal-bg: #1a1a1a;
+  /* ── Brand Palette: Deep Charcoal / Mint Teal / Warm Mango ── */
+  --charcoal: #16181C;
+  --charcoal-deep: #101114;
   --brand-teal: #2DD4BF;
-  --champagne-gold: #D4A843;
-  --brand-mustard: #C9A227;
+  --brand-teal-dark: #0E9C88;
+  --brand-mango: #FF7A29;
+  --brand-mango-dark: #E85D0A;
+  --brand-mango-light: #FFB067;
+  --off-white: #FAF9F6;
   --whatsapp-green: #25D366;
   --whatsapp-header: #075e54;
   --tertiary: #8b5cf6;
   --secondary-color: #6366f1;
   --error: #ef4444;
+
+  /* Legacy alias names — existing rules using these inherit the new palette */
+  --charcoal-bg: var(--charcoal);
+  --champagne-gold: var(--brand-mango);
+  --brand-mustard: var(--brand-mango-dark);
 
   /* Surfaces */
   --surface: #ffffff;
@@ -40,7 +49,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: var(--surface);
@@ -107,7 +116,7 @@ body {
 .nav-links a {
   text-decoration: none;
   color: #1a1a1a;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -116,7 +125,7 @@ body {
 }
 
 /* .nav-links a:hover { color: var(--champagne-gold); } */
-.nav-links a:hover { color: var(--brand-mustard); }
+.nav-links a:hover { color: var(--brand-teal); }
 
 .nav-actions {
   display: flex;
@@ -128,12 +137,12 @@ body {
 
 /* Request Demo — dark pill, hover: brightness(1.25) — ref: bg-charcoal-bg hover:brightness-125 */
 .btn-primary {
-  background: #1c1b1b;
+  background: var(--brand-mango);
   color: white;
   border: none;
   border-radius: 10px;
   padding: 0.5rem 1.5rem;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -153,11 +162,11 @@ body {
 /* Start Free Trial — gold border + gold text — ref: border-primary text-primary hover:bg-primary/5 */
 .btn-outline {
   background: transparent;
-  color: var(--champagne-gold);
-  border: 1px solid var(--champagne-gold);
+  color: var(--brand-teal-dark);
+  border: 1px solid var(--brand-teal);
   border-radius: 10px;
   padding: 0.5rem 1rem;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -172,7 +181,7 @@ body {
 }
 
 .btn-outline:hover {
-  background: rgba(212, 168, 67, 0.2);
+  background: rgba(45, 212, 191, 0.15);
 }
 .btn-outline:active { opacity: 0.85; }
 
@@ -189,7 +198,7 @@ body {
   border: none;
   cursor: pointer;
   padding: 0.5rem;
-  color: var(--champagne-gold);
+  color: var(--brand-teal);
   transition: opacity 0.2s ease;
 }
 
@@ -200,7 +209,7 @@ body {
 .hero-section {
   position: relative;
   min-height: 100vh;
-  background: linear-gradient(135deg, #141620 0%, #1a1f2e 30%, #1e2738 60%, #1c2433 100%);
+  background: linear-gradient(135deg, #14161A 0%, #1B1D21 55%, #14161A 100%);
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -218,7 +227,7 @@ body {
   z-index: 0;
 }
 .hero-glow-teal    { background: rgba(45, 212, 191, 0.09); top: -25%;  right: -20%; }
-.hero-glow-mustard { background: rgba(201, 162, 39, 0.09); bottom:-25%; left: -20%; }
+.hero-glow-mustard { background: rgba(255, 122, 41, 0.10); bottom:-25%; left: -20%; }
 
 /* Two-column inner wrapper */
 .hero-inner {
@@ -244,7 +253,7 @@ body {
 }
 
 .hero-brand-label {
-  font-family: 'Manrope', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 1.75rem;
   font-weight: 800;
   letter-spacing: 0.2em;
@@ -253,7 +262,7 @@ body {
 }
 
 .hero-heading {
-  font-family: 'Manrope', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: clamp(1.875rem, 4vw, 3rem);
   font-weight: 700;
   line-height: 1.15;
@@ -262,7 +271,7 @@ body {
 }
 
 .hero-sub {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 1.125rem;
   line-height: 1.65;
   color: rgba(255, 255, 255, 0.75);
@@ -282,27 +291,27 @@ body {
   overflow: hidden;
   isolation: isolate;
   z-index: 1;
-  background: #bbb095;
-  color: #1a1a1a;
+  background: var(--brand-mango);
+  color: #ffffff;
   border: none;
   border-radius: 9999px;
   padding: 0.875rem 2.25rem;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   cursor: pointer;
-  box-shadow: 0 8px 24px rgba(187, 176, 149, 0.35);
+  box-shadow: 0 8px 24px rgba(255, 122, 41, 0.35);
   transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   white-space: nowrap;
   --mx: 14%;
   --my: 50%;
 }
 .btn-hero-primary:hover {
-  background: #ab986d;
+  background: var(--brand-mango-dark);
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(171, 152, 109, 0.45);
+  box-shadow: 0 12px 32px rgba(232, 93, 10, 0.45);
 }
 
 /* Spotlight — always on, contained strictly within the pill (clipped by
@@ -333,12 +342,12 @@ body {
 
 /* Start Free Trial — ghost pill */
 .btn-hero-ghost {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
   color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(45, 212, 191, 0.45);
   border-radius: 9999px;
   padding: 0.875rem 2.25rem;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -350,7 +359,7 @@ body {
   transition: background 0.2s ease;
   white-space: nowrap;
 }
-.btn-hero-ghost:hover { background: rgba(255, 255, 255, 0.18); }
+.btn-hero-ghost:hover { background: rgba(45, 212, 191, 0.16); }
 
 /* ── RIGHT column — video ── */
 .hero-right {
@@ -534,8 +543,8 @@ body {
 .btn-hover-lift:hover {
   transform: translateY(-2px) scale(1.03);
   box-shadow:
-    0 14px 32px -4px rgba(171, 152, 109, 0.55),
-    0 6px 12px -2px rgba(171, 152, 109, 0.3);
+    0 14px 32px -4px rgba(255, 122, 41, 0.55),
+    0 6px 12px -2px rgba(255, 122, 41, 0.3);
 }
 
 /* ===== STATS / BUSINESS IMPACT ===== */
@@ -557,7 +566,7 @@ body {
 
 .section-title-centered {
   text-align: center;
-  font-family: 'Manrope', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: clamp(1.75rem, 4vw, 3rem);
   font-weight: 700;
   color: var(--on-surface);
@@ -585,11 +594,11 @@ body {
 .stat-card:hover {
   transform: scale(1.04);
   box-shadow: 0 20px 48px rgba(0, 0, 0, 0.1);
-  border-color: rgba(201, 162, 39, 0.3);
+  border-color: rgba(45, 212, 191, 0.35);
 }
 
 .stat-number {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 700;
   color: var(--champagne-gold);
@@ -600,7 +609,7 @@ body {
 }
 
 .stat-label {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.6875rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -610,7 +619,7 @@ body {
 }
 
 .stat-sublabel {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.625rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -645,12 +654,12 @@ body {
 
 .comparison-card.old-way {
   background: rgba(248, 249, 250, 0.5);
-  border-color: rgba(212, 168, 67, 0.4);
+  border-color: rgba(0, 0, 0, 0.14);
 }
 
 .comparison-card.old-way:hover {
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  border-color: rgba(212, 168, 67, 0.65);
+  border-color: rgba(0, 0, 0, 0.28);
 }
 
 .comparison-card.new-way {
@@ -665,7 +674,7 @@ body {
 }
 
 .comparison-heading {
-  font-family: 'Manrope', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
@@ -688,7 +697,7 @@ body {
   display: flex;
   align-items: flex-start;
   gap: 0.75rem;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.9375rem;
   line-height: 1.5;
 }
@@ -718,7 +727,7 @@ body {
 
 .section-subtitle {
   text-align: center;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 1.0625rem;
   color: var(--on-surface-variant);
   max-width: 480px;
@@ -759,7 +768,7 @@ body {
 }
 
 .feature-title-new {
-  font-family: 'Manrope', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 1.0625rem;
   font-weight: 700;
   color: var(--on-surface);
@@ -767,7 +776,7 @@ body {
 }
 
 .feature-desc-new {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.9375rem;
   color: var(--on-surface-variant);
   line-height: 1.65;
@@ -776,7 +785,7 @@ body {
 /* ===== HOW IT WORKS ===== */
 .how-section {
   padding: 6rem 2rem;
-  background: rgba(201, 162, 39, 0.04);
+  background: #F7F6F3;
   overflow: hidden;
 }
 
@@ -812,7 +821,7 @@ body {
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 2rem;
   padding: 0.4375rem 1.25rem;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -857,13 +866,13 @@ body {
   transform: scale(1.05);
   z-index: 10;
   box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
-  border-left-color: rgba(212, 168, 67, 0.4);
+  border-left-color: rgba(45, 212, 191, 0.65);
 }
 
 .step-card.active-step {
-  box-shadow: 0 8px 24px rgba(45, 212, 191, 0.15);
+  box-shadow: 0 8px 24px rgba(255, 122, 41, 0.18);
   background: rgba(255, 255, 255, 0.95);
-  border-left-color: rgba(212, 168, 67, 0.4);
+  border-left-color: rgba(255, 122, 41, 0.7);
   transform: scale(1.02);
 }
 
@@ -876,7 +885,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.9375rem;
   font-weight: 700;
   flex-shrink: 0;
@@ -884,13 +893,13 @@ body {
 }
 
 .step-card.active-step .step-num-circle {
-  background:  rgba(212, 168, 67, 0.4);
+  background: rgba(255, 122, 41, 0.35);
   color: var(--charcoal-bg);
   transform: scale(1.1);
 }
 
 .step-title-new {
-  font-family: 'Manrope', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 1.0625rem;
   font-weight: 700;
   color: var(--on-surface);
@@ -898,7 +907,7 @@ body {
 }
 
 .step-desc-new {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.875rem;
   color: var(--on-surface-variant);
   line-height: 1.55;
@@ -936,7 +945,7 @@ body {
 }
 
 .roi-input-heading {
-  font-family: 'Manrope', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--on-surface);
@@ -944,7 +953,7 @@ body {
 }
 
 .roi-input-subtext {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.9375rem;
   color: var(--on-surface-variant);
   margin-bottom: 2.25rem;
@@ -960,7 +969,7 @@ body {
 }
 
 .roi-slider-label {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.6875rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -969,7 +978,7 @@ body {
 }
 
 .roi-slider-value {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 1rem;
   font-weight: 700;
   color: var(--brand-teal);
@@ -1021,7 +1030,7 @@ body {
 }
 
 .roi-result-value {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: clamp(2.5rem, 5vw, 3.75rem);
   font-weight: 700;
   color: var(--champagne-gold);
@@ -1032,7 +1041,7 @@ body {
 .roi-result-value.white-val { color: white; }
 
 .roi-result-label {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.6875rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -1054,7 +1063,7 @@ body {
 }
 
 .preview-label {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.6875rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -1065,7 +1074,7 @@ body {
 }
 
 .preview-heading {
-  font-family: 'Manrope', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: clamp(1.75rem, 4vw, 3rem);
   font-weight: 700;
   color: var(--on-surface);
@@ -1160,7 +1169,7 @@ body {
   transform: translateX(-50%);
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(201, 162, 39, 0.04), transparent);
+  background: linear-gradient(to bottom, rgba(255, 122, 41, 0.06), transparent);
   pointer-events: none;
 }
 
@@ -1178,7 +1187,7 @@ body {
 }
 
 .cta-heading {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: clamp(1.5rem, 3.5vw, 2.5rem);
   font-weight: 700;
   color: var(--on-surface);
@@ -1187,7 +1196,7 @@ body {
 }
 
 .cta-subtext {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 1.0625rem;
   color: var(--on-surface-variant);
   line-height: 1.65;
@@ -1208,7 +1217,7 @@ body {
 }
 
 .form-label-new {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.6875rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -1222,7 +1231,7 @@ body {
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.75rem;
   padding: 1rem 1.125rem;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 1rem;
   color: var(--on-surface);
   outline: none;
@@ -1239,12 +1248,12 @@ body {
 
 .form-submit-new {
   width: 100%;
-  background: var(--charcoal-bg);
+  background: var(--brand-mango);
   color: white;
   border: none;
   border-radius: 2rem;
   padding: 1.125rem 2rem;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.875rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -1275,7 +1284,7 @@ body {
 }
 
 .success-message h3 {
-  font-family: 'Manrope', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 1.75rem;
   font-weight: 700;
   color: var(--on-surface);
@@ -1283,7 +1292,7 @@ body {
 }
 
 .success-message p {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 1rem;
   color: var(--on-surface-variant);
   line-height: 1.65;
@@ -1316,7 +1325,7 @@ body {
 }
 
 .footer-brand-name {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 1.125rem;
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -1335,7 +1344,7 @@ body {
 }
 
 .footer-link {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.9375rem;
   color: rgba(255, 255, 255, 0.55);
   text-decoration: none;
@@ -1348,7 +1357,7 @@ body {
 
 /* Row 3 — tagline */
 .footer-tagline {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.45);
   text-align: center;
@@ -1358,7 +1367,7 @@ body {
 
 /* DD Consulting credit — clearly readable */
 .footer-credit {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.8125rem;
   color: rgba(255, 255, 255, 0.65);
   text-align: center;

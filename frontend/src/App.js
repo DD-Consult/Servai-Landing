@@ -46,12 +46,12 @@ function StatCounter({ targetValue, duration = 1500 }) {
 // Static data
 // ─────────────────────────────────────────────────────────────────────────────
 const features = [
-  { id: 1, icon: 'chat_bubble',     iconColor: '#D4A843', iconBg: 'rgba(212,168,67,0.12)',  borderColor: '#D4A843', title: 'Conversational AI Ordering',    description: 'Customers have natural conversations with our AI agent through WhatsApp or Messenger. No rigid menus or confusing buttons - just chat naturally like ordering from a real person. Complete orders in under 90 seconds.' },
-  { id: 2, icon: 'fingerprint',     iconColor: '#8b5cf6', iconBg: 'rgba(139,92,246,0.12)',  borderColor: '#8b5cf6', title: 'Instant Biometric Payments',     description: 'Complete transactions with Face ID or Google Pay. No manual card entry, no checkout forms - just fast, secure, trusted payments.' },
-  { id: 3, icon: 'card_membership', iconColor: '#25D366', iconBg: 'rgba(37,211,102,0.12)',  borderColor: '#25D366', title: 'Built-In Loyalty System',         description: 'Track customer orders, reward repeat visits, and build relationships - all inside the chat. Your data, your customers, your loyalty program.' },
+  { id: 1, icon: 'chat_bubble',     iconColor: '#FF7A29', iconBg: 'rgba(255,122,41,0.12)',  borderColor: '#FF7A29', title: 'Conversational AI Ordering',    description: 'Customers have natural conversations with our AI agent through WhatsApp or Messenger. No rigid menus or confusing buttons - just chat naturally like ordering from a real person. Complete orders in under 90 seconds.' },
+  { id: 2, icon: 'fingerprint',     iconColor: '#2DD4BF', iconBg: 'rgba(45,212,191,0.12)',  borderColor: '#2DD4BF', title: 'Instant Biometric Payments',     description: 'Complete transactions with Face ID or Google Pay. No manual card entry, no checkout forms - just fast, secure, trusted payments.' },
+  { id: 3, icon: 'card_membership', iconColor: '#2DD4BF', iconBg: 'rgba(45,212,191,0.12)',  borderColor: '#2DD4BF', title: 'Built-In Loyalty System',         description: 'Track customer orders, reward repeat visits, and build relationships - all inside the chat. Your data, your customers, your loyalty program.' },
   { id: 4, icon: 'dashboard',       iconColor: '#2DD4BF', iconBg: 'rgba(45,212,191,0.12)',  borderColor: '#2DD4BF', title: 'Smart Dashboard',                 description: 'Real-time order management with actionable insights. Know your top customers, track preferences, and optimize your menu based on actual data.' },
-  { id: 5, icon: 'translate',       iconColor: '#6366f1', iconBg: 'rgba(99,102,241,0.12)',  borderColor: '#6366f1', title: 'Multilingual Conversations',      description: 'AI understands and responds in multiple languages naturally. Perfect for tourist areas - customers have full conversations in their native language, with instant translation for your staff. No language barriers.' },
-  { id: 6, icon: 'database',        iconColor: '#C9A227', iconBg: 'rgba(201,162,39,0.12)',  borderColor: '#C9A227', title: 'Own Your Customer Data',          description: 'No third-party aggregators taking your customer relationships. Full ownership of profiles, preferences, and contact information.' }
+  { id: 5, icon: 'translate',       iconColor: '#2DD4BF', iconBg: 'rgba(45,212,191,0.12)',  borderColor: '#2DD4BF', title: 'Multilingual Conversations',      description: 'AI understands and responds in multiple languages naturally. Perfect for tourist areas - customers have full conversations in their native language, with instant translation for your staff. No language barriers.' },
+  { id: 6, icon: 'database',        iconColor: '#2DD4BF', iconBg: 'rgba(45,212,191,0.12)',  borderColor: '#2DD4BF', title: 'Own Your Customer Data',          description: 'No third-party aggregators taking your customer relationships. Full ownership of profiles, preferences, and contact information.' }
 ];
 
 const howItWorksSteps = [
@@ -567,7 +567,7 @@ function App() {
       </section>
 
       {/* ════════════════════════════════════════ FOOTER ════════════════════ */}
-      <footer className="w-full bg-[#1c1b1b] text-[#f2f0f0] py-12 px-6 border-t border-white/10">
+      <footer className="w-full bg-[#16181C] text-[#f2f0f0] py-12 px-6 border-t border-white/10">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
 
           {/* DD Consulting — left */}
@@ -576,11 +576,11 @@ function App() {
               <img 
                 src="/assets/dd_consulting.png" 
                 alt="DD Consulting Logo" 
-                class="h-10 w-auto object-contain rounded-lg shadow-md"
+                className="h-10 w-auto object-contain rounded-lg shadow-md"
               />
             </div>
             <p className="text-xs text-gray-400">
-              Made with excellence by <strong className="text-[#ffab00]">DD Consulting</strong>
+              Made with excellence by <strong className="text-[#FF7A29]">DD Consulting</strong>
             </p>
           </div>
 
@@ -593,13 +593,13 @@ function App() {
                 className="h-8 w-auto object-contain"
               />
               <span className="text-xl font-semibold tracking-wide text-white">
-                <span className="text-[#00ffc8]">Serv</span><span className="text-[#ffab00]">AI</span>
+                <span className="text-[#2DD4BF]">Serv</span><span className="text-[#FF7A29]">AI</span>
               </span>
             </div>
             <p className="text-xs text-gray-400 max-w-sm text-center">
               ServAI: AI-Powered Food Ordering Platform <br className="hidden sm:inline" />
               <span className="text-gray-500">|</span>
-              <a href="mailto:info@serv-ai.com" className="text-[#00ffc8] hover:underline ml-1">info@serv-ai.com</a>
+              <a href="mailto:info@serv-ai.com" className="text-[#2DD4BF] hover:underline ml-1">info@serv-ai.com</a>
             </p>
           </div>
 
