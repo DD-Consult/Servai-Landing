@@ -1,69 +1,24 @@
-# ServAI — Landing Page PRD
+# ServAI Landing Page — PRD
 
-## Original Problem Statement
-Build and refine the "ServAI" (Conversational AI-Powered Food Ordering) landing page to precisely match a Google Stitch design prototype and a reference HTML artifact (`serv-ai-design.html`). Goal is pixel-perfect layout, typography, and a production-quality motion design engine.
-
-## App Type
-Marketing / Landing Page — React frontend + FastAPI backend (backend untouched)
-
-## Core Requirements
-- Transparent header that blurs on scroll (glassmorphism)
-- Dark/Gold/Teal design token system
-- Hero section with restaurant background image
-- Scroll-reveal animations (IntersectionObserver)
-- Hero spring entrance (cubic-bezier spring)
-- Staggered section reveals
-- Animated stat counters (easeOutCubic)
-- Why ServAI comparison cards with distinct hover effects
-- Features grid with per-column stagger
-- How It Works with phone mockup + auto-play step carousel
-- ROI Calculator with live sliders
-- Product Preview video section
-- Demo request form
-- Responsive for mobile/tablet/desktop
-
-## What's Been Implemented
-
-### 2025 (Session 1–2)
-- Resolved frontend startup issues (craco/react-scripts)
-- Initial header & hero redesign from Google Stitch screenshot
-- Background image from Google AIDA CDN
-- Transparent header with scroll-triggered backdrop-blur
-- Typography, ghost buttons, dark pill buttons
-
-### 2025 (Session 3)
-- Full App.js motion engine: IntersectionObserver scroll reveal, hero spring entrance (120ms delay, cubic-bezier(0.16, 1, 0.3, 1)), stat counter (easeOutCubic RAF), auto-play step carousel
-
-### 2026 (Current Session — Hero Redesign)
-- **Rebuilt** hero section from full-width bg-image to two-column dark layout matching `servai.html` reference:
-  - Left: SERVAI brand label → heading → body → SCHEDULE DEMO (teal) + START FREE TRIAL (ghost)
-  - Right: Video player glass container (thumbnail + custom play button, click-to-play)
-  - Background: `#1a1c22` dark slate with teal + mustard ambient glows
-- **Fixed** hero video file permissions (`chmod 644`) — was root-only, causing `ERR_ABORTED`
-- **Fixed** right column visibility: removed `hero-spring` from `hero-right` (was permanently `opacity:0`)
-- **Separate video states**: `heroPlaying/heroVideoRef` (hero) vs `isPlaying/videoRef` (preview section)
+## Original ask
+Full-stack marketing site for ServAI (AI-powered conversational food ordering via WhatsApp/Messenger). Iterations covered: hero CTA cursor-glow effects, hero video ambient/border-beam light effect, and (latest) a full visual redesign to a new brand palette + typography.
 
 ## Architecture
-- `/app/frontend/src/App.js` — main React component, all sections, motion JS
-- `/app/frontend/src/App.css` — all custom CSS, design tokens, motion engine
-- `/app/frontend/src/components/PhoneMockup.jsx` — phone UI component
-- Backend: FastAPI + MongoDB (untouched)
+React (CRA) frontend only (App.js/App.css, PhoneMockup component), no backend business logic beyond static Netlify-style form. Tailwind configured but most real styling lives in App.css.
 
-## Prioritized Backlog
+## Latest work (July 2026) — Full Design System Refresh
+- New palette: Deep Charcoal (#16181C) backgrounds, Mint/Teal (#2DD4BF) for accents/security/secondary CTAs, Warm Mango/Orange (#FF7A29) for primary CTAs/pricing/transactional highlights, off-white for light sections.
+- Typography swapped globally: Inter/Manrope/JetBrains Mono → Plus Jakarta Sans (geometric sans-serif), loaded via Google Fonts in index.html.
+- Updated: header nav buttons, hero buttons, hero background gradient, stat numbers, comparison cards, feature icons (5 teal + 1 mango), step cards/active states, ROI calculator, form submit button, footer wordmark colors, PhoneMockup gradient screens (QR scan/payment = teal, loyalty = mango).
+- Hero "Schedule Demo" button: cursor-follow spotlight glow (idle auto-sweep + real cursor tracking on hover), contained within button bounds.
+- Hero video: rotating border-beam effect (thin bright ring, warm+cool arcs 180° apart, continuously rotating, hollow center so video content stays clear).
+- Verified via automated frontend testing agent — all sections, mobile viewport, and console errors checked, all passing.
 
-### P0
-- None currently blocking
+## Known dead/unused CSS (not rendered, left untouched)
+- `.preview-section`, `.video-glow`, `.video-glass` (unused product-preview block)
+- `.footer`, `.footer-brand`, `.footer-credit` etc. (actual footer in JSX uses inline Tailwind arbitrary-value classes instead)
 
-### P1
-- Provide 4-part design breakdown to user (Design Digest, Blueprint, Motion Engine, Implementation Notes) — user explicitly requested this in the last session
-
-### P2
-- Backend integration (form submission, leads DB)
-- Further pixel-perfect audit of all sections against reference HTML
-- CSS modularisation (App.css is ~1250 lines; candidate for splitting into modules)
-
-### Future / Backlog
-- WhatsApp/Messenger deep-link on CTA
-- Real product demo video replacement (currently BigBuckBunny sample)
-- Analytics / conversion tracking
-- SEO meta tags audit
+## Backlog / Next steps
+- P1: Extend border-beam/glow treatment to other CTAs (header Request Demo, form submit) if requested
+- P2: Consider tightening spacing/card radius further per "modern spacing" brief if user wants deeper polish
+- P2: Review WhatsApp-authentic colors in PhoneMockup chat bubbles (kept as-is for product accuracy)
