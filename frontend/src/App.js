@@ -77,6 +77,8 @@ const navLinks = [
   { id: 'impact',       label: 'Impact' },
 ];
 
+const HERO_HEADING_TEXT = 'Conversational AI-Powered Food Ordering';
+
 const formFields = [
   { id: 'name',           label: 'Your Name',                  type: 'text',  placeholder: 'John Doe' },
   { id: 'email',          label: 'Email',                      type: 'email', placeholder: 'john@restaurant.com' },
@@ -99,6 +101,7 @@ function App() {
   const [ordersPerDay,   setOrdersPerDay]   = useState(50);
   const [avgOrderValue,  setAvgOrderValue]  = useState(15);
   const [heroPlaying,    setHeroPlaying]    = useState(false);
+  const [typedHeading,   setTypedHeading]   = useState('');
   const heroVideoRef = useRef(null);
 
   const monthlyRevenue = Math.round(ordersPerDay * avgOrderValue * 30 * 0.4).toLocaleString();
@@ -128,6 +131,27 @@ function App() {
   useEffect(() => {
     const t = setTimeout(() => setHeroVisible(true), 120);
     return () => clearTimeout(t);
+  }, []);
+
+  // ── Hero heading — realistic typewriter reveal ──────────────────────────
+  // Starts once the hero has spring-entered, types char-by-char with slight
+  // randomized speed (human-like), then leaves a blinking cursor at rest.
+  useEffect(() => {
+    let charTimeout;
+    const startDelay = setTimeout(() => {
+      let i = 0;
+      const typeNext = () => {
+        i += 1;
+        setTypedHeading(HERO_HEADING_TEXT.slice(0, i));
+        if (i < HERO_HEADING_TEXT.length) {
+          const nextChar = HERO_HEADING_TEXT[i];
+          const pause = nextChar === ' ' ? 90 : 35 + Math.random() * 55;
+          charTimeout = setTimeout(typeNext, pause);
+        }
+      };
+      typeNext();
+    }, 1000);
+    return () => { clearTimeout(startDelay); clearTimeout(charTimeout); };
   }, []);
 
   // ── Scroll reveal IntersectionObserver ────────────────────────────────────
@@ -304,8 +328,11 @@ function App() {
           <div className={`hero-left hero-spring${heroVisible ? ' visible' : ''}`}>
             <span className="hero-brand-label">SERVAi</span>
 
-            <h1 className="hero-heading">
-              Conversational AI-Powered Food Ordering
+            <h1 className="hero-heading" aria-label={HERO_HEADING_TEXT} data-testid="hero-heading">
+              <span aria-hidden="true">
+                {typedHeading}
+                <span className="hero-typing-cursor" data-testid="hero-heading-cursor" />
+              </span>
             </h1>
 
             <p className="hero-sub">
