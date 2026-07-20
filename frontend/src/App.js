@@ -46,12 +46,12 @@ function StatCounter({ targetValue, duration = 1500 }) {
 // Static data
 // ─────────────────────────────────────────────────────────────────────────────
 const features = [
-  { id: 1, icon: 'chat_bubble',     iconColor: '#FF7A29', iconBg: 'rgba(255,122,41,0.12)',  borderColor: '#FF7A29', title: 'Conversational AI Ordering',    description: 'Customers have natural conversations with our AI agent through WhatsApp or Messenger. No rigid menus or confusing buttons - just chat naturally like ordering from a real person. Complete orders in under 90 seconds.' },
-  { id: 2, icon: 'fingerprint',     iconColor: '#2DD4BF', iconBg: 'rgba(45,212,191,0.12)',  borderColor: '#2DD4BF', title: 'Instant Biometric Payments',     description: 'Complete transactions with Face ID or Google Pay. No manual card entry, no checkout forms - just fast, secure, trusted payments.' },
-  { id: 3, icon: 'card_membership', iconColor: '#2DD4BF', iconBg: 'rgba(45,212,191,0.12)',  borderColor: '#2DD4BF', title: 'Built-In Loyalty System',         description: 'Track customer orders, reward repeat visits, and build relationships - all inside the chat. Your data, your customers, your loyalty program.' },
-  { id: 4, icon: 'dashboard',       iconColor: '#2DD4BF', iconBg: 'rgba(45,212,191,0.12)',  borderColor: '#2DD4BF', title: 'Smart Dashboard',                 description: 'Real-time order management with actionable insights. Know your top customers, track preferences, and optimize your menu based on actual data.' },
-  { id: 5, icon: 'translate',       iconColor: '#2DD4BF', iconBg: 'rgba(45,212,191,0.12)',  borderColor: '#2DD4BF', title: 'Multilingual Conversations',      description: 'AI understands and responds in multiple languages naturally. Perfect for tourist areas - customers have full conversations in their native language, with instant translation for your staff. No language barriers.' },
-  { id: 6, icon: 'database',        iconColor: '#2DD4BF', iconBg: 'rgba(45,212,191,0.12)',  borderColor: '#2DD4BF', title: 'Own Your Customer Data',          description: 'No third-party aggregators taking your customer relationships. Full ownership of profiles, preferences, and contact information.' }
+  { id: 1, icon: 'chat_bubble',     iconColor: '#22D3EE', iconBg: 'rgba(34,211,238,0.14)',  spotRgb: '34,211,238',  title: 'Conversational AI Ordering',    description: 'Customers have natural conversations with our AI agent through WhatsApp or Messenger. No rigid menus or confusing buttons - just chat naturally like ordering from a real person. Complete orders in under 90 seconds.' },
+  { id: 2, icon: 'fingerprint',     iconColor: '#FBBF24', iconBg: 'rgba(251,191,36,0.14)',  spotRgb: '251,191,36',  title: 'Instant Biometric Payments',     description: 'Complete transactions with Face ID or Google Pay. No manual card entry, no checkout forms - just fast, secure, trusted payments.' },
+  { id: 3, icon: 'card_membership', iconColor: '#34D399', iconBg: 'rgba(52,211,153,0.14)',  spotRgb: '52,211,153',  title: 'Built-In Loyalty System',         description: 'Track customer orders, reward repeat visits, and build relationships - all inside the chat. Your data, your customers, your loyalty program.' },
+  { id: 4, icon: 'dashboard',       iconColor: '#22D3EE', iconBg: 'rgba(34,211,238,0.14)',  spotRgb: '34,211,238',  title: 'Smart Dashboard',                 description: 'Real-time order management with actionable insights. Know your top customers, track preferences, and optimize your menu based on actual data.' },
+  { id: 5, icon: 'translate',       iconColor: '#FBBF24', iconBg: 'rgba(251,191,36,0.14)',  spotRgb: '251,191,36',  title: 'Multilingual Conversations',      description: 'AI understands and responds in multiple languages naturally. Perfect for tourist areas - customers have full conversations in their native language, with instant translation for your staff. No language barriers.' },
+  { id: 6, icon: 'database',        iconColor: '#34D399', iconBg: 'rgba(52,211,153,0.14)',  spotRgb: '52,211,153',  title: 'Own Your Customer Data',          description: 'No third-party aggregators taking your customer relationships. Full ownership of profiles, preferences, and contact information.' }
 ];
 
 const howItWorksSteps = [
@@ -196,6 +196,16 @@ function App() {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
     setMobileMenuOpen(false);
+  };
+
+  // Spotlight cards (Intelligent Hospitality) — tracks pointer position
+  // per-card via CSS vars, so the glow + border-light follow the cursor.
+  const handleSpotlightMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    e.currentTarget.style.setProperty('--mx', `${x}%`);
+    e.currentTarget.style.setProperty('--my', `${y}%`);
   };
 
   // ── Schedule Demo CTA — cursor-follow glow ──────────────────────────────
@@ -458,7 +468,9 @@ function App() {
               /* Stagger across 3 columns: col-index = i % 3 */
               <div key={f.id}
                 className={`feature-card-new reveal-on-scroll stagger-${(i % 3) + 1}`}
-                style={{ borderColor:`${f.borderColor}55` }}
+                style={{ '--spot-rgb': f.spotRgb }}
+                onMouseMove={handleSpotlightMove}
+                data-testid={`feature-card-${f.id}`}
               >
                 <div className="feature-icon-new" style={{ background:f.iconBg }}>
                   <span className="material-symbols-outlined"
