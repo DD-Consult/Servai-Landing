@@ -269,7 +269,7 @@ function App() {
       <header className={`fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-glass-border h-16 flex justify-between items-center px-margin-mobile header-nav${scrolled ? ' header-scrolled' : ''}`}>
         <div className="flex items-center gap-2">
         <img
-          src="https://customer-assets.emergentagent.com/job_preview-view-80/artifacts/6jlb0rap_ServAI-logo.png"
+          src="/assets/servai-logo.webp"
           alt="ServAI" className="logo"
         />
         </div>
@@ -615,7 +615,7 @@ function App() {
           <div className="flex flex-col items-center order-1 md:order-2 space-y-3">
             <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-xl border border-white/10 shadow-inner">
               <img
-                src="https://customer-assets.emergentagent.com/job_preview-view-80/artifacts/6jlb0rap_ServAI-logo.png"
+                src="/assets/servai-logo.webp"
                 alt="ServAI Logo"
                 className="h-8 w-auto object-contain"
               />
