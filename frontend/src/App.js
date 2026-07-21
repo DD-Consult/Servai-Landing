@@ -405,23 +405,6 @@ function App() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════ BUSINESS IMPACT ════════════════ */}
-      <section id="impact" className="stats-section">
-        <div className="stats-section-inner">
-          <h2 className="section-title-centered reveal-on-scroll">Business Impact</h2>
-          <div className="stats-grid">
-            {statCards.map((s, i) => (
-              /* stagger-N delays: 0.08s × i  →  reveal cascades left to right */
-              <div key={i} className={`stat-card reveal-on-scroll stagger-${i + 1}`}>
-                <div className="stat-number">{s.renderNum()}</div>
-                <div className="stat-label">{s.label}</div>
-                <div className="stat-sublabel">{s.sub}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ════════════════════════════════════ WHY SERVAI ════════════════════ */}
       <section className="why-section">
         <div className="why-section-inner">
@@ -452,36 +435,6 @@ function App() {
                 ))}
               </ul>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════ INTELLIGENT HOSPITALITY ════════════════ */}
-      <section id="features" className="features-section">
-        <div className="features-section-inner">
-          <h2 className="section-title-centered reveal-on-scroll">Intelligent Hospitality</h2>
-          <p className="section-subtitle reveal-on-scroll stagger-1">
-            Elevating the dining experience through sophisticated conversational intelligence.
-          </p>
-          <div className="features-grid-new">
-            {features.map((f, i) => (
-              /* Stagger across 3 columns: col-index = i % 3 */
-              <div key={f.id}
-                className={`feature-card-new reveal-on-scroll stagger-${(i % 3) + 1}`}
-                style={{ '--spot-rgb': f.spotRgb }}
-                onMouseMove={handleSpotlightMove}
-                data-testid={`feature-card-${f.id}`}
-              >
-                <div className="feature-icon-new" style={{ background:f.iconBg }}>
-                  <span className="material-symbols-outlined"
-                    style={{ color:f.iconColor, fontVariationSettings:'"FILL" 1' }}>
-                    {f.icon}
-                  </span>
-                </div>
-                <h3 className="feature-title-new">{f.title}</h3>
-                <p className="feature-desc-new">{f.description}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -521,6 +474,53 @@ function App() {
                 ))}
               </ol>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════ INTELLIGENT HOSPITALITY ════════════════ */}
+      <section id="features" className="features-section">
+        <div className="features-section-inner">
+          <h2 className="section-title-centered reveal-on-scroll">Intelligent Hospitality</h2>
+          <p className="section-subtitle reveal-on-scroll stagger-1">
+            Elevating the dining experience through sophisticated conversational intelligence.
+          </p>
+          <div className="features-grid-new">
+            {features.map((f, i) => (
+              /* Stagger across 3 columns: col-index = i % 3 */
+              <div key={f.id}
+                className={`feature-card-new reveal-on-scroll stagger-${(i % 3) + 1}`}
+                style={{ '--spot-rgb': f.spotRgb }}
+                onMouseMove={handleSpotlightMove}
+                data-testid={`feature-card-${f.id}`}
+              >
+                <div className="feature-icon-new" style={{ background:f.iconBg }}>
+                  <span className="material-symbols-outlined"
+                    style={{ color:f.iconColor, fontVariationSettings:'"FILL" 1' }}>
+                    {f.icon}
+                  </span>
+                </div>
+                <h3 className="feature-title-new">{f.title}</h3>
+                <p className="feature-desc-new">{f.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════ BUSINESS IMPACT ════════════════ */}
+      <section id="impact" className="stats-section">
+        <div className="stats-section-inner">
+          <h2 className="section-title-centered reveal-on-scroll">Business Impact</h2>
+          <div className="stats-grid">
+            {statCards.map((s, i) => (
+              /* stagger-N delays: 0.08s × i  →  reveal cascades left to right */
+              <div key={i} className={`stat-card reveal-on-scroll stagger-${i + 1}`}>
+                <div className="stat-number">{s.renderNum()}</div>
+                <div className="stat-label">{s.label}</div>
+                <div className="stat-sublabel">{s.sub}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
