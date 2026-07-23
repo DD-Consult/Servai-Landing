@@ -1,0 +1,60 @@
+name: Deploy to S3
+
+on:
+  push:
+    branches: [main]
+
+env:
+  AWS_REGION: ap-southeast-2
+  S3_BUCKET: serv-ai.com.prod
+  CLOUDFRONT_DISTRIBUTION_ID: E2KY0R57A9P35
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: yarn
+          cache-dependency-path: frontend/yarn.lock
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build
+        run: yarn build
+        env:
+          CI: false
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Sync static assets (long cache)
+        run: |
+          aws s3 sync build/static s3://$S3_BUCKET/static \
+            --delete \
+            --cache-control "public, max-age=31536000, immutable"
+
+      - name: Sync remaining files (short cache)
+        run: |
+          aws s3 sync build s3://$S3_BUCKET \
+            --delete \
+            --cache-control "public, max-age=60, s-maxage=300" \
+            --exclude "static/*"
+
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id $CLOUDFRONT_DISTRIBUTION_ID \
+            --paths "/*"
