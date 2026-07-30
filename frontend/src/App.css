@@ -418,16 +418,16 @@ body {
   background: conic-gradient(
       from var(--beam-angle, 0deg),
       transparent 0deg,
-      transparent 72deg,
-      rgba(200, 90, 50, 0.95) 90deg,
-      rgba(230, 178, 150, 1) 100deg,
-      rgba(200, 90, 50, 0.95) 110deg,
-      transparent 128deg,
-      transparent 252deg,
-      rgba(128, 155, 115, 0.95) 270deg,
-      rgba(190, 205, 180, 1) 280deg,
-      rgba(128, 155, 115, 0.95) 290deg,
-      transparent 308deg,
+      transparent 68deg,
+      rgba(232, 118, 72, 1) 88deg,
+      rgba(255, 214, 190, 1) 100deg,
+      rgba(232, 118, 72, 1) 112deg,
+      transparent 132deg,
+      transparent 248deg,
+      rgba(157, 190, 140, 1) 268deg,
+      rgba(220, 235, 210, 1) 280deg,
+      rgba(157, 190, 140, 1) 292deg,
+      transparent 312deg,
       transparent 360deg
     )
     border-box;
@@ -435,7 +435,7 @@ body {
   -webkit-mask-composite: xor;
   mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
-  filter: blur(1.5px) drop-shadow(0 0 6px rgba(255, 255, 255, 0.2));
+  filter: blur(1px) drop-shadow(0 0 12px rgba(255, 255, 255, 0.55)) drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
   pointer-events: none;
   z-index: 2;
   animation: heroBeamSpin 9s linear infinite;
@@ -461,9 +461,9 @@ body {
   overflow: hidden;
   box-shadow:
     /* visible outer glow — light halo against dark bg */
-    0 0 0 1px rgba(255, 255, 255, 0.14),
-    0 0 40px 12px rgba(255, 255, 255, 0.10),
-    0 0 80px 20px rgba(255, 255, 255, 0.06),
+    0 0 0 1px rgba(255, 255, 255, 0.22),
+    0 0 50px 14px rgba(255, 255, 255, 0.16),
+    0 0 90px 24px rgba(255, 255, 255, 0.10),
     /* deep shadow beneath for depth */
     0 25px 50px -12px rgba(0, 0, 0, 0.95),
     0 60px 120px -30px rgba(0, 0, 0, 0.80);
