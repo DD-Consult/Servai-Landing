@@ -46,12 +46,12 @@ function StatCounter({ targetValue, duration = 1500 }) {
 // Static data
 // ─────────────────────────────────────────────────────────────────────────────
 const features = [
-  { id: 1, icon: 'chat_bubble',     iconColor: '#22D3EE', iconBg: 'rgba(34,211,238,0.14)',  spotRgb: '34,211,238',  title: 'Conversational AI Ordering',    description: 'Customers have natural conversations with our AI agent through WhatsApp or Messenger. No rigid menus or confusing buttons - just chat naturally like ordering from a real person. Complete orders in under 90 seconds.' },
-  { id: 2, icon: 'fingerprint',     iconColor: '#FBBF24', iconBg: 'rgba(251,191,36,0.14)',  spotRgb: '251,191,36',  title: 'Instant Biometric Payments',     description: 'Complete transactions with Face ID or Google Pay. No manual card entry, no checkout forms - just fast, secure, trusted payments.' },
-  { id: 3, icon: 'card_membership', iconColor: '#34D399', iconBg: 'rgba(52,211,153,0.14)',  spotRgb: '52,211,153',  title: 'Built-In Loyalty System',         description: 'Track customer orders, reward repeat visits, and build relationships - all inside the chat. Your data, your customers, your loyalty program.' },
-  { id: 4, icon: 'dashboard',       iconColor: '#22D3EE', iconBg: 'rgba(34,211,238,0.14)',  spotRgb: '34,211,238',  title: 'Smart Dashboard',                 description: 'Real-time order management with actionable insights. Know your top customers, track preferences, and optimize your menu based on actual data.' },
-  { id: 5, icon: 'translate',       iconColor: '#FBBF24', iconBg: 'rgba(251,191,36,0.14)',  spotRgb: '251,191,36',  title: 'Multilingual Conversations',      description: 'AI understands and responds in multiple languages naturally. Perfect for tourist areas - customers have full conversations in their native language, with instant translation for your staff. No language barriers.' },
-  { id: 6, icon: 'database',        iconColor: '#34D399', iconBg: 'rgba(52,211,153,0.14)',  spotRgb: '52,211,153',  title: 'Own Your Customer Data',          description: 'No third-party aggregators taking your customer relationships. Full ownership of profiles, preferences, and contact information.' }
+  { id: 1, icon: 'chat_bubble',     iconColor: '#809B73', iconBg: 'rgba(128,155,115,0.14)',  spotRgb: '128,155,115',  title: 'Conversational AI Ordering',    description: 'Customers have natural conversations with our AI agent through WhatsApp or Messenger. No rigid menus or confusing buttons - just chat naturally like ordering from a real person. Complete orders in under 90 seconds.' },
+  { id: 2, icon: 'fingerprint',     iconColor: '#6B8560', iconBg: 'rgba(107,133,96,0.14)',  spotRgb: '107,133,96',  title: 'Instant Biometric Payments',     description: 'Complete transactions with Face ID or Google Pay. No manual card entry, no checkout forms - just fast, secure, trusted payments.' },
+  { id: 3, icon: 'card_membership', iconColor: '#9DB491', iconBg: 'rgba(157,180,145,0.14)',  spotRgb: '157,180,145',  title: 'Built-In Loyalty System',         description: 'Track customer orders, reward repeat visits, and build relationships - all inside the chat. Your data, your customers, your loyalty program.' },
+  { id: 4, icon: 'dashboard',       iconColor: '#809B73', iconBg: 'rgba(128,155,115,0.14)',  spotRgb: '128,155,115',  title: 'Smart Dashboard',                 description: 'Real-time order management with actionable insights. Know your top customers, track preferences, and optimize your menu based on actual data.' },
+  { id: 5, icon: 'translate',       iconColor: '#6B8560', iconBg: 'rgba(107,133,96,0.14)',  spotRgb: '107,133,96',  title: 'Multilingual Conversations',      description: 'AI understands and responds in multiple languages naturally. Perfect for tourist areas - customers have full conversations in their native language, with instant translation for your staff. No language barriers.' },
+  { id: 6, icon: 'database',        iconColor: '#9DB491', iconBg: 'rgba(157,180,145,0.14)',  spotRgb: '157,180,145',  title: 'Own Your Customer Data',          description: 'No third-party aggregators taking your customer relationships. Full ownership of profiles, preferences, and contact information.' }
 ];
 
 const howItWorksSteps = [
@@ -116,7 +116,7 @@ function App() {
 
   const getSliderStyle = (value, min, max) => {
     const pct = ((value - min) / (max - min)) * 100;
-    return { background: `linear-gradient(to right, #2DD4BF ${pct}%, #e0e0e0 ${pct}%)` };
+    return { background: `linear-gradient(to right, #809B73 ${pct}%, #e0e0e0 ${pct}%)` };
   };
 
   // ── Header scroll state ────────────────────────────────────────────────────
@@ -606,7 +606,7 @@ function App() {
       </section>
 
       {/* ════════════════════════════════════════ FOOTER ════════════════════ */}
-      <footer className="w-full bg-[#16181C] text-[#f2f0f0] py-12 px-6 border-t border-white/10">
+      <footer className="w-full bg-[#222A30] text-[#F8F5EE] py-12 px-6 border-t border-white/10">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
 
           {/* DD Consulting — left */}
@@ -619,7 +619,7 @@ function App() {
               />
             </div>
             <p className="text-xs text-gray-400">
-              Made with excellence by <strong className="text-[#FF7A29]">DD Consulting</strong>
+              Made with excellence by <strong className="text-[#C85A32]">DD Consulting</strong>
             </p>
           </div>
 
@@ -632,13 +632,13 @@ function App() {
                 className="h-8 w-auto object-contain"
               />
               <span className="text-xl font-semibold tracking-wide text-white">
-                <span className="text-[#2DD4BF]">Serv</span><span className="text-[#FF7A29]">AI</span>
+                <span className="text-[#C85A32]">Serv</span><span className="text-[#809B73]">AI</span>
               </span>
             </div>
             <p className="text-xs text-gray-400 max-w-sm text-center">
               ServAI: AI-Powered Food Ordering Platform <br className="hidden sm:inline" />
               <span className="text-gray-500">|</span>
-              <a href="mailto:info@serv-ai.com" className="text-[#2DD4BF] hover:underline ml-1">info@serv-ai.com</a>
+              <a href="mailto:info@serv-ai.com" className="text-[#809B73] hover:underline ml-1">info@serv-ai.com</a>
             </p>
           </div>
 
