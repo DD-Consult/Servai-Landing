@@ -736,11 +736,11 @@ body {
 /* ===== FEATURES / INTELLIGENT HOSPITALITY ===== */
 .features-section {
   padding: 6rem 2rem;
-  background: linear-gradient(160deg, #171D22 0%, #202830 55%, #171D22 100%);
+  background: linear-gradient(160deg, #0A0B0E 0%, #14161B 55%, #0A0B0E 100%);
   position: relative;
 }
 
-.features-section .section-title-centered { color: #F8F5EE; }
+.features-section .section-title-centered { color: #F5F5F2; }
 .features-section .section-subtitle { color: rgba(245, 245, 242, 0.6); }
 
 .section-subtitle {
@@ -842,7 +842,7 @@ body {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 1.0625rem;
   font-weight: 700;
-  color: #F8F5EE;
+  color: #F5F5F2;
   margin-bottom: 0.75rem;
 }
 
