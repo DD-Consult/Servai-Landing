@@ -619,7 +619,7 @@ function App() {
               />
             </div>
             <p className="text-xs text-gray-400">
-              Made with excellence by <strong className="text-[#C85A32]">DD Consulting</strong>
+              Made with excellence by <a href="https://ddconsult.com.au" target="_blank" rel="noopener noreferrer" className="text-[#C85A32] hover:underline"><strong>DD Consulting</strong></a>
             </p>
           </div>
 
