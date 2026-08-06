@@ -116,7 +116,7 @@ function App() {
 
   const getSliderStyle = (value, min, max) => {
     const pct = ((value - min) / (max - min)) * 100;
-    return { background: `linear-gradient(to right, #2DD4BF ${pct}%, #e0e0e0 ${pct}%)` };
+    return { background: `linear-gradient(to right, #809B73 ${pct}%, #e0e0e0 ${pct}%)` };
   };
 
   // ── Header scroll state ────────────────────────────────────────────────────
@@ -606,7 +606,7 @@ function App() {
       </section>
 
       {/* ════════════════════════════════════════ FOOTER ════════════════════ */}
-      <footer className="w-full bg-[#16181C] text-[#f2f0f0] py-12 px-6 border-t border-white/10">
+      <footer className="w-full bg-[#222A30] text-[#F8F5EE] py-12 px-6 border-t border-white/10">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
 
           {/* DD Consulting — left */}
@@ -619,7 +619,7 @@ function App() {
               />
             </div>
             <p className="text-xs text-gray-400">
-              Made with excellence by <strong className="text-[#FF7A29]">DD Consulting</strong>
+              Made with excellence by <a href="https://ddconsult.com.au" target="_blank" rel="noopener noreferrer" className="text-[#C85A32] hover:underline"><strong>DD Consulting</strong></a>
             </p>
           </div>
 
@@ -632,13 +632,13 @@ function App() {
                 className="h-8 w-auto object-contain"
               />
               <span className="text-xl font-semibold tracking-wide text-white">
-                <span className="text-[#2DD4BF]">Serv</span><span className="text-[#FF7A29]">AI</span>
+                <span className="text-[#C85A32]">Serv</span><span className="text-[#809B73]">AI</span>
               </span>
             </div>
             <p className="text-xs text-gray-400 max-w-sm text-center">
               ServAI: AI-Powered Food Ordering Platform <br className="hidden sm:inline" />
               <span className="text-gray-500">|</span>
-              <a href="mailto:info@serv-ai.com" className="text-[#2DD4BF] hover:underline ml-1">info@serv-ai.com</a>
+              <a href="mailto:info@serv-ai.com" className="text-[#809B73] hover:underline ml-1">info@serv-ai.com</a>
             </p>
           </div>
 
