@@ -608,15 +608,15 @@ function Home() {
       </section>
 
       {/* ════════════════════════════════════════ FOOTER ════════════════════ */}
-      <footer className="w-full bg-[#222A30] text-[#F8F5EE] pt-16 pb-8 px-6 sm:px-10 lg:px-16 border-t border-white/10" data-testid="site-footer">
-        <div className="max-w-[1280px] mx-auto">
+      <footer className="w-full bg-[#222A30] text-[#F8F5EE] pt-16 pb-8 px-8 sm:px-16 lg:px-24 border-t border-white/10" data-testid="site-footer">
+        <div className="max-w-[1120px] mx-auto">
 
           {/* Main footer — 3 columns */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
 
             {/* PRODUCT — left */}
             <div className="flex flex-col items-center md:items-start text-center md:text-left">
-              <h4 className="text-xs font-semibold tracking-[0.15em] text-white uppercase mb-5">Product</h4>
+              <h4 className="text-xs font-semibold tracking-[0.15em] text-white uppercase mb-5">Discover</h4>
               <nav className="flex flex-col gap-3">
                 {navLinks.map(({ id, label }) => (
                   <a key={id} href={`#${id}`}
@@ -653,7 +653,7 @@ function Home() {
 
             {/* MADE BY — right */}
             <div className="flex flex-col items-center md:items-end text-center md:text-right">
-              <h4 className="text-xs font-semibold tracking-[0.15em] text-white uppercase mb-5">Made By</h4>
+              <h4 className="text-[10px] font-semibold tracking-[0.15em] text-white uppercase mb-5">Made With Excellence By</h4>
               <a href="https://ddconsult.com.au" target="_blank" rel="noopener noreferrer"
                 className="flex items-center gap-2 mb-6 hover:opacity-80 transition-opacity duration-200"
                 data-testid="footer-dd-consulting-link">
