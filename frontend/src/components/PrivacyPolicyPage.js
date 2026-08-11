@@ -77,27 +77,25 @@ function PrivacyPolicyPage() {
   return (
     <div className="min-h-screen bg-white text-[#222A30]" data-testid="privacy-policy-page">
 
-      <header className="w-full h-16 flex items-center px-6 sm:px-10 lg:px-16 border-b border-gray-100" data-testid="privacy-header">
-        <Link to="/" className="flex items-center gap-2" data-testid="privacy-header-logo-link">
+      <header className="w-full h-16 flex items-center gap-4 px-6 sm:px-10 lg:px-16 border-b border-gray-100" data-testid="privacy-header">
+        <Link to="/" className="flex items-center gap-2 shrink-0" data-testid="privacy-header-logo-link">
           <img src="/assets/servai-logo.webp" alt="ServAI" className="h-8 w-auto object-contain" />
         </Link>
+        <span className="hidden sm:block w-px h-6 bg-gray-200" />
+        <h1 className="text-base sm:text-lg font-semibold text-[#1A2126] truncate" data-testid="privacy-header-title">
+          ServAi <span className="text-[#C85A32]">Privacy Policy</span>
+        </h1>
       </header>
 
       <div className="pt-12 sm:pt-16 pb-24 px-6 sm:px-10 lg:px-16">
         <div className="max-w-6xl mx-auto">
 
-          {/* Header & overview */}
+          {/* Overview */}
           <div className="mb-16 max-w-3xl">
-            <h1 className="text-4xl sm:text-5xl font-bold text-[#1A2126] mb-5 leading-tight" data-testid="privacy-policy-title">
-              ServAi <span className="text-[#C85A32]">Privacy Policy</span>
-            </h1>
-            <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-500" data-testid="privacy-policy-meta">
-              <span>Effective Date: <span className="text-gray-700">August 10, 2026</span></span>
-              <span className="text-gray-300">|</span>
-              <span>Last Updated: <span className="text-gray-700">August 10, 2026</span></span>
+            <div className="text-sm text-gray-500" data-testid="privacy-policy-meta">
+              Last Updated: <span className="text-gray-700">August 10, 2026</span>
             </div>
           </div>
- [100 lines shown. Remaining: lines 101-301 (201 lines). Use view_range parameter to continue.]
 
           <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-12 lg:gap-16">
 

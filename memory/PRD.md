@@ -32,3 +32,10 @@ Marketing/landing page for ServAI, an AI-powered conversational food ordering pl
 - Changed /privacy-policy background from dark (#1A2126) to white, with all text/border colors flipped to dark-on-light equivalents (charcoal headings, gray-500/700 body, gray-200 borders)
 - Removed SiteHeader (fixed top nav) from this page only — page now starts directly with "Back to Home" link; homepage header unaffected
 - Verified via auto_frontend_testing_agent: white bg, no header, TOC scroll-spy still functional (minor 1-section offset noted, non-blocking), table styling, footer, mobile layout all working
+
+### 2026-08-11 (later): Privacy Policy header/title consolidation
+- Moved "ServAi Privacy Policy" title into the page's minimal header, right of the logo with a vertical divider; removed the duplicate large title from the body
+- Removed "Effective Date" from metadata, kept only "Last Updated: August 10, 2026"
+- Footer's "Privacy Policy" link now opens in a new tab (target="_blank"); Terms & Conditions link unchanged
+- Fixed a stray leftover debug/artifact text line that had ended up in PrivacyPolicyPage.js body (found + fixed via testing agent)
+- Verified via auto_frontend_testing_agent: header layout, no duplicate title, metadata, no stray text, TOC/table/footer all still functional on desktop + mobile
