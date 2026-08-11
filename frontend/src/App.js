@@ -608,8 +608,8 @@ function Home() {
       </section>
 
       {/* ════════════════════════════════════════ FOOTER ════════════════════ */}
-      <footer className="w-full bg-[#222A30] text-[#F8F5EE] pt-16 pb-8 px-8 sm:px-16 lg:px-24 border-t border-white/10" data-testid="site-footer">
-        <div className="max-w-[1120px] mx-auto">
+      <footer className="w-full bg-[#222A30] text-[#F8F5EE] pt-16 pb-8 px-10 sm:px-20 lg:px-32 border-t border-white/10" data-testid="site-footer">
+        <div className="max-w-[1040px] mx-auto">
 
           {/* Main footer — 3 columns */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
@@ -664,7 +664,6 @@ function Home() {
                 />
               </a>
               <div className="flex flex-col items-center md:items-end gap-1.5">
-                <span className="text-xs text-gray-500">Powered by</span>
                 <a
                   href="https://aws.amazon.com/what-is-cloud-computing"
                   target="_blank"
