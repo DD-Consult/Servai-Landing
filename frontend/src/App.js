@@ -608,8 +608,8 @@ function Home() {
       </section>
 
       {/* ════════════════════════════════════════ FOOTER ════════════════════ */}
-      <footer className="w-full bg-[#222A30] text-[#F8F5EE] pt-16 pb-8 px-6 border-t border-white/10" data-testid="site-footer">
-        <div className="max-w-7xl mx-auto">
+      <footer className="w-full bg-[#222A30] text-[#F8F5EE] pt-16 pb-8 px-6 sm:px-10 lg:px-16 border-t border-white/10" data-testid="site-footer">
+        <div className="max-w-[1280px] mx-auto">
 
           {/* Main footer — 3 columns */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
