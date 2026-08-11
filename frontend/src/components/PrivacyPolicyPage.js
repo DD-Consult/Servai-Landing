@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
 import SiteFooter from './SiteFooter';
 
 const tocSections = [
@@ -78,17 +77,17 @@ function PrivacyPolicyPage() {
   return (
     <div className="min-h-screen bg-white text-[#222A30]" data-testid="privacy-policy-page">
 
-      <div className="pt-16 sm:pt-20 pb-24 px-6 sm:px-10 lg:px-16">
+      <header className="w-full h-16 flex items-center px-6 sm:px-10 lg:px-16 border-b border-gray-100" data-testid="privacy-header">
+        <Link to="/" className="flex items-center gap-2" data-testid="privacy-header-logo-link">
+          <img src="/assets/servai-logo.webp" alt="ServAI" className="h-8 w-auto object-contain" />
+        </Link>
+      </header>
+
+      <div className="pt-12 sm:pt-16 pb-24 px-6 sm:px-10 lg:px-16">
         <div className="max-w-6xl mx-auto">
 
           {/* Header & overview */}
           <div className="mb-16 max-w-3xl">
-            <Link to="/"
-              className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-[#647A5A] transition-colors duration-200 mb-8"
-              data-testid="privacy-back-link">
-              <ArrowLeft size={16} />
-              Back to Home
-            </Link>
             <h1 className="text-4xl sm:text-5xl font-bold text-[#1A2126] mb-5 leading-tight" data-testid="privacy-policy-title">
               ServAi <span className="text-[#C85A32]">Privacy Policy</span>
             </h1>
@@ -98,6 +97,7 @@ function PrivacyPolicyPage() {
               <span>Last Updated: <span className="text-gray-700">August 10, 2026</span></span>
             </div>
           </div>
+ [100 lines shown. Remaining: lines 101-301 (201 lines). Use view_range parameter to continue.]
 
           <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-12 lg:gap-16">
 

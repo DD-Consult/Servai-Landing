@@ -95,6 +95,8 @@ function SiteFooter() {
         <div className="flex flex-col md:flex-row items-center gap-4 md:gap-0 justify-between text-center md:text-left">
           <div className="flex items-center gap-6">
             <Link to="/privacy-policy"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-[13px] text-gray-400 hover:text-[#809B73] transition-colors duration-200"
               data-testid="footer-privacy-policy-link">
               Privacy Policy
