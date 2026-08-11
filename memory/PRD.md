@@ -27,3 +27,8 @@ Marketing/landing page for ServAI, an AI-powered conversational food ordering pl
 - Scroll-spy implemented via scroll-position offset check (not IntersectionObserver) with bottom-of-page detection so the last TOC section correctly activates near page end
 - /terms-and-conditions still uses the generic LegalPage.js placeholder (not built yet — content not provided for it)
 - Verified via auto_frontend_testing_agent: header/meta, TOC navigation + scroll-spy (all 8 sections), legal basis table, SiteHeader/SiteFooter integration, mobile responsiveness, footer link navigation — all working
+
+### 2026-08-11 (later): Privacy Policy page theme flip
+- Changed /privacy-policy background from dark (#1A2126) to white, with all text/border colors flipped to dark-on-light equivalents (charcoal headings, gray-500/700 body, gray-200 borders)
+- Removed SiteHeader (fixed top nav) from this page only — page now starts directly with "Back to Home" link; homepage header unaffected
+- Verified via auto_frontend_testing_agent: white bg, no header, TOC scroll-spy still functional (minor 1-section offset noted, non-blocking), table styling, footer, mobile layout all working
