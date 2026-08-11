@@ -2,10 +2,10 @@ import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import PhoneMockup from './components/PhoneMockup';
-import LegalPage from './components/LegalPage';
 import SiteHeader from './components/SiteHeader';
 import SiteFooter from './components/SiteFooter';
 import PrivacyPolicyPage from './components/PrivacyPolicyPage';
+import TermsOfServicePage from './components/TermsOfServicePage';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // StatCounter
@@ -574,7 +574,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-      <Route path="/terms-and-conditions" element={<LegalPage title="Terms & Conditions" />} />
+      <Route path="/terms-and-conditions" element={<TermsOfServicePage />} />
     </Routes>
   );
 }

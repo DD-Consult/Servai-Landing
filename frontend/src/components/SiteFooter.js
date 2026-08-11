@@ -102,6 +102,8 @@ function SiteFooter() {
               Privacy Policy
             </Link>
             <Link to="/terms-and-conditions"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-[13px] text-gray-400 hover:text-[#809B73] transition-colors duration-200"
               data-testid="footer-terms-link">
               Terms &amp; Conditions

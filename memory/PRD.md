@@ -39,3 +39,10 @@ Marketing/landing page for ServAI, an AI-powered conversational food ordering pl
 - Footer's "Privacy Policy" link now opens in a new tab (target="_blank"); Terms & Conditions link unchanged
 - Fixed a stray leftover debug/artifact text line that had ended up in PrivacyPolicyPage.js body (found + fixed via testing agent)
 - Verified via auto_frontend_testing_agent: header layout, no duplicate title, metadata, no stray text, TOC/table/footer all still functional on desktop + mobile
+
+### 2026-08-11 (later): Terms of Service page built
+- Built full /terms-and-conditions page (TermsOfServicePage.js) mirroring Privacy Policy's exact layout: logo-only header with title beside it, no dates/duplicate title, sticky 10-item TOC sidebar with scroll-spy, 750px readable content, white theme
+- All 10 sections from user-provided ServAi Legal Terms doc: Acceptance, Account Registration, Acceptable Use, IP & AI Output Ownership, Subscriptions & Payments, Termination, Disclaimers & Liability, Indemnification, Governing Law, Contact Info
+- Footer's "Terms & Conditions" link now also opens in a new tab (matching Privacy Policy link behavior)
+- Removed unused LegalPage.js placeholder route reference (component file still exists but no longer routed)
+- Verified via auto_frontend_testing_agent: header, TOC scroll-spy (all 10 sections), content, footer, new-tab behavior for both legal links, mobile layout — all working
