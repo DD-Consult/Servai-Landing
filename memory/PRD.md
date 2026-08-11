@@ -20,3 +20,10 @@ Marketing/landing page for ServAI, an AI-powered conversational food ordering pl
 ## Backlog / Next Steps
 - P1: Replace placeholder Privacy Policy / Terms & Conditions content with real legal copy
 - P2: Consider adding footer social links if ServAI wants social presence
+
+### 2026-08-11: Privacy Policy page build-out + shared Header/Footer refactor
+- Extracted SiteHeader.js and SiteFooter.js from Home into reusable components (used across Home + legal pages); nav links smooth-scroll on home, navigate-then-hash-scroll from other routes
+- Built full PrivacyPolicyPage.js (dark theme #1A2126) replacing the placeholder at /privacy-policy: title + effective/last-updated dates, sticky 2-column layout (TOC sidebar with scroll-spy + 750px-wide readable content, 16px/1.6 line-height), all 8 real policy sections from user-provided ServAi Legal Terms.docx, 3-column bordered table for Section 2 (Legal Basis/Business Purpose)
+- Scroll-spy implemented via scroll-position offset check (not IntersectionObserver) with bottom-of-page detection so the last TOC section correctly activates near page end
+- /terms-and-conditions still uses the generic LegalPage.js placeholder (not built yet — content not provided for it)
+- Verified via auto_frontend_testing_agent: header/meta, TOC navigation + scroll-spy (all 8 sections), legal basis table, SiteHeader/SiteFooter integration, mobile responsiveness, footer link navigation — all working

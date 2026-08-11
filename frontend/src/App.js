@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import { Menu, X } from 'lucide-react';
 import PhoneMockup from './components/PhoneMockup';
 import LegalPage from './components/LegalPage';
+import SiteHeader from './components/SiteHeader';
+import SiteFooter from './components/SiteFooter';
+import PrivacyPolicyPage from './components/PrivacyPolicyPage';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // StatCounter
@@ -73,7 +75,7 @@ const statCards = [
   { renderNum: () => <><StatCounter targetValue={2} />B+</>,         label: 'Global WhatsApp reach',         sub: 'Your customers already use it daily' },
 ];
 
-const navLinks = [
+export const navLinks = [
   { id: 'how-it-works', label: 'How It Works' },
   { id: 'features',     label: 'Features' },
   { id: 'impact',       label: 'Impact' },
@@ -93,8 +95,6 @@ const formFields = [
 // Home — main landing page
 // ─────────────────────────────────────────────────────────────────────────────
 function Home() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [scrolled,       setScrolled]       = useState(false);
   const [heroVisible,    setHeroVisible]    = useState(false);
   const [formData,       setFormData]       = useState({ name:'', email:'', phone:'', restaurantName:'', location:'' });
   const [showSuccess,    setShowSuccess]    = useState(false);
@@ -121,11 +121,15 @@ function Home() {
     return { background: `linear-gradient(to right, #809B73 ${pct}%, #e0e0e0 ${pct}%)` };
   };
 
-  // ── Header scroll state ────────────────────────────────────────────────────
+  // ── Scroll to section on load if URL has a hash (e.g. navigated from another page) ──
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    if (window.location.hash) {
+      const id = window.location.hash.slice(1);
+      const t = setTimeout(() => {
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+      }, 150);
+      return () => clearTimeout(t);
+    }
   }, []);
 
   // ── Hero spring entrance — fires 120ms after first paint ───────────────────
@@ -197,7 +201,6 @@ function Home() {
   const scrollToSection = (id) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
-    setMobileMenuOpen(false);
   };
 
   // Spotlight cards (Intelligent Hospitality) — tracks pointer position
@@ -277,57 +280,7 @@ function Home() {
   return (
     <div className="App">
 
-      {/* ═══════════════════════════════════════ HEADER ══════════════════════ */}
-      <header className={`fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-glass-border h-16 flex justify-between items-center px-margin-mobile header-nav${scrolled ? ' header-scrolled' : ''}`}>
-        <div className="flex items-center gap-2">
-        <img
-          src="/assets/servai-logo.webp"
-          alt="ServAI" className="logo"
-        />
-        </div>
-        <div className="flex items-center gap-stack-lg ml-auto mr-stack-lg">
-        <nav className="nav-links">
-          {navLinks.map(({ id, label }) => (
-            <a key={id} href={`#${id}`}
-              onClick={(e) => { e.preventDefault(); scrollToSection(id); }}>
-              {label}
-            </a>
-          ))}
-        </nav>
-        </div>
-        <div className="nav-actions">
-          <a href="https://app.serv-ai.com/login" target="_blank" rel="noopener noreferrer"
-            className="btn-outline nav-trial-btn">Start Free Trial</a>
-          <button className="btn-primary" onClick={() => scrollToSection('demo')}>Request Demo</button>
-          <button className="mobile-menu-btn" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-      </header>
-
-      {/* Mobile menu — light glass consistent with header */}
-      {mobileMenuOpen && (
-        <div style={{
-          position:'fixed', top:'64px', left:0, right:0, zIndex:49,
-          background:'rgba(255, 255, 255, 0.95)', backdropFilter:'blur(20px)',
-          WebkitBackdropFilter:'blur(20px)',
-          padding:'0.75rem 1.5rem', borderBottom:'1px solid rgba(121,119,119,0.1)',
-          boxShadow:'0 4px 24px rgba(0,0,0,0.06)'
-        }}>
-          <nav style={{ display:'flex', flexDirection:'column', gap:'0.25rem' }}>
-            {navLinks.map(({ id, label }) => (
-              <a key={id} href={`#${id}`}
-                onClick={(e) => { e.preventDefault(); scrollToSection(id); }}
-                style={{ textDecoration:'none', color:'#1a1a1a',
-                  fontFamily:'Inter,sans-serif', fontWeight:600,
-                  fontSize:'0.75rem', textTransform:'uppercase', letterSpacing:'0.1em',
-                  padding:'0.875rem 0.75rem', borderRadius:'0.5rem' }}>
-                {label}
-              </a>
-            ))}
-          </nav>
-        </div>
-      )}
+      <SiteHeader />
 
       {/* ═══════════════════════════════════════ HERO ════════════════════════ */}
       <section className="hero-section">
@@ -607,105 +560,7 @@ function Home() {
         </div>
       </section>
 
-      {/* ════════════════════════════════════════ FOOTER ════════════════════ */}
-      <footer className="w-full bg-[#222A30] text-[#F8F5EE] pt-16 pb-8 px-10 sm:px-20 lg:px-32 border-t border-white/10" data-testid="site-footer">
-        <div className="max-w-[1040px] mx-auto">
-
-          {/* Main footer — 3 columns */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
-
-            {/* PRODUCT — left */}
-            <div className="flex flex-col items-center md:items-start text-center md:text-left">
-              <h4 className="text-xs font-semibold tracking-[0.15em] text-white uppercase mb-5">Discover</h4>
-              <nav className="flex flex-col gap-3">
-                {navLinks.map(({ id, label }) => (
-                  <a key={id} href={`#${id}`}
-                    onClick={(e) => { e.preventDefault(); scrollToSection(id); }}
-                    className="text-sm text-gray-400 hover:text-[#809B73] transition-colors duration-200 w-fit"
-                    data-testid={`footer-link-${id}`}>
-                    {label}
-                  </a>
-                ))}
-              </nav>
-            </div>
-
-            {/* ServAI brand — center */}
-            <div className="flex flex-col items-center text-center gap-3">
-              <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-xl border border-white/10 shadow-inner">
-                <img
-                  src="/assets/servai-logo.webp"
-                  alt="ServAI Logo"
-                  className="h-8 w-auto object-contain"
-                />
-                <span className="text-xl font-semibold tracking-wide text-white">
-                  <span className="text-[#C85A32]">Serv</span><span className="text-[#809B73]">AI</span>
-                </span>
-              </div>
-              <p className="text-xs text-gray-400 max-w-sm">
-                ServAI: AI-Powered Food Ordering Platform
-              </p>
-              <a href="mailto:info@serv-ai.com"
-                className="text-xs text-[#809B73] hover:text-[#98B389] hover:underline transition-colors duration-200"
-                data-testid="footer-contact-email">
-                info@serv-ai.com
-              </a>
-            </div>
-
-            {/* MADE BY — right */}
-            <div className="flex flex-col items-center md:items-end text-center md:text-right">
-              <h4 className="text-[10px] font-semibold tracking-[0.15em] text-white uppercase mb-5">Made With Excellence By</h4>
-              <a href="https://ddconsult.com.au" target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-2 mb-6 hover:opacity-80 transition-opacity duration-200"
-                data-testid="footer-dd-consulting-link">
-                <img
-                  src="/assets/dd_consulting.png"
-                  alt="DD Consulting Logo"
-                  className="h-9 w-auto object-contain rounded-md"
-                />
-              </a>
-              <div className="flex flex-col items-center md:items-end gap-1.5">
-                <a
-                  href="https://aws.amazon.com/what-is-cloud-computing"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="transition-transform duration-200 hover:scale-105 inline-block"
-                  data-testid="footer-aws-badge"
-                >
-                  <img
-                    src="https://d0.awsstatic.com/logos/powered-by-aws-white.png"
-                    alt="Powered by AWS Cloud Computing"
-                    className="h-7 w-auto object-contain"
-                  />
-                </a>
-              </div>
-            </div>
-
-          </div>
-
-          {/* Divider */}
-          <div className="w-full h-px bg-white/10 my-10" />
-
-          {/* Sub-footer */}
-          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-0 justify-between text-center md:text-left">
-            <div className="flex items-center gap-6">
-              <Link to="/privacy-policy"
-                className="text-[13px] text-gray-400 hover:text-[#809B73] transition-colors duration-200"
-                data-testid="footer-privacy-policy-link">
-                Privacy Policy
-              </Link>
-              <Link to="/terms-and-conditions"
-                className="text-[13px] text-gray-400 hover:text-[#809B73] transition-colors duration-200"
-                data-testid="footer-terms-link">
-                Terms &amp; Conditions
-              </Link>
-            </div>
-            <p className="text-[13px] text-gray-500" data-testid="footer-copyright">
-              Copyright &copy; 2026 ServAI. All rights reserved.
-            </p>
-          </div>
-
-        </div>
-      </footer>
+      <SiteFooter />
 
     </div>
   );
@@ -718,7 +573,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/privacy-policy" element={<LegalPage title="Privacy Policy" />} />
+      <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
       <Route path="/terms-and-conditions" element={<LegalPage title="Terms & Conditions" />} />
     </Routes>
   );
