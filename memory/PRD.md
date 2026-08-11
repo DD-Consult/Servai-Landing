@@ -46,3 +46,9 @@ Marketing/landing page for ServAI, an AI-powered conversational food ordering pl
 - Footer's "Terms & Conditions" link now also opens in a new tab (matching Privacy Policy link behavior)
 - Removed unused LegalPage.js placeholder route reference (component file still exists but no longer routed)
 - Verified via auto_frontend_testing_agent: header, TOC scroll-spy (all 10 sections), content, footer, new-tab behavior for both legal links, mobile layout — all working
+
+### 2026-08-11 (later): Data Deletion page built
+- Built full /data-deletion page (DataDeletionPage.js) mirroring Privacy Policy/Terms layout: logo-only header with title beside it, sticky 7-item TOC sidebar with scroll-spy, 750px readable content, white theme
+- Content from ServAi User Data Deletion Policy doc: Deletion Methods, In-App Self-Service, Meta/Facebook Callback (with JSON code snippet block + numbered steps), Email Request, Processing Timeline, Scope & Legal Exceptions, Contact & Support
+- Footer sub-bar now shows all 3 legal links with bullet separators: "Privacy Policy • Terms & Conditions • Data Deletion" — all three open in new tabs (target="_blank")
+- Verified via auto_frontend_testing_agent: header, TOC scroll-spy (7 sections), JSON code block styling, numbered lists, footer link updates, mobile layout — all working

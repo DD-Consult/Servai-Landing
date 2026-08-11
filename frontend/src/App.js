@@ -6,6 +6,7 @@ import SiteHeader from './components/SiteHeader';
 import SiteFooter from './components/SiteFooter';
 import PrivacyPolicyPage from './components/PrivacyPolicyPage';
 import TermsOfServicePage from './components/TermsOfServicePage';
+import DataDeletionPage from './components/DataDeletionPage';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // StatCounter
@@ -575,6 +576,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
       <Route path="/terms-and-conditions" element={<TermsOfServicePage />} />
+      <Route path="/data-deletion" element={<DataDeletionPage />} />
     </Routes>
   );
 }

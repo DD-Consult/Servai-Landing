@@ -93,7 +93,7 @@ function SiteFooter() {
 
         {/* Sub-footer */}
         <div className="flex flex-col md:flex-row items-center gap-4 md:gap-0 justify-between text-center md:text-left">
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-3">
             <Link to="/privacy-policy"
               target="_blank"
               rel="noopener noreferrer"
@@ -101,12 +101,21 @@ function SiteFooter() {
               data-testid="footer-privacy-policy-link">
               Privacy Policy
             </Link>
+            <span className="text-gray-600 text-[13px]" aria-hidden="true">&bull;</span>
             <Link to="/terms-and-conditions"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[13px] text-gray-400 hover:text-[#809B73] transition-colors duration-200"
               data-testid="footer-terms-link">
               Terms &amp; Conditions
+            </Link>
+            <span className="text-gray-600 text-[13px]" aria-hidden="true">&bull;</span>
+            <Link to="/data-deletion"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[13px] text-gray-400 hover:text-[#809B73] transition-colors duration-200"
+              data-testid="footer-data-deletion-link">
+              Data Deletion
             </Link>
           </div>
           <p className="text-[13px] text-gray-500" data-testid="footer-copyright">
