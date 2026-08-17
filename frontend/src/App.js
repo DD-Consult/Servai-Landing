@@ -1,7 +1,12 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import { Menu, X } from 'lucide-react';
 import PhoneMockup from './components/PhoneMockup';
+import SiteHeader from './components/SiteHeader';
+import SiteFooter from './components/SiteFooter';
+import PrivacyPolicyPage from './components/PrivacyPolicyPage';
+import TermsOfServicePage from './components/TermsOfServicePage';
+import DataDeletionPage from './components/DataDeletionPage';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // StatCounter
@@ -71,7 +76,7 @@ const statCards = [
   { renderNum: () => <><StatCounter targetValue={2} />B+</>,         label: 'Global WhatsApp reach',         sub: 'Your customers already use it daily' },
 ];
 
-const navLinks = [
+export const navLinks = [
   { id: 'how-it-works', label: 'How It Works' },
   { id: 'features',     label: 'Features' },
   { id: 'impact',       label: 'Impact' },
@@ -88,11 +93,9 @@ const formFields = [
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
-// App
+// Home — main landing page
 // ─────────────────────────────────────────────────────────────────────────────
-function App() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [scrolled,       setScrolled]       = useState(false);
+function Home() {
   const [heroVisible,    setHeroVisible]    = useState(false);
   const [formData,       setFormData]       = useState({ name:'', email:'', phone:'', restaurantName:'', location:'' });
   const [showSuccess,    setShowSuccess]    = useState(false);
@@ -119,11 +122,15 @@ function App() {
     return { background: `linear-gradient(to right, #809B73 ${pct}%, #e0e0e0 ${pct}%)` };
   };
 
-  // ── Header scroll state ────────────────────────────────────────────────────
+  // ── Scroll to section on load if URL has a hash (e.g. navigated from another page) ──
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    if (window.location.hash) {
+      const id = window.location.hash.slice(1);
+      const t = setTimeout(() => {
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+      }, 150);
+      return () => clearTimeout(t);
+    }
   }, []);
 
   // ── Hero spring entrance — fires 120ms after first paint ───────────────────
@@ -195,7 +202,6 @@ function App() {
   const scrollToSection = (id) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
-    setMobileMenuOpen(false);
   };
 
   // Spotlight cards (Intelligent Hospitality) — tracks pointer position
@@ -275,57 +281,7 @@ function App() {
   return (
     <div className="App">
 
-      {/* ═══════════════════════════════════════ HEADER ══════════════════════ */}
-      <header className={`fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-glass-border h-16 flex justify-between items-center px-margin-mobile header-nav${scrolled ? ' header-scrolled' : ''}`}>
-        <div className="flex items-center gap-2">
-        <img
-          src="/assets/servai-logo.webp"
-          alt="ServAI" className="logo"
-        />
-        </div>
-        <div className="flex items-center gap-stack-lg ml-auto mr-stack-lg">
-        <nav className="nav-links">
-          {navLinks.map(({ id, label }) => (
-            <a key={id} href={`#${id}`}
-              onClick={(e) => { e.preventDefault(); scrollToSection(id); }}>
-              {label}
-            </a>
-          ))}
-        </nav>
-        </div>
-        <div className="nav-actions">
-          <a href="https://app.serv-ai.com/login" target="_blank" rel="noopener noreferrer"
-            className="btn-outline nav-trial-btn">Start Free Trial</a>
-          <button className="btn-primary" onClick={() => scrollToSection('demo')}>Request Demo</button>
-          <button className="mobile-menu-btn" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-      </header>
-
-      {/* Mobile menu — light glass consistent with header */}
-      {mobileMenuOpen && (
-        <div style={{
-          position:'fixed', top:'64px', left:0, right:0, zIndex:49,
-          background:'rgba(255, 255, 255, 0.95)', backdropFilter:'blur(20px)',
-          WebkitBackdropFilter:'blur(20px)',
-          padding:'0.75rem 1.5rem', borderBottom:'1px solid rgba(121,119,119,0.1)',
-          boxShadow:'0 4px 24px rgba(0,0,0,0.06)'
-        }}>
-          <nav style={{ display:'flex', flexDirection:'column', gap:'0.25rem' }}>
-            {navLinks.map(({ id, label }) => (
-              <a key={id} href={`#${id}`}
-                onClick={(e) => { e.preventDefault(); scrollToSection(id); }}
-                style={{ textDecoration:'none', color:'#1a1a1a',
-                  fontFamily:'Inter,sans-serif', fontWeight:600,
-                  fontSize:'0.75rem', textTransform:'uppercase', letterSpacing:'0.1em',
-                  padding:'0.875rem 0.75rem', borderRadius:'0.5rem' }}>
-                {label}
-              </a>
-            ))}
-          </nav>
-        </div>
-      )}
+      <SiteHeader />
 
       {/* ═══════════════════════════════════════ HERO ════════════════════════ */}
       <section className="hero-section">
@@ -605,63 +561,23 @@ function App() {
         </div>
       </section>
 
-      {/* ════════════════════════════════════════ FOOTER ════════════════════ */}
-      <footer className="w-full bg-[#222A30] text-[#F8F5EE] py-12 px-6 border-t border-white/10">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
-
-          {/* DD Consulting — left */}
-          <div className="flex flex-col items-center md:items-start order-2 md:order-1 space-y-2">
-            <div className="flex items-center gap-2">
-              <img 
-                src="/assets/dd_consulting.png" 
-                alt="DD Consulting Logo" 
-                className="h-10 w-auto object-contain rounded-lg shadow-md"
-              />
-            </div>
-            <p className="text-xs text-gray-400">
-              Made with excellence by <a href="https://ddconsult.com.au" target="_blank" rel="noopener noreferrer" className="text-[#C85A32] hover:underline"><strong>DD Consulting</strong></a>
-            </p>
-          </div>
-
-          {/* ServAI brand — center */}
-          <div className="flex flex-col items-center order-1 md:order-2 space-y-3">
-            <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-xl border border-white/10 shadow-inner">
-              <img
-                src="/assets/servai-logo.webp"
-                alt="ServAI Logo"
-                className="h-8 w-auto object-contain"
-              />
-              <span className="text-xl font-semibold tracking-wide text-white">
-                <span className="text-[#C85A32]">Serv</span><span className="text-[#809B73]">AI</span>
-              </span>
-            </div>
-            <p className="text-xs text-gray-400 max-w-sm text-center">
-              ServAI: AI-Powered Food Ordering Platform <br className="hidden sm:inline" />
-              <span className="text-gray-500">|</span>
-              <a href="mailto:info@serv-ai.com" className="text-[#809B73] hover:underline ml-1">info@serv-ai.com</a>
-            </p>
-          </div>
-
-          {/* AWS — right */}
-          <div className="flex flex-col items-center md:items-end order-3 space-y-2">
-            <a
-              href="https://aws.amazon.com/what-is-cloud-computing"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-transform duration-200 hover:scale-105 inline-block"
-            >
-              <img
-                src="https://d0.awsstatic.com/logos/powered-by-aws-white.png"
-                alt="Powered by AWS Cloud Computing"
-                className="h-8 w-auto object-contain"
-              />
-            </a>
-          </div>
-
-        </div>
-      </footer>
+      <SiteFooter />
 
     </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// App — top-level router
+// ─────────────────────────────────────────────────────────────────────────
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+      <Route path="/terms-and-conditions" element={<TermsOfServicePage />} />
+      <Route path="/data-deletion" element={<DataDeletionPage />} />
+    </Routes>
   );
 }
 

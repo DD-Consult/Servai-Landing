@@ -1,22 +1,54 @@
 # ServAI Landing Page - PRD
 
-## Original ask
-Static marketing landing page for "ServAI" (conversational AI food ordering platform). React frontend only, no backend/DB usage for this site (form submits via Netlify).
+## Overview
+Marketing/landing page for ServAI, an AI-powered conversational food ordering platform (WhatsApp/Messenger based ordering with biometric payments and loyalty).
 
-## Session: Color Palette Redesign (2026-07-30)
-User requested replacing clinical turquoise/teal/orange palette with a warm palette:
-- Soft Cream #F8F5EE - main page background
-- Deep Charcoal #222A30 - dark UI (Hero, Footer, features section, results cards)
-- Terracotta #C85A32 - primary buttons/CTAs
-- Sage Green #809B73 - success states/icons/accents
-- Footer wordmark: "Serv" = Terracotta, "AI" = Sage Green
-- Typography explicitly NOT changed (kept Plus Jakarta Sans as before)
+## Tech Stack
+- React 19 (CRA + craco), Tailwind CSS, lucide-react icons, react-router-dom v7
+- Single-page app (no backend API calls used by the footer/legal work; demo form posts via Netlify forms)
 
-### Implemented
-- Updated CSS variables & all hardcoded hex/rgba colors in /app/frontend/src/App.css, /app/frontend/src/components/PhoneMockup.css, /app/frontend/src/App.js
-- Feature icons (6 cards) now use 3 tonal shades of Sage Green instead of cyan/amber/green
-- Footer wordmark split-color applied; WhatsApp-authentic colors (chat bubbles, header) intentionally left unchanged for realism
-- Verified via auto_frontend_testing_agent across all 9 page sections - all passed, no old colors remain, typography unchanged, no console errors
+## What's Been Implemented
+### 2026-08-11: Footer redesign + legal page routes
+- Restructured footer into two sections:
+  - Main footer (3 columns): "Product" nav links (How it Works/Features/Impact, smooth scroll), center ServAI brand block (logo, tagline, contact email), "Made By" column (DD Consulting logo/link, "Powered by" + AWS badge)
+  - Sub-footer (separated by 1px divider): Privacy Policy (`/privacy-policy`) and Terms & Conditions (`/terms-and-conditions`) links, copyright text (13px)
+  - All links have hover states (color/opacity/scale transitions)
+- Added `react-router-dom` BrowserRouter wiring in `index.js`; `App.js` now exports a router (`Home` = landing page at `/`, plus the two new routes)
+- Added `/app/frontend/src/components/LegalPage.js` — placeholder "coming soon" page (dark themed, "Back to Home" link) reused for both Privacy Policy and Terms & Conditions routes
+- Verified via auto_frontend_testing_agent: all footer links, hover states, routing, and responsiveness (desktop/mobile) work; original sections (hero, how it works, features, impact, ROI calculator, demo form) unaffected
 
-### Backlog / Next steps
-- None outstanding from this request. Future: could regenerate header logo image asset (servai-logo.webp) to match new palette if desired.
+## Backlog / Next Steps
+- P1: Replace placeholder Privacy Policy / Terms & Conditions content with real legal copy
+- P2: Consider adding footer social links if ServAI wants social presence
+
+### 2026-08-11: Privacy Policy page build-out + shared Header/Footer refactor
+- Extracted SiteHeader.js and SiteFooter.js from Home into reusable components (used across Home + legal pages); nav links smooth-scroll on home, navigate-then-hash-scroll from other routes
+- Built full PrivacyPolicyPage.js (dark theme #1A2126) replacing the placeholder at /privacy-policy: title + effective/last-updated dates, sticky 2-column layout (TOC sidebar with scroll-spy + 750px-wide readable content, 16px/1.6 line-height), all 8 real policy sections from user-provided ServAi Legal Terms.docx, 3-column bordered table for Section 2 (Legal Basis/Business Purpose)
+- Scroll-spy implemented via scroll-position offset check (not IntersectionObserver) with bottom-of-page detection so the last TOC section correctly activates near page end
+- /terms-and-conditions still uses the generic LegalPage.js placeholder (not built yet — content not provided for it)
+- Verified via auto_frontend_testing_agent: header/meta, TOC navigation + scroll-spy (all 8 sections), legal basis table, SiteHeader/SiteFooter integration, mobile responsiveness, footer link navigation — all working
+
+### 2026-08-11 (later): Privacy Policy page theme flip
+- Changed /privacy-policy background from dark (#1A2126) to white, with all text/border colors flipped to dark-on-light equivalents (charcoal headings, gray-500/700 body, gray-200 borders)
+- Removed SiteHeader (fixed top nav) from this page only — page now starts directly with "Back to Home" link; homepage header unaffected
+- Verified via auto_frontend_testing_agent: white bg, no header, TOC scroll-spy still functional (minor 1-section offset noted, non-blocking), table styling, footer, mobile layout all working
+
+### 2026-08-11 (later): Privacy Policy header/title consolidation
+- Moved "ServAi Privacy Policy" title into the page's minimal header, right of the logo with a vertical divider; removed the duplicate large title from the body
+- Removed "Effective Date" from metadata, kept only "Last Updated: August 10, 2026"
+- Footer's "Privacy Policy" link now opens in a new tab (target="_blank"); Terms & Conditions link unchanged
+- Fixed a stray leftover debug/artifact text line that had ended up in PrivacyPolicyPage.js body (found + fixed via testing agent)
+- Verified via auto_frontend_testing_agent: header layout, no duplicate title, metadata, no stray text, TOC/table/footer all still functional on desktop + mobile
+
+### 2026-08-11 (later): Terms of Service page built
+- Built full /terms-and-conditions page (TermsOfServicePage.js) mirroring Privacy Policy's exact layout: logo-only header with title beside it, no dates/duplicate title, sticky 10-item TOC sidebar with scroll-spy, 750px readable content, white theme
+- All 10 sections from user-provided ServAi Legal Terms doc: Acceptance, Account Registration, Acceptable Use, IP & AI Output Ownership, Subscriptions & Payments, Termination, Disclaimers & Liability, Indemnification, Governing Law, Contact Info
+- Footer's "Terms & Conditions" link now also opens in a new tab (matching Privacy Policy link behavior)
+- Removed unused LegalPage.js placeholder route reference (component file still exists but no longer routed)
+- Verified via auto_frontend_testing_agent: header, TOC scroll-spy (all 10 sections), content, footer, new-tab behavior for both legal links, mobile layout — all working
+
+### 2026-08-11 (later): Data Deletion page built
+- Built full /data-deletion page (DataDeletionPage.js) mirroring Privacy Policy/Terms layout: logo-only header with title beside it, sticky 7-item TOC sidebar with scroll-spy, 750px readable content, white theme
+- Content from ServAi User Data Deletion Policy doc: Deletion Methods, In-App Self-Service, Meta/Facebook Callback (with JSON code snippet block + numbered steps), Email Request, Processing Timeline, Scope & Legal Exceptions, Contact & Support
+- Footer sub-bar now shows all 3 legal links with bullet separators: "Privacy Policy • Terms & Conditions • Data Deletion" — all three open in new tabs (target="_blank")
+- Verified via auto_frontend_testing_agent: header, TOC scroll-spy (7 sections), JSON code block styling, numbered lists, footer link updates, mobile layout — all working
