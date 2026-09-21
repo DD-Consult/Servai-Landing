@@ -1365,6 +1365,12 @@ body::-webkit-scrollbar-thumb:hover{
 #sv10 .sv10-demo-form label{display:block;margin-bottom:14px} #sv10 .sv10-demo-form label>span{display:block;font-size:8px;letter-spacing:.08em;text-transform:uppercase;font-weight:800;margin-bottom:6px}
 #sv10 .sv10-demo-form input,#sv10 .sv10-demo-form select{width:100%;height:50px;border:1px solid #d9d1c5;background:#fff;border-radius:10px;padding:0 13px;outline:0;color:#273033} #sv10 .sv10-demo-form input:focus,#sv10 .sv10-demo-form select:focus{border-color:var(--sage);box-shadow:0 0 0 4px rgba(145,165,127,.12)}
 #sv10 .sv10-demo-success{display:none;margin-top:12px;padding:12px;border-radius:10px;background:#e4ebdd;color:#5f7058} #sv10 .sv10-demo-success.show{display:block} #sv10 .sv10-demo-success strong,#sv10 .sv10-demo-success span{display:block} #sv10 .sv10-demo-success strong{font-size:11px} #sv10 .sv10-demo-success span{font-size:9px;margin-top:3px}
+#sv10 .sv10-demo-form input.sv10-input-error{border-color:#c9402f;box-shadow:0 0 0 4px rgba(201,64,47,.12)}
+#sv10 .sv10-input-msg{display:block;font-size:9px;font-weight:700;letter-spacing:.02em;color:#c9402f;margin-top:5px}
+#sv10 .sv10-demo-form.is-submitted label,#sv10 .sv10-demo-form.is-submitted #sv10-demo-submit{display:none}
+#sv10 .sv10-demo-form.is-submitted .sv10-demo-success{margin-top:0;padding:26px 22px;text-align:center;background:#e4ebdd}
+#sv10 .sv10-demo-form.is-submitted .sv10-demo-success strong{font-size:20px;letter-spacing:-.01em}
+#sv10 .sv10-demo-form.is-submitted .sv10-demo-success span{font-size:12px;line-height:1.55;margin-top:8px}
 
 /* Footer */
 #sv10 .sv10-footer{padding:62px 0 22px;background:#202a30;color:#fff}

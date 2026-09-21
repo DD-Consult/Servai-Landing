@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Verify THREE NEW mobile-only CSS/JS fixes on ServAI homepage: 1) LIVE TRANSLATION arrow no longer tilted, 2) Connector line between step 4 (PAY) and step 5 (KNOW) now shows, 3) Hero info boxes (orbit cards) now visible on mobile"
+user_problem_statement: "Verify client-side validation & submission logic for the 'Request a Demo' form on the ServAI homepage"
 
 frontend:
   - task: "CSS phone mockup height fix in HOW IT WORKS section"
@@ -143,15 +143,27 @@ frontend:
         - working: true
           agent: "testing"
           comment: "✅ ALL THREE NEW MOBILE CSS FIXES VERIFIED AND WORKING (2024-09-21): Re-tested at 390x844 (confirmed window.innerWidth=390) and desktop 1920x800. ALL FIXES NOW PASSING. FIX 1 (LIVE TRANSLATION arrow) - ✅ PASSED: Container (.sv10-language-arrow) computed transform='none' (no rotation matrix) ✓. <small> 'LIVE TRANSLATION' text is HORIZONTAL (63.28px width × 7.97px height, width>height) ✓. Arrow <span> has transform='matrix(0,1,-1,0,0,0)' (rotate(90deg) applied to span only, pointing DOWN) ✓. The CSS fix at line 1954 'transform:none!important' successfully overrides the container rotation. FIX 2 (Process connector line) - ✅ PASSED: Connector line ::before width=421px, left=52px, display=block ✓. Line is present and spans all 5 steps including 04 (PAY) to 05 (KNOW) ✓. FIX 3 (Hero orbit cards) - ✅ PASSED: All 5 .sv10-orbit-card elements found ✓. All have display='block' (NOT 'none') ✓. All have position='static' ✓. All have non-zero bounding boxes (Cards 1-4: 196.52×66px, Card 5: 403.03×66px) and are VISIBLE below phone mock ✓. The CSS fix at line 2008 'display:block!important' successfully overrides the display:none. DESKTOP REGRESSION (1920x800) - ✅ NO REGRESSION: Orbit cards position='absolute' ✓. Language arrow flexDirection='column' ✓. Language demo gridTemplateColumns='482.406px 72px 482.406px' (3 columns) ✓. CONSOLE ERRORS: ✅ No console errors detected. All three mobile-only fixes are production-ready and working correctly without breaking desktop layout."
+  
+  - task: "Request a Demo form client-side validation and submission"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/servaiScript.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ ALL FIVE DEMO FORM VALIDATION TESTS PASSED (2024-09-21): Comprehensive testing of the 'Request a Demo' form at section #sv10-demo completed successfully. TEST 1 (Empty submission) ✅ PASSED: All 5 input fields (name, email, phone, restaurant, country) correctly received class 'sv10-input-error' and displayed inline error message '.sv10-input-msg' with text 'Please fill in this field'. Success message NOT shown. TEST 2 (Invalid email format) ✅ PASSED: Email 'notanemail' and 'john@' both correctly rejected with error message 'Please enter a valid email address'. Email field received 'sv10-input-error' class. Success NOT shown. TEST 3 (Errors clear on typing) ✅ PASSED: When valid value typed into a field with error, the 'sv10-input-error' class and '.sv10-input-msg' were immediately removed. TEST 4 (Successful submission) ✅ PASSED: With all valid values (john@restaurant.com), success box #sv10-demo-success became visible with class 'show', displayed heading 'Thank You!' and body text 'We've received your demo request. Our team will contact you within 24 hours to schedule your personalized ServAI demonstration.' Form received class 'is-submitted' and all input values were reset to empty. TEST 5 (Old mock message removed) ✅ PASSED: Neither 'Concept form ready.' nor 'Connect this CTA to the existing ServAI demo form, CRM or webhook before production launch.' text found anywhere in DOM. ADDITIONAL CHECKS: Form container has proper rounded borders, white input backgrounds (rgb(255,255,255)), and orange full-width button (rgb(201,87,45), width:100%). Desktop (1920x800): Form width 954.50px, height 274.59px. Mobile (390x844): Form width 360px with NO horizontal overflow. Console: Only monitoring endpoint failures (__emergent_overlay__, cdn-cgi/rum), no actual application errors. All validation logic working correctly on both desktop and mobile viewports."
 
 metadata:
   created_by: "testing_agent"
-  version: "1.5"
-  test_sequence: 6
+  version: "1.6"
+  test_sequence: 7
 
 test_plan:
   current_focus:
-    - "Three NEW mobile CSS fixes (language arrow, process line, orbit cards)"
+    - "Request a Demo form client-side validation and submission"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
@@ -165,3 +177,5 @@ agent_communication:
       message: "❌ THREE NEW MOBILE CSS FIXES VERIFICATION FAILED (2024-09-21): Tested at 390x844, 360x800, and desktop 1920x800. CRITICAL ISSUES: FIX 1 (Language arrow) FAILED - Arrow and text are still VERTICAL/rotated due to transform:rotate(90deg) rules at lines 1719 and 1770 not being overridden. FIX 2 (Process line) PASSED - Connector line correctly spans all 5 steps. FIX 3 (Orbit cards) FAILED - Cards are invisible (display:none from line 1654) not overridden. ROOT CAUSE: The @media(max-width:560px) fixes at lines 1930-2021 are INCOMPLETE. They set position:static and flex-direction:row but don't override the conflicting display:none and transform:rotate rules from the @media(max-width:850px) breakpoint at lines 1654 and 1719. REQUIRED FIXES: (1) Line 2005: Add 'display:flex' or remove display:none for .sv10-orbit-card, (2) Line 1949: Add 'transform:none' for .sv10-language-arrow, (3) Add new rule after line 1954: '.sv10-language-arrow>span{transform:none}'. Desktop regression test passed - no breaking changes at 1920x800."
     - agent: "testing"
       message: "✅ THREE NEW MOBILE CSS FIXES RE-VERIFICATION COMPLETE - ALL PASSING (2024-09-21): Re-tested all three mobile-only fixes at 390x844 (confirmed window.innerWidth=390) and desktop 1920x800. Main agent successfully implemented the required CSS fixes. RESULTS: FIX 1 (LIVE TRANSLATION arrow) ✅ PASSED - Container transform='none', text is horizontal (63.28×7.97px), arrow span rotated 90deg pointing down. FIX 2 (Process connector line) ✅ PASSED - Line present (421px width, 52px left), spans steps 04-05. FIX 3 (Hero orbit cards) ✅ PASSED - All 5 cards visible (display='block', position='static', non-zero dimensions). DESKTOP REGRESSION ✅ NO ISSUES - Orbit cards position='absolute', language arrow flexDirection='column', language demo 3 columns. NO CONSOLE ERRORS. All three fixes are production-ready and working correctly on mobile without breaking desktop layout. Main agent can now summarize and finish."
+    - agent: "testing"
+      message: "✅ REQUEST A DEMO FORM VALIDATION COMPLETE - ALL TESTS PASSED (2024-09-21): Comprehensive testing of the 'Request a Demo' form validation and submission logic completed successfully. All 5 test cases PASSED: (1) Empty submission correctly shows 5 inline errors with class 'sv10-input-error' and message 'Please fill in this field', (2) Invalid email formats ('notanemail', 'john@') correctly rejected with message 'Please enter a valid email address', (3) Errors clear immediately when valid value is typed, (4) Successful submission with valid data shows success message 'Thank You!' with text about 24-hour contact, form gets 'is-submitted' class, and all input values reset to empty, (5) Old mock messages ('Concept form ready.', 'Connect this CTA...') NOT found in DOM. Form has proper styling: white input backgrounds, orange full-width button, rounded borders. Desktop (1920x800): Form 954.50×274.59px. Mobile (390x844): Form 360px width with NO overflow. Console: Only monitoring endpoint failures, no application errors. The demo form validation is production-ready and working correctly on both desktop and mobile viewports."

@@ -821,8 +821,44 @@ export function initServAI(){
   [orders,locations].forEach(el=>el?.addEventListener('input',calcBusiness));
   calcBusiness();
 
-  // Demo button
-  $('#sv10-demo-submit')?.addEventListener('click',()=>$('#sv10-demo-success')?.classList.add('show'));
+  // Demo form: client-side validation + submission
+  (function(){
+    const demoForm=$('.sv10-demo-form');
+    const demoSubmit=$('#sv10-demo-submit');
+    if(demoForm&&demoSubmit){
+      const requiredFields=['name','email','phone','restaurant','country'];
+      const emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const clearFieldError=(input)=>{
+        input.classList.remove('sv10-input-error');
+        const m=input.parentNode.querySelector('.sv10-input-msg');
+        if(m) m.remove();
+      };
+      const setFieldError=(input,text)=>{
+        input.classList.add('sv10-input-error');
+        let m=input.parentNode.querySelector('.sv10-input-msg');
+        if(!m){ m=document.createElement('span'); m.className='sv10-input-msg'; input.parentNode.appendChild(m); }
+        m.textContent=text;
+      };
+      demoForm.querySelectorAll('input').forEach(inp=>{
+        inp.addEventListener('input',()=>clearFieldError(inp));
+      });
+      demoSubmit.addEventListener('click',()=>{
+        let valid=true, firstInvalid=null;
+        requiredFields.forEach(nm=>{
+          const input=demoForm.querySelector('[name="'+nm+'"]');
+          if(!input) return;
+          clearFieldError(input);
+          const val=(input.value||'').trim();
+          if(!val){ setFieldError(input,'Please fill in this field'); valid=false; if(!firstInvalid) firstInvalid=input; }
+          else if(nm==='email' && !emailRe.test(val)){ setFieldError(input,'Please enter a valid email address'); valid=false; if(!firstInvalid) firstInvalid=input; }
+        });
+        if(!valid){ if(firstInvalid) firstInvalid.focus(); return; }
+        demoForm.reset();
+        demoForm.classList.add('is-submitted');
+        $('#sv10-demo-success')?.classList.add('show');
+      });
+    }
+  })();
 
 
   // Subtle pointer tilt on premium cards
