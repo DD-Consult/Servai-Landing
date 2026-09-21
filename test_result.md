@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Verify THREE mobile-only CSS responsiveness fixes on ServAI homepage: 1) Hero heading no longer cut off at mobile widths, 2) Impact stat cards fit content without tall whitespace, 3) Footer 2-column layout on mobile"
+user_problem_statement: "Verify THREE NEW mobile-only CSS/JS fixes on ServAI homepage: 1) LIVE TRANSLATION arrow no longer tilted, 2) Connector line between step 4 (PAY) and step 5 (KNOW) now shows, 3) Hero info boxes (orbit cards) now visible on mobile"
 
 frontend:
   - task: "CSS phone mockup height fix in HOW IT WORKS section"
@@ -128,14 +128,30 @@ frontend:
         - working: true
           agent: "testing"
           comment: "✓ VERIFIED THREE MOBILE CSS FIXES (2024-09-21): All three fixes PASSED at mobile viewports (<=560px). FIX 1 - HERO HEADING NO LONGER CUT OFF: Tested at 360x800, 390x844, 430x932. Results: 360x800 (h1 right=345px, innerWidth=360px, overflow=0px) ✓ PASS, 390x844 (h1 right=375px, innerWidth=390px) ✓ PASS, 430x932 (h1 right=415px, innerWidth=430px) ✓ PASS. Hero h1 uses clamp(30px,9vw,46px) with overflow-wrap:break-word and word-break:break-word. All words visible, no horizontal clipping. FIX 2 - IMPACT STAT CARDS FIT CONTENT: Tested at 390x844. Card heights: Card 1=154.38px, Card 2=154.38px, Card 3=154.38px. All cards have minHeight=0px (was 270px), padding=24px 22px. No tall whitespace, content fits properly ✓ PASS. FIX 3 - FOOTER 2-COLUMN ON MOBILE: Tested at 390x844. gridTemplateColumns='170px 170px' (2 columns) ✓ PASS. Brand gridColumnEnd='-1' (spans full width) ✓ PASS. Footer properly displays in 2-column layout with brand spanning full width. DESKTOP REGRESSION TEST (1920x800): Hero h1 fontSize=102px (large) ✓ PASS, Impact grid=4 columns (multi-column) ✓ PASS, Footer=5 columns ✓ PASS. No desktop regression detected. Console: Only failed requests to monitoring endpoints (__emergent_overlay__, cdn-cgi/rum), no actual application errors. All three mobile fixes working correctly without breaking desktop layout."
+  
+  - task: "Three NEW mobile CSS fixes (language arrow, process line, orbit cards)"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/servai.css"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: false
+          agent: "testing"
+          comment: "❌ CRITICAL ISSUES FOUND IN THREE NEW MOBILE CSS FIXES (2024-09-21): Tested at 390x844, 360x800, and desktop 1920x800. FIX 1 (LIVE TRANSLATION arrow) - ❌ FAILED: The CSS at line 1952 sets flex-direction:row correctly, BUT there are TWO transform:rotate(90deg) rules that are NOT overridden: (1) Line 1719 @media(max-width:850px) rotates .sv10-language-arrow container 90deg, (2) Line 1770 @media(max-width:560px) rotates .sv10-language-arrow>span 90deg. Result: Arrow span has transform:matrix(0,1,-1,0,0,0) and 'LIVE TRANSLATION' text is VERTICAL (7.97px x 63.28px, height>width) instead of horizontal. The gridTemplateColumns is correctly '360px' (single column). FIX 2 (Process connector line) - ✅ PASSED: Connector line width=421px, left=52px at mobile, spans all 5 steps including 04-05. Desktop regression OK. FIX 3 (Hero orbit cards) - ❌ FAILED: The CSS at line 2005 sets position:static correctly, BUT line 1654 @media(max-width:850px) sets display:none which is NOT overridden at 560px. Result: All 5 orbit cards have display:none, size=0x0, completely invisible on mobile. Phone mock and scenario tabs are visible. DESKTOP REGRESSION (1920x800): ✅ PASSED - orbit cards position:absolute, language demo 3 columns, arrow flex-direction:column, no breaking changes. ROOT CAUSE: The @media(max-width:560px) fixes are INCOMPLETE - they change position/flex-direction but don't override the display:none and transform:rotate rules from the @media(max-width:850px) breakpoint. FIXES NEEDED: (1) Add 'display:flex' or 'display:block' to .sv10-orbit-card at line 2005, (2) Add 'transform:none' to .sv10-language-arrow at line 1949 and to .sv10-language-arrow>span (new rule needed after line 1954)."
+        - working: true
+          agent: "testing"
+          comment: "✅ ALL THREE NEW MOBILE CSS FIXES VERIFIED AND WORKING (2024-09-21): Re-tested at 390x844 (confirmed window.innerWidth=390) and desktop 1920x800. ALL FIXES NOW PASSING. FIX 1 (LIVE TRANSLATION arrow) - ✅ PASSED: Container (.sv10-language-arrow) computed transform='none' (no rotation matrix) ✓. <small> 'LIVE TRANSLATION' text is HORIZONTAL (63.28px width × 7.97px height, width>height) ✓. Arrow <span> has transform='matrix(0,1,-1,0,0,0)' (rotate(90deg) applied to span only, pointing DOWN) ✓. The CSS fix at line 1954 'transform:none!important' successfully overrides the container rotation. FIX 2 (Process connector line) - ✅ PASSED: Connector line ::before width=421px, left=52px, display=block ✓. Line is present and spans all 5 steps including 04 (PAY) to 05 (KNOW) ✓. FIX 3 (Hero orbit cards) - ✅ PASSED: All 5 .sv10-orbit-card elements found ✓. All have display='block' (NOT 'none') ✓. All have position='static' ✓. All have non-zero bounding boxes (Cards 1-4: 196.52×66px, Card 5: 403.03×66px) and are VISIBLE below phone mock ✓. The CSS fix at line 2008 'display:block!important' successfully overrides the display:none. DESKTOP REGRESSION (1920x800) - ✅ NO REGRESSION: Orbit cards position='absolute' ✓. Language arrow flexDirection='column' ✓. Language demo gridTemplateColumns='482.406px 72px 482.406px' (3 columns) ✓. CONSOLE ERRORS: ✅ No console errors detected. All three mobile-only fixes are production-ready and working correctly without breaking desktop layout."
 
 metadata:
   created_by: "testing_agent"
-  version: "1.3"
-  test_sequence: 4
+  version: "1.5"
+  test_sequence: 6
 
 test_plan:
-  current_focus: []
+  current_focus:
+    - "Three NEW mobile CSS fixes (language arrow, process line, orbit cards)"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
@@ -145,3 +161,7 @@ agent_communication:
       message: "PHONE MOCKUP HEIGHT FIX VERIFICATION COMPLETE (2024-09-21): The CSS fix setting .sv10-device-stage to height:705px on desktop has been successfully verified. All measurements match expected values exactly. The phone mockup content is now perfectly vertically centered (0px difference between top and bottom gaps). The fix maintains consistent height across all 6 steps (0-5) and properly uses responsive height on mobile viewport. No console errors detected. Visual inspection confirms the phone matches reference proportions and content is no longer pinned to the top. The fix is production-ready."
     - agent: "testing"
       message: "THREE MOBILE CSS FIXES VERIFICATION COMPLETE (2024-09-21): All three mobile-only CSS responsiveness fixes have been successfully verified and are working correctly. FIX 1 (Hero heading): The h1 no longer overflows or gets cut off at mobile widths (360px, 390px, 430px). The clamp() font-size and word-break properties ensure all text is visible within viewport bounds with zero horizontal overflow. FIX 2 (Impact stat cards): Cards now have minHeight:0 instead of 270px, resulting in proper content-fitting heights (~154px) with no excessive whitespace. FIX 3 (Footer): Footer correctly displays in 2-column grid layout on mobile with brand block spanning full width (gridColumnEnd:-1). Desktop regression test at 1920x800 confirms no breaking changes: h1 fontSize remains large (102px), impact grid maintains multi-column layout (4 cols), and footer keeps 5-column structure. No application console errors detected (only monitoring endpoint failures). All fixes are production-ready and mobile-responsive without desktop regression."
+    - agent: "testing"
+      message: "❌ THREE NEW MOBILE CSS FIXES VERIFICATION FAILED (2024-09-21): Tested at 390x844, 360x800, and desktop 1920x800. CRITICAL ISSUES: FIX 1 (Language arrow) FAILED - Arrow and text are still VERTICAL/rotated due to transform:rotate(90deg) rules at lines 1719 and 1770 not being overridden. FIX 2 (Process line) PASSED - Connector line correctly spans all 5 steps. FIX 3 (Orbit cards) FAILED - Cards are invisible (display:none from line 1654) not overridden. ROOT CAUSE: The @media(max-width:560px) fixes at lines 1930-2021 are INCOMPLETE. They set position:static and flex-direction:row but don't override the conflicting display:none and transform:rotate rules from the @media(max-width:850px) breakpoint at lines 1654 and 1719. REQUIRED FIXES: (1) Line 2005: Add 'display:flex' or remove display:none for .sv10-orbit-card, (2) Line 1949: Add 'transform:none' for .sv10-language-arrow, (3) Add new rule after line 1954: '.sv10-language-arrow>span{transform:none}'. Desktop regression test passed - no breaking changes at 1920x800."
+    - agent: "testing"
+      message: "✅ THREE NEW MOBILE CSS FIXES RE-VERIFICATION COMPLETE - ALL PASSING (2024-09-21): Re-tested all three mobile-only fixes at 390x844 (confirmed window.innerWidth=390) and desktop 1920x800. Main agent successfully implemented the required CSS fixes. RESULTS: FIX 1 (LIVE TRANSLATION arrow) ✅ PASSED - Container transform='none', text is horizontal (63.28×7.97px), arrow span rotated 90deg pointing down. FIX 2 (Process connector line) ✅ PASSED - Line present (421px width, 52px left), spans steps 04-05. FIX 3 (Hero orbit cards) ✅ PASSED - All 5 cards visible (display='block', position='static', non-zero dimensions). DESKTOP REGRESSION ✅ NO ISSUES - Orbit cards position='absolute', language arrow flexDirection='column', language demo 3 columns. NO CONSOLE ERRORS. All three fixes are production-ready and working correctly on mobile without breaking desktop layout. Main agent can now summarize and finish."

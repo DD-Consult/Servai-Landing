@@ -1766,15 +1766,9 @@ body::-webkit-scrollbar-thumb:hover{
   }
 
   #sv10 .sv10-language-arrow>span{
-    font-size:0!important;
-  }
-  #sv10 .sv10-language-arrow>span:before{
-    content:"TO";
-    font-family:'Manrope',sans-serif;
-    font-size:7px;
-    font-weight:800;
-    letter-spacing:.12em;
-    color:#7d8b84;
+    font-size:24px!important;
+    transform:rotate(90deg);
+    line-height:1;
   }
 
   /*
@@ -1935,10 +1929,12 @@ body::-webkit-scrollbar-thumb:hover{
 
   #sv10 .sv10-language-demo{
     align-items:stretch;
+    grid-template-columns:1fr;
+    gap:14px;
   }
 
   #sv10 .sv10-language-demo>.sv10-language-column:first-child{
-    min-height:350px;
+    min-height:150px;
   }
 
   #sv10 .sv10-language-column--venue{
@@ -1951,8 +1947,11 @@ body::-webkit-scrollbar-thumb:hover{
   }
 
   #sv10 .sv10-language-arrow{
-    min-height:42px;
+    min-height:auto;
     justify-content:center;
+    flex-direction:row;
+    gap:8px;
+    transform:none!important;
   }
 
   #sv10 .sv10-language-column:hover{
@@ -1976,10 +1975,53 @@ body::-webkit-scrollbar-thumb:hover{
   #sv10 .sv10-hero h1{font-size:clamp(30px,9vw,46px);overflow-wrap:break-word;word-break:break-word}
   #sv10 .sv10-hero-actions{flex-direction:column}
   #sv10 .sv10-btn{width:100%}
-  #sv10 .sv10-hero-phone{width:292px;transform:translateY(14px) rotate(.4deg)}
+  #sv10 .sv10-hero-stage{
+    flex-wrap:wrap;
+    flex-direction:row;
+    align-items:flex-start;
+    justify-content:center;
+    min-height:auto!important;
+    padding:0 0 34px;
+    gap:10px;
+  }
+  #sv10 .sv10-hero-phone{
+    order:-2;
+    flex:0 0 100%;
+    max-width:292px;
+    width:292px;
+    margin:0 auto 8px;
+    transform:none!important;
+  }
+  #sv10 .sv10-hero-scenarios{
+    position:static!important;
+    order:-1;
+    flex:0 0 100%;
+    left:auto;
+    bottom:auto;
+    transform:none!important;
+    max-width:100%;
+    justify-content:center;
+    margin-bottom:2px;
+  }
+  #sv10 .sv10-orbit-card{
+    position:static!important;
+    display:block!important;
+    inset:auto!important;
+    top:auto!important;
+    right:auto!important;
+    bottom:auto!important;
+    left:auto!important;
+    transform:none!important;
+    flex:1 1 42%;
+    min-width:0;
+    order:0;
+    z-index:auto;
+  }
   #sv10 .sv10-phone-ui{min-height:590px}
   #sv10 .sv10-table-tag{display:none}
   #sv10 .sv10-process-track{grid-template-columns:repeat(5,105px)}
+  #sv10 .sv10-process-track:before{left:52px;right:auto;width:421px}
+  #sv10 .sv10-process-progress{left:52px}
   #sv10 .sv10-friction-old,#sv10 .sv10-friction-new{min-height:470px}
   #sv10 .sv10-clutter-card{width:200px}
   #sv10 .sv10-product-device{width:300px}

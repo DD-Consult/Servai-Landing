@@ -865,8 +865,15 @@ export function initServAI(){
       const r=proc.getBoundingClientRect();
       const local=Math.max(0,Math.min(1,(window.innerHeight*0.72-r.top)/(r.height+180)));
       const idx=Math.min(4,Math.floor(local*5));
-      $$('.sv10-process-step',proc).forEach((s,i)=>s.classList.toggle('is-active',i<=idx));
-      $('#sv10-process-progress').style.width=(idx/4*82)+'%';
+      const steps=$$('.sv10-process-step',proc);
+      steps.forEach((s,i)=>s.classList.toggle('is-active',i<=idx));
+      const prog=$('#sv10-process-progress');
+      if(prog&&steps[0]&&steps[idx]){
+        const c0=steps[0].offsetLeft+steps[0].offsetWidth/2;
+        const ci=steps[idx].offsetLeft+steps[idx].offsetWidth/2;
+        prog.style.left=c0+'px';
+        prog.style.width=Math.max(0,ci-c0)+'px';
+      }
     }
   }
   window.addEventListener('scroll',onScroll,{passive:true});
