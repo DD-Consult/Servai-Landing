@@ -1973,7 +1973,7 @@ body::-webkit-scrollbar-thumb:hover{
   #sv10 .sv10-experience-caption{left:15px;right:15px}
 
   #sv10 h2{font-size:38px}
-  #sv10 .sv10-hero h1{font-size:48px}
+  #sv10 .sv10-hero h1{font-size:clamp(30px,9vw,46px);overflow-wrap:break-word;word-break:break-word}
   #sv10 .sv10-hero-actions{flex-direction:column}
   #sv10 .sv10-btn{width:100%}
   #sv10 .sv10-hero-phone{width:292px;transform:translateY(14px) rotate(.4deg)}
@@ -1985,6 +1985,7 @@ body::-webkit-scrollbar-thumb:hover{
   #sv10 .sv10-product-device{width:300px}
   #sv10 .sv10-device-stage{height:auto;min-height:540px}
   #sv10 .sv10-metric-grid,#sv10 .sv10-kanban,#sv10 .sv10-impact-grid{grid-template-columns:1fr}
+  #sv10 .sv10-impact-stat{min-height:0;padding:24px 22px}
   #sv10 .sv10-case-placeholder{grid-template-columns:1fr}
   #sv10 .sv10-case-photo{min-height:180px}
   #sv10 .sv10-dash-side{grid-template-columns:repeat(2,1fr)}
@@ -1992,6 +1993,8 @@ body::-webkit-scrollbar-thumb:hover{
   #sv10 .sv10-table-row{grid-template-columns:1fr 1fr}
   #sv10 .sv10-ai-chart div{grid-template-columns:95px 1fr 22px}
   #sv10 .sv10-trust-row{grid-template-columns:1fr 1fr}
-  #sv10 .sv10-footer-grid{grid-template-columns:1fr}
+  #sv10 .sv10-footer-grid{grid-template-columns:1fr 1fr;gap:26px 20px}
+  #sv10 .sv10-footer-brand{grid-column:1 / -1}
+  #sv10 .sv10-footer-tech{grid-column:auto}
   #sv10 .sv10-footer-bottom{flex-direction:column;gap:8px}
 }
