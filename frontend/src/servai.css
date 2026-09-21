@@ -802,7 +802,7 @@ body::-webkit-scrollbar-thumb:hover{
 #sv10 .sv10-how-grid{display:grid;grid-template-columns:.74fr 1.26fr;gap:90px;align-items:center}
 #sv10 .sv10-product-device{width:370px;border:10px solid #111517;border-radius:50px;background:#111517;box-shadow:0 30px 80px rgba(20,28,31,.2);margin:auto;position:relative}
 #sv10 .sv10-device-notch{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:115px;height:27px;background:#101214;border-radius:17px;z-index:5}
-#sv10 .sv10-device-stage{min-height:610px;background:#fbfaf7;border-radius:39px;overflow:hidden;padding:55px 18px 20px}
+#sv10 .sv10-device-stage{height:705px;background:#fbfaf7;border-radius:39px;overflow:hidden;padding:55px 18px 20px}
 #sv10 .sv10-stage-wrap{height:100%;min-height:525px;display:flex;flex-direction:column;justify-content:center;animation:sv10Fade .35s}
 #sv10 .sv10-stage-kicker{font-size:8px;letter-spacing:.16em;color:#849087;text-align:center;font-weight:800}
 #sv10 .sv10-stage-title{font-size:25px;text-align:center;margin:8px 0 5px}
@@ -1983,7 +1983,7 @@ body::-webkit-scrollbar-thumb:hover{
   #sv10 .sv10-friction-old,#sv10 .sv10-friction-new{min-height:470px}
   #sv10 .sv10-clutter-card{width:200px}
   #sv10 .sv10-product-device{width:300px}
-  #sv10 .sv10-device-stage{min-height:540px}
+  #sv10 .sv10-device-stage{height:auto;min-height:540px}
   #sv10 .sv10-metric-grid,#sv10 .sv10-kanban,#sv10 .sv10-impact-grid{grid-template-columns:1fr}
   #sv10 .sv10-case-placeholder{grid-template-columns:1fr}
   #sv10 .sv10-case-photo{min-height:180px}
