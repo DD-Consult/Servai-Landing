@@ -393,7 +393,7 @@ export function initServAI(){
       html:'<div class="sv10-stage-chat"><div>Welcome to The Grand Bistro. What can I get started?</div><div>What do you recommend tonight?</div><div>The barramundi and mushroom linguine are both popular.</div></div>'
     },
     {
-      kicker:'STEP 3 OF 6', title:'Order Naturally', sub:'Ask questions, discover dishes and make changes.',
+      kicker:'STEP 3 OF 6', title:'Conversational Ordering', sub:'Ask questions, discover dishes and make changes.',
       html:`<div class="sv10-stage-food"><img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=700&q=86"><div><strong>Chilli Mushroom Linguine</strong><small>Vegetarian · Can be made nut free</small><div style="display:flex;gap:6px;margin-top:10px"><span style="font-size:7px;padding:5px 7px;border-radius:999px;background:#edf1e9">No nuts</span><span style="font-size:7px;padding:5px 7px;border-radius:999px;background:#f7e7df">Spicy</span></div></div></div>`
     },
     {
