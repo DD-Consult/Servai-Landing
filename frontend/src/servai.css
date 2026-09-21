@@ -114,6 +114,11 @@ body::-webkit-scrollbar-thumb:hover{
   position:relative;
 }
 #sv10 *{box-sizing:border-box}
+/* Restore default heading/emphasis weights that a global CSS reset (e.g. Tailwind
+   Preflight) strips out. The standalone reference relied on the browser default
+   bold (700) for all headings and <strong>/<b>. */
+#sv10 h1,#sv10 h2,#sv10 h3,#sv10 h4,#sv10 h5,#sv10 h6{font-weight:700}
+#sv10 b,#sv10 strong{font-weight:700}
 #sv10 img{display:block;max-width:100%}
 #sv10 a{color:inherit;text-decoration:none}
 #sv10 button,#sv10 input,#sv10 select{font:inherit}
