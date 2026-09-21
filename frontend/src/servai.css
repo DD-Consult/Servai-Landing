@@ -550,8 +550,8 @@ body::-webkit-scrollbar-thumb:hover{
 #sv10 .sv10-process-progress{position:absolute;left:9%;top:45px;height:2px;width:0;background:linear-gradient(90deg,var(--orange),var(--sage));z-index:2;transition:width .55s ease}
 #sv10 .sv10-process-step{text-align:center;position:relative;z-index:3;color:#8d918e;transition:.35s}
 #sv10 .sv10-process-step b{width:44px;height:44px;margin:0 auto 13px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--cream);border:1px solid #d8d0c5;font-size:10px;transition:.35s}
-#sv10 .sv10-process-step span{font-size:13px;font-weight:800;letter-spacing:.09em;display:block}
-#sv10 .sv10-process-step small{font-size:9px;color:#9a9e9a}
+#sv10 .sv10-process-step span{font-size:13px;font-weight:800;letter-spacing:.09em;display:block;line-height:1.15}
+#sv10 .sv10-process-step small{font-size:9px;color:#6f726f;display:block;margin-top:2px;line-height:1.2}
 #sv10 .sv10-process-step.is-active{color:var(--orange)}
 #sv10 .sv10-process-step.is-active b{background:var(--orange);border-color:var(--orange);color:#fff;box-shadow:0 0 0 8px rgba(201,87,45,.08)}
 
