@@ -172,17 +172,8 @@ async def create_demo_request(payload: DemoRequest):
     submitted_dt = datetime.now(timezone.utc)
     submitted_at = submitted_dt.strftime("%d %b %Y, %H:%M UTC")
 
-    # Persist the submission (best-effort)
-    doc = payload.model_dump()
-    doc['email'] = str(doc['email'])
-    doc['id'] = str(uuid.uuid4())
-    doc['submitted_at'] = submitted_dt.isoformat()
-    try:
-        await db.demo_requests.insert_one({**doc})
-    except Exception as e:  # noqa: BLE001
-        logger.error(f"Failed to store demo request: {e}")
-
-    # Send the notification email via AWS SES SMTP (run blocking IO in a thread)
+    # Send the notification email via AWS SES SMTP (run blocking IO in a thread).
+    # No database storage: the endpoint directly emails the submitted form data.
     try:
         await asyncio.to_thread(_send_demo_email_sync, payload, submitted_at)
     except Exception as e:  # noqa: BLE001

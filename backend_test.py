@@ -1,438 +1,293 @@
 #!/usr/bin/env python3
 """
-Backend API Test Suite for ServAI Demo Request Endpoint
-Tests POST /api/demo-request validation, MongoDB storage, and error handling
+Backend test for POST /api/demo-request endpoint.
+Tests the following requirements:
+1. ROUTING / NO 404: Valid payload returns HTTP 503 (not 404) with exact JSON detail
+2. VALIDATION: Empty body, missing fields, invalid email all return 422
+3. NO DB WRITE: MongoDB demo_requests collection count does NOT increase after POST
+4. SANITY: GET /api/ returns {"message":"Hello World"}
 """
 
 import requests
 import os
+from pymongo import MongoClient
 from dotenv import load_dotenv
 from pathlib import Path
-from pymongo import MongoClient
-from datetime import datetime
 
 # Load environment variables
-backend_env = Path('/app/backend/.env')
-frontend_env = Path('/app/frontend/.env')
+ROOT_DIR = Path(__file__).parent / "backend"
+load_dotenv(ROOT_DIR / '.env')
 
-load_dotenv(backend_env)
-load_dotenv(frontend_env)
+# Get URLs
+FRONTEND_ENV = Path(__file__).parent / "frontend" / ".env"
+with open(FRONTEND_ENV) as f:
+    for line in f:
+        if line.startswith("REACT_APP_BACKEND_URL="):
+            BASE_URL = line.split("=", 1)[1].strip()
+            break
 
-# Get configuration
-BACKEND_URL = os.environ.get('REACT_APP_BACKEND_URL')
-MONGO_URL = os.environ.get('MONGO_URL')
-DB_NAME = os.environ.get('DB_NAME')
+API_BASE = f"{BASE_URL}/api"
+
+# MongoDB connection
+MONGO_URL = os.environ['MONGO_URL']
+DB_NAME = os.environ['DB_NAME']
 
 print("=" * 80)
-print("BACKEND API TEST SUITE - POST /api/demo-request")
+print("BACKEND TEST: POST /api/demo-request")
 print("=" * 80)
-print(f"Backend URL: {BACKEND_URL}")
-print(f"MongoDB URL: {MONGO_URL}")
-print(f"Database: {DB_NAME}")
+print(f"API Base URL: {API_BASE}")
+print(f"MongoDB: {MONGO_URL} / {DB_NAME}")
 print("=" * 80)
-print()
 
-# Test counters
-tests_passed = 0
-tests_failed = 0
-test_results = []
+# Test data
+VALID_PAYLOAD = {
+    "name": "John Doe",
+    "email": "john@restaurant.com",
+    "phone": "+1 (555) 000-0000",
+    "restaurant": "The Grand Bistro",
+    "country": "London, UK"
+}
 
+INVALID_EMAIL_PAYLOAD = {
+    "name": "J",
+    "email": "notanemail",
+    "phone": "1",
+    "restaurant": "B",
+    "country": "UK"
+}
 
-def log_test(test_name, passed, details=""):
-    """Log test result"""
-    global tests_passed, tests_failed
+MISSING_COUNTRY_PAYLOAD = {
+    "name": "John Doe",
+    "email": "john@restaurant.com",
+    "phone": "+1 (555) 000-0000",
+    "restaurant": "The Grand Bistro"
+}
+
+# Test results
+results = []
+
+def test_result(test_name, passed, details):
+    """Record test result"""
     status = "✅ PASS" if passed else "❌ FAIL"
-    print(f"{status} - {test_name}")
-    if details:
-        print(f"    {details}")
-    print()
-    
-    if passed:
-        tests_passed += 1
-    else:
-        tests_failed += 1
-    
-    test_results.append({
+    results.append({
         "test": test_name,
         "passed": passed,
         "details": details
     })
-
+    print(f"\n{status}: {test_name}")
+    print(f"Details: {details}")
 
 # ============================================================================
-# TEST 0: Sanity Check - GET /api/ endpoint
+# TEST 4: SANITY CHECK - GET /api/
 # ============================================================================
-print("TEST 0: Sanity Check - GET /api/ endpoint")
-print("-" * 80)
+print("\n" + "=" * 80)
+print("TEST 4: SANITY CHECK - GET /api/")
+print("=" * 80)
+
 try:
-    response = requests.get(f"{BACKEND_URL}/api/", timeout=10)
-    expected_response = {"message": "Hello World"}
+    response = requests.get(f"{API_BASE}/", timeout=10)
+    expected_body = {"message": "Hello World"}
     
-    if response.status_code == 200 and response.json() == expected_response:
-        log_test(
+    if response.status_code == 200 and response.json() == expected_body:
+        test_result(
             "GET /api/ sanity check",
             True,
-            f"Status: {response.status_code}, Response: {response.json()}"
+            f"Status: {response.status_code}, Body: {response.json()}"
         )
     else:
-        log_test(
+        test_result(
             "GET /api/ sanity check",
             False,
-            f"Status: {response.status_code}, Response: {response.text}"
+            f"Status: {response.status_code}, Body: {response.text[:200]}"
         )
 except Exception as e:
-    log_test("GET /api/ sanity check", False, f"Exception: {str(e)}")
-
+    test_result("GET /api/ sanity check", False, f"Exception: {str(e)}")
 
 # ============================================================================
-# TEST 1: Validation - Empty body {}
+# TEST 2a: VALIDATION - Empty body
 # ============================================================================
-print("TEST 1: Validation - Empty body {}")
-print("-" * 80)
+print("\n" + "=" * 80)
+print("TEST 2a: VALIDATION - Empty body should return 422")
+print("=" * 80)
+
 try:
-    response = requests.post(
-        f"{BACKEND_URL}/api/demo-request",
-        json={},
-        timeout=10
-    )
+    response = requests.post(f"{API_BASE}/demo-request", json={}, timeout=10)
     
     if response.status_code == 422:
-        log_test(
-            "Empty body validation",
+        test_result(
+            "POST {} returns 422",
             True,
-            f"Status: {response.status_code}, Error snippet: {response.text[:200]}"
+            f"Status: {response.status_code}, Body preview: {response.text[:150]}"
         )
     else:
-        log_test(
-            "Empty body validation",
+        test_result(
+            "POST {} returns 422",
             False,
-            f"Expected 422, got {response.status_code}. Response: {response.text[:200]}"
+            f"Expected 422, got {response.status_code}. Body: {response.text[:200]}"
         )
 except Exception as e:
-    log_test("Empty body validation", False, f"Exception: {str(e)}")
-
+    test_result("POST {} returns 422", False, f"Exception: {str(e)}")
 
 # ============================================================================
-# TEST 2: Validation - Missing one field (country)
+# TEST 2b: VALIDATION - Missing country field
 # ============================================================================
-print("TEST 2: Validation - Missing one field (country)")
-print("-" * 80)
+print("\n" + "=" * 80)
+print("TEST 2b: VALIDATION - Missing 'country' field should return 422")
+print("=" * 80)
+
 try:
-    response = requests.post(
-        f"{BACKEND_URL}/api/demo-request",
-        json={
-            "name": "John Doe",
-            "email": "john@restaurant.com",
-            "phone": "+1 555-0000",
-            "restaurant": "The Grand Bistro"
-            # Missing "country"
-        },
-        timeout=10
-    )
+    response = requests.post(f"{API_BASE}/demo-request", json=MISSING_COUNTRY_PAYLOAD, timeout=10)
     
     if response.status_code == 422:
-        log_test(
-            "Missing field validation",
+        test_result(
+            "POST missing 'country' returns 422",
             True,
-            f"Status: {response.status_code}, Error snippet: {response.text[:200]}"
+            f"Status: {response.status_code}, Body preview: {response.text[:150]}"
         )
     else:
-        log_test(
-            "Missing field validation",
+        test_result(
+            "POST missing 'country' returns 422",
             False,
-            f"Expected 422, got {response.status_code}. Response: {response.text[:200]}"
+            f"Expected 422, got {response.status_code}. Body: {response.text[:200]}"
         )
 except Exception as e:
-    log_test("Missing field validation", False, f"Exception: {str(e)}")
-
+    test_result("POST missing 'country' returns 422", False, f"Exception: {str(e)}")
 
 # ============================================================================
-# TEST 3: Validation - Invalid email format
+# TEST 2c: VALIDATION - Invalid email format
 # ============================================================================
-print("TEST 3: Validation - Invalid email format")
-print("-" * 80)
+print("\n" + "=" * 80)
+print("TEST 2c: VALIDATION - Invalid email format should return 422")
+print("=" * 80)
+
 try:
-    response = requests.post(
-        f"{BACKEND_URL}/api/demo-request",
-        json={
-            "name": "John",
-            "email": "notanemail",  # Invalid email
-            "phone": "+1 555",
-            "restaurant": "Bistro",
-            "country": "UK"
-        },
-        timeout=10
-    )
+    response = requests.post(f"{API_BASE}/demo-request", json=INVALID_EMAIL_PAYLOAD, timeout=10)
     
     if response.status_code == 422:
-        log_test(
-            "Invalid email validation",
+        test_result(
+            "POST invalid email returns 422",
             True,
-            f"Status: {response.status_code}, Error snippet: {response.text[:200]}"
+            f"Status: {response.status_code}, Body preview: {response.text[:150]}"
         )
     else:
-        log_test(
-            "Invalid email validation",
+        test_result(
+            "POST invalid email returns 422",
             False,
-            f"Expected 422, got {response.status_code}. Response: {response.text[:200]}"
+            f"Expected 422, got {response.status_code}. Body: {response.text[:200]}"
         )
 except Exception as e:
-    log_test("Invalid email validation", False, f"Exception: {str(e)}")
-
-
-# ============================================================================
-# TEST 4a: Valid payload via external URL - Should return 503 (SMTP creds empty)
-# ============================================================================
-print("TEST 4a: Valid payload via external URL - Should return 503 (SMTP creds empty)")
-print("-" * 80)
-try:
-    valid_payload = {
-        "name": "John Doe",
-        "email": "john@restaurant.com",
-        "phone": "+1 (555) 000-0000",
-        "restaurant": "The Grand Bistro",
-        "country": "London, UK"
-    }
-    
-    response = requests.post(
-        f"{BACKEND_URL}/api/demo-request",
-        json=valid_payload,
-        timeout=10
-    )
-    
-    expected_detail = "Something went wrong. Please try again or email us directly at info@serv-ai.com."
-    
-    print(f"    Response status code: {response.status_code}")
-    print(f"    Response body (first 120 chars): {response.text[:120]}")
-    print()
-    
-    if response.status_code == 503:
-        try:
-            response_json = response.json()
-            actual_detail = response_json.get("detail", "")
-            
-            if actual_detail == expected_detail:
-                log_test(
-                    "Valid payload via external URL returns 503 with correct JSON",
-                    True,
-                    f"Status: {response.status_code}, Detail: '{actual_detail}', Body starts with: {response.text[:120]}"
-                )
-            else:
-                log_test(
-                    "Valid payload via external URL returns 503 with correct JSON",
-                    False,
-                    f"Status: {response.status_code}, Expected detail: '{expected_detail}', Got: '{actual_detail}'"
-                )
-        except Exception as json_error:
-            # Check if response is HTML (ingress interference)
-            if response.text.strip().startswith("<!DOCTYPE") or response.text.strip().startswith("<html"):
-                log_test(
-                    "Valid payload via external URL returns 503 with correct JSON",
-                    False,
-                    f"⚠️ CRITICAL: Status 503 correct, but response is HTML not JSON. Ingress/proxy still intercepting. Response starts with: '{response.text[:120]}'"
-                )
-            else:
-                log_test(
-                    "Valid payload via external URL returns 503 with correct JSON",
-                    False,
-                    f"Status: {response.status_code} (correct), but failed to parse JSON response. Error: {json_error}. Response text: '{response.text[:120]}'"
-                )
-    else:
-        log_test(
-            "Valid payload via external URL returns 503 with correct JSON",
-            False,
-            f"Expected 503, got {response.status_code}. Response: {response.text[:120]}"
-        )
-except Exception as e:
-    log_test("Valid payload via external URL returns 503 with correct JSON", False, f"Exception: {str(e)}")
-
+    test_result("POST invalid email returns 422", False, f"Exception: {str(e)}")
 
 # ============================================================================
-# TEST 4b: Valid payload via localhost - Verify backend returns correct JSON
+# TEST 3: NO DB WRITE - MongoDB count should NOT increase
 # ============================================================================
-print("TEST 4b: Valid payload via localhost - Verify backend returns correct JSON")
-print("-" * 80)
-try:
-    valid_payload = {
-        "name": "Jane Smith",
-        "email": "jane@bistro.com",
-        "phone": "+44 20 1234 5678",
-        "restaurant": "London Bistro",
-        "country": "United Kingdom"
-    }
-    
-    response = requests.post(
-        "http://localhost:8001/api/demo-request",
-        json=valid_payload,
-        timeout=10
-    )
-    
-    expected_detail = "Something went wrong. Please try again or email us directly at info@serv-ai.com."
-    
-    if response.status_code == 503:
-        try:
-            response_json = response.json()
-            actual_detail = response_json.get("detail", "")
-            
-            if actual_detail == expected_detail:
-                log_test(
-                    "Valid payload via localhost returns 503 with correct JSON",
-                    True,
-                    f"✓ Backend implementation correct: Status {response.status_code}, Detail: '{actual_detail}'"
-                )
-            else:
-                log_test(
-                    "Valid payload via localhost returns 503 with correct JSON",
-                    False,
-                    f"Status: {response.status_code}, Expected detail: '{expected_detail}', Got: '{actual_detail}'"
-                )
-        except Exception as json_error:
-            log_test(
-                "Valid payload via localhost returns 503 with correct JSON",
-                False,
-                f"Status: {response.status_code}, but failed to parse JSON. Error: {json_error}. Response: '{response.text[:300]}'"
-            )
-    else:
-        log_test(
-            "Valid payload via localhost returns 503 with correct JSON",
-            False,
-            f"Expected 503, got {response.status_code}. Response: {response.text[:300]}"
-        )
-except Exception as e:
-    log_test("Valid payload via localhost returns 503 with correct JSON", False, f"Exception: {str(e)}")
+print("\n" + "=" * 80)
+print("TEST 3: NO DB WRITE - MongoDB demo_requests count should NOT increase")
+print("=" * 80)
 
-
-# ============================================================================
-# TEST 5: MongoDB Storage - Verify document was inserted
-# ============================================================================
-print("TEST 5: MongoDB Storage - Verify document was inserted")
-print("-" * 80)
 try:
     # Connect to MongoDB
     mongo_client = MongoClient(MONGO_URL)
     db = mongo_client[DB_NAME]
     collection = db.demo_requests
     
-    # Find the most recent document with our test data
-    query = {
-        "name": "John Doe",
-        "email": "john@restaurant.com",
-        "restaurant": "The Grand Bistro"
-    }
+    # Get count BEFORE
+    count_before = collection.count_documents({})
+    print(f"Count BEFORE POST: {count_before}")
     
-    document = collection.find_one(query, sort=[("submitted_at", -1)])
+    # POST valid payload
+    response = requests.post(f"{API_BASE}/demo-request", json=VALID_PAYLOAD, timeout=10)
+    print(f"POST response status: {response.status_code}")
+    print(f"POST response body preview: {response.text[:120]}")
     
-    if document:
-        # Verify all fields
-        checks = []
-        checks.append(("name", document.get("name") == "John Doe"))
-        checks.append(("email", document.get("email") == "john@restaurant.com"))
-        checks.append(("phone", document.get("phone") == "+1 (555) 000-0000"))
-        checks.append(("restaurant", document.get("restaurant") == "The Grand Bistro"))
-        checks.append(("country", document.get("country") == "London, UK"))
-        checks.append(("id", "id" in document and len(document["id"]) > 0))
-        checks.append(("submitted_at", "submitted_at" in document))
-        
-        all_passed = all(check[1] for check in checks)
-        failed_checks = [check[0] for check in checks if not check[1]]
-        
-        if all_passed:
-            log_test(
-                "MongoDB storage verification",
-                True,
-                f"Document found with all correct fields. ID: {document.get('id')}, Submitted: {document.get('submitted_at')}"
-            )
-        else:
-            log_test(
-                "MongoDB storage verification",
-                False,
-                f"Document found but some fields incorrect. Failed checks: {failed_checks}"
-            )
+    # Get count AFTER
+    count_after = collection.count_documents({})
+    print(f"Count AFTER POST: {count_after}")
+    
+    # Verify count is UNCHANGED
+    if count_before == count_after:
+        test_result(
+            "NO DB WRITE - count unchanged",
+            True,
+            f"Count before: {count_before}, Count after: {count_after} (UNCHANGED ✓)"
+        )
     else:
-        log_test(
-            "MongoDB storage verification",
+        test_result(
+            "NO DB WRITE - count unchanged",
             False,
-            "No document found in demo_requests collection matching the test data"
+            f"Count before: {count_before}, Count after: {count_after} (INCREASED by {count_after - count_before})"
         )
     
     mongo_client.close()
     
 except Exception as e:
-    log_test("MongoDB storage verification", False, f"Exception: {str(e)}")
-
+    test_result("NO DB WRITE - count unchanged", False, f"Exception: {str(e)}")
 
 # ============================================================================
-# TEST 6: Routing - Verify /api prefix is required
+# TEST 1: ROUTING / NO 404 - Valid payload should return 503 with JSON
 # ============================================================================
-print("TEST 6: Routing - Verify /api prefix is required")
-print("-" * 80)
+print("\n" + "=" * 80)
+print("TEST 1: ROUTING / NO 404 - Valid payload should return 503 with JSON")
+print("=" * 80)
+
 try:
-    # Try to access without /api prefix (should fail or 404)
-    response = requests.post(
-        f"{BACKEND_URL}/demo-request",  # No /api prefix
-        json={
-            "name": "Test",
-            "email": "test@test.com",
-            "phone": "+1 555",
-            "restaurant": "Test",
-            "country": "Test"
-        },
-        timeout=10
-    )
+    response = requests.post(f"{API_BASE}/demo-request", json=VALID_PAYLOAD, timeout=10)
     
-    # Should NOT reach the endpoint (404 or similar)
-    if response.status_code in [404, 405]:
-        log_test(
-            "Routing requires /api prefix",
+    # Check status code
+    status_ok = response.status_code == 503
+    
+    # Check response is JSON (not HTML)
+    body_preview = response.text[:120]
+    is_json = response.text.startswith("{")
+    is_not_html = not response.text.startswith("<!DOCTYPE") and not response.text.startswith("<html")
+    
+    # Check exact detail message
+    expected_detail = "Something went wrong. Please try again or email us directly at info@serv-ai.com."
+    try:
+        json_body = response.json()
+        detail_match = json_body.get("detail") == expected_detail
+    except:
+        detail_match = False
+        json_body = None
+    
+    if status_ok and is_json and is_not_html and detail_match:
+        test_result(
+            "ROUTING / NO 404 - Valid payload returns 503 with JSON",
             True,
-            f"Without /api prefix: Status {response.status_code} (endpoint not reachable as expected)"
-        )
-    elif response.status_code in [502, 503]:
-        log_test(
-            "Routing requires /api prefix",
-            False,
-            f"Without /api prefix: Got {response.status_code} (endpoint was reached, should have been blocked by ingress)"
+            f"Status: {response.status_code}, Body starts with: {body_preview}, Detail matches: {detail_match}"
         )
     else:
-        log_test(
-            "Routing requires /api prefix",
+        test_result(
+            "ROUTING / NO 404 - Valid payload returns 503 with JSON",
             False,
-            f"Without /api prefix: Got unexpected status {response.status_code}"
+            f"Status: {response.status_code} (expected 503: {status_ok}), "
+            f"Is JSON: {is_json}, Not HTML: {is_not_html}, Detail match: {detail_match}, "
+            f"Body preview: {body_preview}"
         )
 except Exception as e:
-    # Connection error or timeout is also acceptable (ingress blocks it)
-    if "404" in str(e) or "Not Found" in str(e):
-        log_test(
-            "Routing requires /api prefix",
-            True,
-            f"Without /api prefix: Request blocked (404/Not Found)"
-        )
-    else:
-        log_test("Routing requires /api prefix", False, f"Exception: {str(e)}")
-
+    test_result("ROUTING / NO 404 - Valid payload returns 503 with JSON", False, f"Exception: {str(e)}")
 
 # ============================================================================
 # SUMMARY
 # ============================================================================
-print("=" * 80)
+print("\n" + "=" * 80)
 print("TEST SUMMARY")
 print("=" * 80)
-print(f"Total Tests: {tests_passed + tests_failed}")
-print(f"Passed: {tests_passed}")
-print(f"Failed: {tests_failed}")
-print("=" * 80)
-print()
 
-if tests_failed == 0:
-    print("✅ ALL TESTS PASSED")
+passed_count = sum(1 for r in results if r["passed"])
+total_count = len(results)
+
+for result in results:
+    status = "✅ PASS" if result["passed"] else "❌ FAIL"
+    print(f"{status}: {result['test']}")
+
+print("=" * 80)
+print(f"TOTAL: {passed_count}/{total_count} tests passed")
+print("=" * 80)
+
+if passed_count == total_count:
+    print("\n🎉 ALL TESTS PASSED!")
+    exit(0)
 else:
-    print("❌ SOME TESTS FAILED")
-    print("\nFailed tests:")
-    for result in test_results:
-        if not result["passed"]:
-            print(f"  - {result['test']}")
-            if result["details"]:
-                print(f"    {result['details']}")
-
-print()
-print("=" * 80)
+    print(f"\n⚠️  {total_count - passed_count} test(s) failed")
+    exit(1)
