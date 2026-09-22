@@ -4,6 +4,7 @@ import markup from "@/servaiMarkup";
 import { initServAI } from "@/servaiScript";
 import dashboardImg from "@/assets/dashboard.png";
 import dataImg from "@/assets/data_explorer.png";
+import awsLogo from "@/assets/powered-by-aws.png";
 
 /**
  * ServAI homepage.
@@ -27,7 +28,8 @@ const ServAIHome = () => {
 
     const html = markup
       .replace(/__DASHBOARD_IMG__/g, dashboardImg)
-      .replace(/__DATA_IMG__/g, dataImg);
+      .replace(/__DATA_IMG__/g, dataImg)
+      .replace(/__AWS_LOGO__/g, awsLogo);
 
     containerRef.current.innerHTML = html;
     initialised.current = true;
