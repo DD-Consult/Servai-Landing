@@ -842,7 +842,7 @@ export function initServAI(){
       demoForm.querySelectorAll('input').forEach(inp=>{
         inp.addEventListener('input',()=>clearFieldError(inp));
       });
-      const API_BASE=(process.env.REACT_APP_BACKEND_URL||'')+'/api';
+      const API_BASE='https://ul5x883e9a.execute-api.ap-southeast-2.amazonaws.com';
       const defaultBtnHTML=demoSubmit.innerHTML;
       const showFormError=(text)=>{
         let box=demoForm.querySelector('.sv10-demo-error');
