@@ -1371,6 +1371,8 @@ body::-webkit-scrollbar-thumb:hover{
 #sv10 .sv10-demo-form.is-submitted .sv10-demo-success{margin-top:0;padding:26px 22px;text-align:center;background:#e4ebdd}
 #sv10 .sv10-demo-form.is-submitted .sv10-demo-success strong{font-size:20px;letter-spacing:-.01em}
 #sv10 .sv10-demo-form.is-submitted .sv10-demo-success span{font-size:12px;line-height:1.55;margin-top:8px}
+#sv10 .sv10-demo-form button.is-loading{opacity:.75;cursor:wait}
+#sv10 .sv10-demo-error{display:none;margin-top:12px;padding:11px 13px;border-radius:10px;background:#f7e2df;border:1px solid #e6b4ab;color:#a3341f;font-size:10px;font-weight:700;line-height:1.5}
 
 /* Footer */
 #sv10 .sv10-footer{padding:62px 0 22px;background:#202a30;color:#fff}

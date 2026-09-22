@@ -842,20 +842,61 @@ export function initServAI(){
       demoForm.querySelectorAll('input').forEach(inp=>{
         inp.addEventListener('input',()=>clearFieldError(inp));
       });
-      demoSubmit.addEventListener('click',()=>{
+      const API_BASE=(process.env.REACT_APP_BACKEND_URL||'')+'/api';
+      const defaultBtnHTML=demoSubmit.innerHTML;
+      const showFormError=(text)=>{
+        let box=demoForm.querySelector('.sv10-demo-error');
+        if(!box){
+          box=document.createElement('div');
+          box.className='sv10-demo-error';
+          demoSubmit.parentNode.insertBefore(box,demoSubmit.nextSibling);
+        }
+        box.textContent=text;
+        box.style.display='block';
+      };
+      const clearFormError=()=>{
+        const box=demoForm.querySelector('.sv10-demo-error');
+        if(box) box.style.display='none';
+      };
+      demoSubmit.addEventListener('click',async ()=>{
+        clearFormError();
         let valid=true, firstInvalid=null;
+        const values={};
         requiredFields.forEach(nm=>{
           const input=demoForm.querySelector('[name="'+nm+'"]');
           if(!input) return;
           clearFieldError(input);
           const val=(input.value||'').trim();
+          values[nm]=val;
           if(!val){ setFieldError(input,'Please fill in this field'); valid=false; if(!firstInvalid) firstInvalid=input; }
           else if(nm==='email' && !emailRe.test(val)){ setFieldError(input,'Please enter a valid email address'); valid=false; if(!firstInvalid) firstInvalid=input; }
         });
         if(!valid){ if(firstInvalid) firstInvalid.focus(); return; }
-        demoForm.reset();
-        demoForm.classList.add('is-submitted');
-        $('#sv10-demo-success')?.classList.add('show');
+
+        demoSubmit.disabled=true;
+        demoSubmit.classList.add('is-loading');
+        demoSubmit.innerHTML='Sending\u2026';
+        try{
+          const res=await fetch(API_BASE+'/demo-request',{
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify(values)
+          });
+          if(!res.ok){
+            let detail='Something went wrong. Please try again or email us directly at info@serv-ai.com.';
+            try{ const j=await res.json(); if(j&&j.detail) detail=(typeof j.detail==='string')?j.detail:detail; }catch(e){}
+            throw new Error(detail);
+          }
+          demoForm.reset();
+          demoForm.classList.add('is-submitted');
+          $('#sv10-demo-success')?.classList.add('show');
+        }catch(err){
+          showFormError(err&&err.message?err.message:'Something went wrong. Please try again or email us directly at info@serv-ai.com.');
+        }finally{
+          demoSubmit.disabled=false;
+          demoSubmit.classList.remove('is-loading');
+          demoSubmit.innerHTML=defaultBtnHTML;
+        }
       });
     }
   })();
