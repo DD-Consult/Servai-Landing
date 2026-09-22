@@ -103,12 +103,12 @@ def _row(label: str, value: str) -> str:
 
 
 def _send_demo_email_sync(data: DemoRequest, submitted_at: str) -> None:
-    host = os.environ.get('SES_SMTP_HOST')
-    port = int(os.environ.get('SES_SMTP_PORT', '587'))
-    username = os.environ.get('SES_SMTP_USERNAME')
-    password = os.environ.get('SES_SMTP_PASSWORD')
-    from_email = os.environ.get('DEMO_FROM_EMAIL')
-    to_email = os.environ.get('DEMO_TO_EMAIL', 'info@serv-ai.com')
+    host = os.environ.get('SMTP_HOST')
+    port = int(os.environ.get('SMTP_PORT', '587'))
+    username = os.environ.get('SMTP_USER')
+    password = os.environ.get('SMTP_PASSWORD')
+    from_email = os.environ.get('SMTP_FROM_EMAIL')
+    to_email = os.environ.get('SMTP_TO_EMAIL', 'info@serv-ai.com')
 
     if not all([host, username, password, from_email, to_email]):
         raise RuntimeError("SES SMTP configuration is incomplete. Please set SES_SMTP_* and DEMO_*_EMAIL env vars.")
@@ -122,6 +122,8 @@ def _send_demo_email_sync(data: DemoRequest, submitted_at: str) -> None:
     msg['Reply-To'] = str(data.email)
     msg.attach(MIMEText(text_body, 'plain', 'utf-8'))
     msg.attach(MIMEText(html_body, 'html', 'utf-8'))
+    
+    logger.info("msg html ----> ",msg);
 
     context = ssl.create_default_context()
     if port == 465:
