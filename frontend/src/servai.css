@@ -1381,6 +1381,11 @@ body::-webkit-scrollbar-thumb:hover{
 #sv10 .sv10-footer-brand p{font-size:11px;color:#9aa4a0;max-width:260px;margin:15px 0 7px} #sv10 .sv10-footer-brand>a{font-size:11px;color:#b0c2a4}
 #sv10 .sv10-footer-grid>div:not(.sv10-footer-brand) strong{display:block;font-size:8px;letter-spacing:.13em;text-transform:uppercase;margin-bottom:15px} #sv10 .sv10-footer-grid>div:not(.sv10-footer-brand) a,#sv10 .sv10-footer-grid>div:not(.sv10-footer-brand) span{display:block;font-size:10px;color:#9aa5a1;margin-bottom:9px}
 #sv10 .sv10-footer-bottom{display:flex;justify-content:space-between;margin-top:42px;padding-top:20px;border-top:1px solid rgba(255,255,255,.07);font-size:9px;color:#7f8a86}
+#sv10 .sv10-aws-badge{display:inline-flex;flex-direction:column;align-items:flex-start;gap:1px;text-decoration:none;padding:8px 12px;border:1px solid rgba(255,255,255,.12);border-radius:8px;background:rgba(255,255,255,.03);line-height:1;width:fit-content;margin-bottom:9px;opacity:.8;transition:opacity .3s ease,border-color .3s ease,background .3s ease}
+#sv10 .sv10-aws-badge:hover{opacity:1;border-color:rgba(255,153,0,.5);background:rgba(255,153,0,.06)}
+#sv10 .sv10-aws-badge>span{display:block;font-size:7px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:#9aa5a1;margin:0}
+#sv10 .sv10-aws-badge>b{display:inline-flex;align-items:flex-end;font-size:17px;font-weight:800;letter-spacing:.02em;color:#fff}
+#sv10 .sv10-aws-badge>b>i{display:inline-block;width:15px;height:5px;margin-left:1px;border-bottom:2px solid #ff9900;border-radius:0 0 9px 9px;transform:translateY(-1px)}
 
 /* Reveal / animation */
 #sv10 .sv10-reveal{
