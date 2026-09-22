@@ -1,0 +1,18 @@
+[build]
+  # The React app lives in the frontend/ folder.
+  base = "frontend"
+  command = "yarn build"
+  # Relative to `base`, so this resolves to frontend/build
+  publish = "build"
+
+[build.environment]
+  # Pin Node for react-scripts 5 / React 19 stability
+  NODE_VERSION = "20"
+  # Speeds up installs; CI is set automatically by Netlify
+  CI = "false"
+
+# SPA fallback: send all client-side routes to index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
